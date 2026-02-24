@@ -14,9 +14,9 @@
     <properties>
         <swagger-annotations-version>1.5.22</swagger-annotations-version>
         <springfox-oaso-version>3.0.0</springfox-oaso-version>
-        <javax-validation-version>2.0.1.Final</javax-validation-version>
+<!--        <javax-validation-version>2.0.1.Final</javax-validation-version>-->
         <springfox-core-version>3.0.0</springfox-core-version>
-        <jackson-databind-nullable>0.2.4</jackson-databind-nullable>
+<!--        <jackson-databind-nullable>0.2.4</jackson-databind-nullable>-->
 
     </properties>
 
@@ -31,26 +31,26 @@
             <artifactId>springfox-oas</artifactId>
             <version>${springfox-oaso-version}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${javax-validation-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>${jackson-databind-nullable}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.validation</groupId>-->
+<!--            <artifactId>validation-api</artifactId>-->
+<!--            <version>${javax-validation-version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>jackson-databind-nullable</artifactId>-->
+<!--            <version>${jackson-databind-nullable}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-core</artifactId>
             <version>${springfox-core-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>jackson-databind-nullable</artifactId>-->
+<!--            <version>0.2.4</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
