@@ -39,7 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Parent'
+              $ref: '#/components/schemas/ParentDto'
       responses:
         default:
           description: successful operation
@@ -116,7 +116,7 @@ paths:
       responses:
         default:
           description: successful operation
-  '/parent/{parentname}':
+  /parent/{parentname}:
     get:
       tags:
         - parent
@@ -135,10 +135,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Parent'
+                $ref: '#/components/schemas/ParentDto'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Parent'
+                $ref: '#/components/schemas/ParentDto'
         '400':
           description: Invalid parentname supplied
         '404':
@@ -162,7 +162,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Parent'
+              $ref: '#/components/schemas/ParentDto'
       responses:
         '400':
           description: Invalid parent supplied
@@ -191,17 +191,7 @@ externalDocs:
   url: 'http://swagger.io'
 components:
   schemas:
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Category
-    Parent:
+    ParentDto:
       type: object
       xml:
         name: Parent
@@ -229,11 +219,11 @@ components:
           format: int32
           description: Parent Status
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/AddressDto'
         children:
           type: array
           items:
-            $ref: '#/components/schemas/Child'
+            $ref: '#/components/schemas/ChildDto'
     ApiResponse:
       type: object
       properties:
@@ -244,7 +234,7 @@ components:
           type: string
         message:
           type: string
-    Address:
+    AddressDto:
       type: object
       properties:
         street:
@@ -258,7 +248,7 @@ components:
         country:
           type: string
       description: Address model
-    Child:
+    ChildDto:
       type: object
       title: Child
       properties:
@@ -289,7 +279,7 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Parent'
+              $ref: '#/components/schemas/ParentDto'
       description: List of parent object
       required: true
   securitySchemes:
