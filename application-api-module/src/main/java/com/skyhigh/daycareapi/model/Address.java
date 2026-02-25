@@ -21,7 +21,7 @@ public class Address {
 
   private String postalCode;
 
-  private String location;
+  private String locationCoordinates;
 
   public Long getId() {
     return id;
@@ -79,11 +79,11 @@ public class Address {
     this.postalCode = postalCode;
   }
 
-  public String getLocation() {
-    return location;
+  public String getLocationCoordinates() {
+    return locationCoordinates;
   }
 
-  public void setLocation(String location) {
-    this.location = location;
+  public void setLocationCoordinates(String locationCoordinates) {
+    this.locationCoordinates = locationCoordinates;
   }
 }
