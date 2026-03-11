@@ -17,18 +17,28 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: 'https://virtserver.swaggerhub.com/skyhigh-00b/DaycareAPI/1.0.0'
   - url: 'https://daycare.swagger.io/v2'
+
 tags:
   - name: User
     description: Operations common for all users
 
+  - name: DayCareOwner
+    description: Operations about daycare owner
+
+  - name: DaycareUser
+    description: Operations about daycare administration
+
   - name: Daycare
-    description: Access to Daycare
+    description: Daycare operations
     externalDocs:
       description: Find out more about our daycare
       url: 'http://swagger.io'
 
   - name: Parent
     description: Operations about parent
+
+  - name: Child
+    description: Operations about child
 
 paths:
   /user/login:
@@ -83,6 +93,383 @@ paths:
         default:
           description: successful operation
 
+  /parent:
+    post:
+      tags:
+        - Parent
+      summary: Create parent
+      description: This can be done by parent themself.
+      operationId: createParent
+      requestBody:
+        description: Parent object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentDto'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        400:
+          description: Operation failed
+    put:
+      tags:
+        - Parent
+      summary: Edit parent
+      description: This can be done by admin or Parent
+      operationId: editParent
+      requestBody:
+        description: Created parent object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentDto'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        400:
+          description: Operation failed
+    get:
+      tags:
+        - Parent
+      summary: Get Parent list
+      description: This can be done by admin only
+      operationId: listParents
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        400:
+          description: Operation failed
+  /parent/{id}:
+    get:
+      tags:
+        - Parent
+      summary: Get parent by id
+      description: This can be done by respective user or admin
+      operationId: geParent
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        400:
+          description: Operation failed
+    delete:
+      tags:
+        - Parent
+      summary: Delete Parent by id
+      description: This can be done only by admin after receiving a written request from the parent
+      operationId: deleteParent
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        400:
+          description: Operation failed
+
+  /child:
+    post:
+      tags:
+        - Child
+      summary: Create child
+      description: This can be done by parent.
+      operationId: createChild
+      requestBody:
+        description: Child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        400:
+          description: Operation failed
+    put:
+      tags:
+        - Child
+      summary: Edit Child
+      description: This can be done by parent
+      operationId: editChild
+      requestBody:
+        description: Created child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        400:
+          description: Operation failed
+    get:
+      tags:
+        - Child
+      summary: Get child list
+      description: This can be done by admin, parent, or daycare user
+      operationId: listChildren
+      parameters:
+        - in: query
+          name: loggedInParentId
+          required: false
+          description: If logged in user is a parent, they can view only their children.
+        - in: query
+          name: loggedInDayCareId
+          required: false
+          description: If logged in user is a daycare, they can view only children in their daycare.
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        400:
+          description: Operation failed
+  /child/{id}:
+    get:
+      tags:
+        - Child
+      summary: Get child by id
+      description: This can be done by respective parent, daycare user, or admin
+      operationId: getChild
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        400:
+          description: Operation failed
+    delete:
+      tags:
+        - Child
+      summary: Delete Child by id
+      description: This can be done only by parent
+      operationId: deleteChild
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        400:
+          description: Operation failed
+
+  /daycareOwner:
+    post:
+      tags:
+        - DayCareOwner
+      summary: Create new daycare owner/ admin
+      description: This can be done by system admin only
+      operationId: createDayCareOwner
+      requestBody:
+        description: Created daycare owner object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    put:
+      tags:
+        - DayCareOwner
+      summary: Edit daycare admin
+      description: This can be done by admin or Daycare owner
+      operationId: editDayCareOwner
+      requestBody:
+        description: Created DayCareOwner object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    get:
+      tags:
+        - DayCareOwner
+      summary: Get Daycare owners list
+      description: This can be done by admin only
+      operationId: listDayCareOwners
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        400:
+          description: Operation failed
+  /daycareOwner/{id}:
+    get:
+      tags:
+        - DayCareOwner
+      summary: Get daycare owner by id
+      description: This can be done by admin or owner only
+      operationId: getDayCareOwner
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    delete:
+      tags:
+        - DayCareOwner
+      summary: Delete daycare owner by id
+      description: This can be done only by admin after receiving a written request from the daycare owner
+      operationId: deleteDayCareOwner
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+
+  /daycareUser:
+    post:
+      tags:
+        - DaycareUser
+      summary: Create new daycare
+      description: This can be done by admin only
+      operationId: createDaycareUser
+      requestBody:
+        description: Created daycare user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    put:
+      tags:
+        - DaycareUser
+      summary: Edit daycare user
+      description: This can be done by admin or Daycare owner
+      operationId: editDaycareUser
+      requestBody:
+        description: Created daycare user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    get:
+      tags:
+        - DaycareUser
+      summary: Get daycare users list
+      description: This can be done by admin, specific daycare owner, or daycare user
+      operationId: listDaycareUsers
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+  /daycareUser/{id}:
+    get:
+      tags:
+        - DaycareUser
+      summary: Get daycare user by id
+      description: This can be done by admin, daycare admin, or daycare user
+      operationId: getDaycareUser
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+    delete:
+      tags:
+        - DaycareUser
+      summary: Delete daycare by id
+      description: This can be done by daycare owner, or admin after receiving a written request from the daycare owner
+      operationId: deleteDayCareUser
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        400:
+          description: Operation failed
+
   /daycare:
     post:
       tags:
@@ -105,7 +492,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DayCareDto'
         400:
-          description: operation failed
+          description: Operation failed
     put:
       tags:
         - Daycare
@@ -134,13 +521,6 @@ paths:
       summary: Get daycare list
       description: This can be done by any user
       operationId: listDayCares
-      requestBody:
-        description: Array of daycare objects
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DayCareDto'
       responses:
         200:
           description: Successful operation
@@ -150,7 +530,6 @@ paths:
                 $ref: '#/components/schemas/DayCareDto'
         400:
           description: Operation failed
-
   /daycare/{id}:
     get:
       tags:
@@ -158,13 +537,6 @@ paths:
       summary: Get daycare by id
       description: This can be done by any user
       operationId: getDayCare
-      requestBody:
-        description: Object of daycare
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DayCareDto'
       responses:
         200:
           description: Successful operation
@@ -179,14 +551,7 @@ paths:
         - Daycare
       summary: Delete daycare by id
       description: This can be done only by admin after receiving a written request from the daycare owner
-      operationId: getDayCare
-      requestBody:
-        description: Object of daycare
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DayCareDto'
+      operationId: deleteDayCare
       responses:
         200:
           description: Successful operation
@@ -197,99 +562,19 @@ paths:
         400:
           description: Operation failed
 
-  /parent:
-    post:
-      tags:
-        - Parent
-      summary: Create parent
-      description: This can be done by parent themself.
-      operationId: createParent
-      requestBody:
-        description: Created parent object
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParentDto'
-      responses:
-        default:
-          description: successful operation
-
-  /parent/{parentname}:
-    get:
-      tags:
-        - Parent
-      summary: Get parent by parent name
-      operationId: getParentByName
-      parameters:
-        - name: parentname
-          in: path
-          description: The name that needs to be fetched. Use parent1 for testing.
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-        '400':
-          description: Invalid parentname supplied
-        '404':
-          description: Parent not found
-    put:
-      tags:
-        - Parent
-      summary: Updated parent
-      description: This can only be done by the logged in parent.
-      operationId: updateParent
-      parameters:
-        - name: parentname
-          in: path
-          description: name that need to be updated
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Updated parent object
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParentDto'
-      responses:
-        '400':
-          description: Invalid parent supplied
-        '404':
-          description: Parent not found
-    delete:
-      tags:
-        - Parent
-      summary: Delete parent
-      description: This can only be done by the logged in parent.
-      operationId: deleteParent
-      parameters:
-        - name: parentname
-          in: path
-          description: The name that needs to be deleted
-          required: true
-          schema:
-            type: string
-      responses:
-        '400':
-          description: Invalid parentname supplied
-        '404':
-          description: Parent not found
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
+
+
 components:
+#  definitions:
+
   schemas:
+    UserTypes:
+      type: string
+      enum: [ admin, daycareOwner, daycareAssistant, parent, child ]
+
     ParentDto:
       type: object
       xml:
@@ -390,6 +675,8 @@ components:
           type: string
         phoneNumber:
           type: string
+        userType:
+          $ref: '#/components/schemas/UserTypes'
     DayCareDto:
       type: object
       description: Day care DTO
