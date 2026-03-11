@@ -25,9 +25,6 @@ tags:
   - name: DayCareOwner
     description: Operations about daycare owner
 
-  - name: DaycareUser
-    description: Operations about daycare administration
-
   - name: Daycare
     description: Daycare operations
     externalDocs:
@@ -378,98 +375,6 @@ paths:
         400:
           description: Operation failed
 
-  /daycareUser:
-    post:
-      tags:
-        - DaycareUser
-      summary: Create new daycare
-      description: This can be done by admin only
-      operationId: createDaycareUser
-      requestBody:
-        description: Created daycare user object
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OwnerDto'
-      responses:
-        201:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OwnerDto'
-        400:
-          description: Operation failed
-    put:
-      tags:
-        - DaycareUser
-      summary: Edit daycare user
-      description: This can be done by admin or Daycare owner
-      operationId: editDaycareUser
-      requestBody:
-        description: Created daycare user object
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OwnerDto'
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OwnerDto'
-        400:
-          description: Operation failed
-    get:
-      tags:
-        - DaycareUser
-      summary: Get daycare users list
-      description: This can be done by admin, specific daycare owner, or daycare user
-      operationId: listDaycareUsers
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OwnerDto'
-        400:
-          description: Operation failed
-  /daycareUser/{id}:
-    get:
-      tags:
-        - DaycareUser
-      summary: Get daycare user by id
-      description: This can be done by admin, daycare admin, or daycare user
-      operationId: getDaycareUser
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OwnerDto'
-        400:
-          description: Operation failed
-    delete:
-      tags:
-        - DaycareUser
-      summary: Delete daycare by id
-      description: This can be done by daycare owner, or admin after receiving a written request from the daycare owner
-      operationId: deleteDayCareUser
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OwnerDto'
-        400:
-          description: Operation failed
-
   /daycare:
     post:
       tags:
@@ -568,8 +473,6 @@ externalDocs:
 
 
 components:
-#  definitions:
-
   schemas:
     UserTypes:
       type: string
@@ -608,16 +511,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChildDto'
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
     AddressDto:
       type: object
       properties:
@@ -685,10 +578,22 @@ components:
           type: string
         telephone:
           type: string
-        owner:
-          $ref: '#/components/schemas/OwnerDto'
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/OwnerDto'
         address:
           $ref: '#/components/schemas/AddressDto'
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
   requestBodies:
     ParentArray:
       content:
