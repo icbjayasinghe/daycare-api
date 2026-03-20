@@ -1,11 +1,28 @@
 package com.skyhigh.daycareapi.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "User")
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
+    public User() {
+    }
+
+    public User(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.passwordHash = passwordHash;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

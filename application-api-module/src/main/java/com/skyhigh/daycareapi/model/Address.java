@@ -1,10 +1,27 @@
 package com.skyhigh.daycareapi.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 @Entity
+@Builder
 @Table(name = "Address")
 public class Address {
+
+  public Address() {
+  }
+
+  public Address(Long id, String streetNumber, String addressLine1, String addressLine2, String city, String province, String postalCode, String locationCoordinates) {
+    this.id = id;
+    this.streetNumber = streetNumber;
+    this.addressLine1 = addressLine1;
+    this.addressLine2 = addressLine2;
+    this.city = city;
+    this.province = province;
+    this.postalCode = postalCode;
+    this.locationCoordinates = locationCoordinates;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -21,6 +38,7 @@ public class Address {
 
   private String postalCode;
 
+  @Column(columnDefinition = "json")
   private String locationCoordinates;
 
   public Long getId() {
