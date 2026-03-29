@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T05:54:00.346356-04:00[America/Halifax]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-25T11:14:24.149504-03:00[America/Halifax]")
 @Validated
 @Tag(name = "parent", description = "Operations about parent")
 public interface ParentApi {
@@ -46,24 +46,48 @@ public interface ParentApi {
      * This can only be done by the logged in parent.
      *
      * @param parentDto Created parent object (required)
-     * @return successful operation (status code 200)
+     * @return Successful operation (status code 200)
+     *         or Invalid (status code 400)
+     *         or Parent not found (status code 404)
+     *         or Validation exception (status code 405)
      */
     @Operation(
-        operationId = "createParent",
-        summary = "Create parent",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation")
-        }
+            operationId = "createParent",
+            summary = "Create parent",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ParentDto.class)),
+                            @Content(mediaType = "application/xml", schema = @Schema(implementation = ParentDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Invalid"),
+                    @ApiResponse(responseCode = "404", description = "Parent not found"),
+                    @ApiResponse(responseCode = "405", description = "Validation exception")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/parent",
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/parent",
+            produces = { "application/json", "application/xml" },
+            consumes = { "application/json" }
     )
-    default ResponseEntity<Void> createParent(
-        @Parameter(name = "ParentDto", description = "Created parent object", required = true) @Valid @RequestBody ParentDto parentDto
+    default ResponseEntity<ParentDto> createParent(
+            @Parameter(name = "ParentDto", description = "Created parent object", required = true) @Valid @RequestBody ParentDto parentDto
     ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"city\" : \"city\", \"street\" : \"street\", \"postalCode\" : \"postalCode\", \"state\" : \"state\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
+                    String exampleString = "<Parent> <id>123456789</id> <firstName>aeiou</firstName> <lastName>aeiou</lastName> <email>aeiou</email> <password>aeiou</password> <phone>aeiou</phone> <parentStatus>123</parentStatus> </Parent>";
+                    ApiUtil.setExampleResponse(request, "application/xml", exampleString);
+                    break;
+                }
+            }
+        });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -76,20 +100,20 @@ public interface ParentApi {
      * @return successful operation (status code 200)
      */
     @Operation(
-        operationId = "createParentsWithArrayInput",
-        summary = "Creates list of parents with given input array",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation")
-        }
+            operationId = "createParentsWithArrayInput",
+            summary = "Creates list of parents with given input array",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/parent/createWithArray",
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/parent/createWithArray",
+            consumes = { "application/json" }
     )
     default ResponseEntity<Void> createParentsWithArrayInput(
-        @Parameter(name = "ParentDto", description = "List of parent object", required = true) @Valid @RequestBody List<ParentDto> parentDto
+            @Parameter(name = "ParentDto", description = "List of parent object", required = true) @Valid @RequestBody List<ParentDto> parentDto
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -103,20 +127,20 @@ public interface ParentApi {
      * @return successful operation (status code 200)
      */
     @Operation(
-        operationId = "createParentsWithListInput",
-        summary = "Creates list of parents with given input array",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation")
-        }
+            operationId = "createParentsWithListInput",
+            summary = "Creates list of parents with given input array",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/parent/createWithList",
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/parent/createWithList",
+            consumes = { "application/json" }
     )
     default ResponseEntity<Void> createParentsWithListInput(
-        @Parameter(name = "ParentDto", description = "List of parent object", required = true) @Valid @RequestBody List<ParentDto> parentDto
+            @Parameter(name = "ParentDto", description = "List of parent object", required = true) @Valid @RequestBody List<ParentDto> parentDto
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -132,20 +156,20 @@ public interface ParentApi {
      *         or Parent not found (status code 404)
      */
     @Operation(
-        operationId = "deleteParent",
-        summary = "Delete parent",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "400", description = "Invalid parentname supplied"),
-            @ApiResponse(responseCode = "404", description = "Parent not found")
-        }
+            operationId = "deleteParent",
+            summary = "Delete parent",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "400", description = "Invalid parentname supplied"),
+                    @ApiResponse(responseCode = "404", description = "Parent not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/parent/{parentname}"
+            method = RequestMethod.DELETE,
+            value = "/parent/{parentname}"
     )
     default ResponseEntity<Void> deleteParent(
-        @Parameter(name = "parentname", description = "The name that needs to be deleted", required = true) @PathVariable("parentname") String parentname
+            @Parameter(name = "parentname", description = "The name that needs to be deleted", required = true) @PathVariable("parentname") String parentname
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -161,25 +185,25 @@ public interface ParentApi {
      *         or Parent not found (status code 404)
      */
     @Operation(
-        operationId = "getParentByName",
-        summary = "Get parent by parent name",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ParentDto.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = ParentDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid parentname supplied"),
-            @ApiResponse(responseCode = "404", description = "Parent not found")
-        }
+            operationId = "getParentByName",
+            summary = "Get parent by parent name",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ParentDto.class)),
+                            @Content(mediaType = "application/xml", schema = @Schema(implementation = ParentDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Invalid parentname supplied"),
+                    @ApiResponse(responseCode = "404", description = "Parent not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/parent/{parentname}",
-        produces = { "application/json", "application/xml" }
+            method = RequestMethod.GET,
+            value = "/parent/{parentname}",
+            produces = { "application/json", "application/xml" }
     )
     default ResponseEntity<ParentDto> getParentByName(
-        @Parameter(name = "parentname", description = "The name that needs to be fetched. Use parent1 for testing.", required = true) @PathVariable("parentname") String parentname
+            @Parameter(name = "parentname", description = "The name that needs to be fetched. Use parent1 for testing.", required = true) @PathVariable("parentname") String parentname
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -209,25 +233,25 @@ public interface ParentApi {
      *         or Invalid parentname/password supplied (status code 400)
      */
     @Operation(
-        operationId = "loginParent",
-        summary = "Logs parent into the system",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = String.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid parentname/password supplied")
-        }
+            operationId = "loginParent",
+            summary = "Logs parent into the system",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = String.class)),
+                            @Content(mediaType = "application/xml", schema = @Schema(implementation = String.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Invalid parentname/password supplied")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/parent/login",
-        produces = { "application/json", "application/xml" }
+            method = RequestMethod.GET,
+            value = "/parent/login",
+            produces = { "application/json", "application/xml" }
     )
     default ResponseEntity<String> loginParent(
-        @NotNull @Parameter(name = "parentname", description = "The parent name for login", required = true) @Valid @RequestParam(value = "parentname", required = true) String parentname,
-        @NotNull @Parameter(name = "password", description = "The password for login in clear text", required = true) @Valid @RequestParam(value = "password", required = true) String password
+            @NotNull @Parameter(name = "parentname", description = "The parent name for login", required = true) @Valid @RequestParam(value = "parentname", required = true) String parentname,
+            @NotNull @Parameter(name = "password", description = "The password for login in clear text", required = true) @Valid @RequestParam(value = "password", required = true) String password
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -240,19 +264,19 @@ public interface ParentApi {
      * @return successful operation (status code 200)
      */
     @Operation(
-        operationId = "logoutParent",
-        summary = "Logs out current logged in parent session",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation")
-        }
+            operationId = "logoutParent",
+            summary = "Logs out current logged in parent session",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/parent/logout"
+            method = RequestMethod.GET,
+            value = "/parent/logout"
     )
     default ResponseEntity<Void> logoutParent(
-        
+
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -269,22 +293,22 @@ public interface ParentApi {
      *         or Parent not found (status code 404)
      */
     @Operation(
-        operationId = "updateParent",
-        summary = "Updated parent",
-        tags = { "parent" },
-        responses = {
-            @ApiResponse(responseCode = "400", description = "Invalid parent supplied"),
-            @ApiResponse(responseCode = "404", description = "Parent not found")
-        }
+            operationId = "updateParent",
+            summary = "Updated parent",
+            tags = { "parent" },
+            responses = {
+                    @ApiResponse(responseCode = "400", description = "Invalid parent supplied"),
+                    @ApiResponse(responseCode = "404", description = "Parent not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/parent/{parentname}",
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/parent/{parentname}",
+            consumes = { "application/json" }
     )
     default ResponseEntity<Void> updateParent(
-        @Parameter(name = "parentname", description = "name that need to be updated", required = true) @PathVariable("parentname") String parentname,
-        @Parameter(name = "ParentDto", description = "Updated parent object", required = true) @Valid @RequestBody ParentDto parentDto
+            @Parameter(name = "parentname", description = "name that need to be updated", required = true) @PathVariable("parentname") String parentname,
+            @Parameter(name = "ParentDto", description = "Updated parent object", required = true) @Valid @RequestBody ParentDto parentDto
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 

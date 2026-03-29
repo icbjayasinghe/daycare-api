@@ -41,8 +41,21 @@ paths:
             schema:
               $ref: '#/components/schemas/ParentDto'
       responses:
-        default:
-          description: successful operation
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Invalid
+        '404':
+          description: Parent not found
+        '405':
+          description: Validation exception
   /parent/createWithArray:
     post:
       tags:
