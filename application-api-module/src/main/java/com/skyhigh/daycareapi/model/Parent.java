@@ -19,23 +19,9 @@ public class Parent extends User {
     public Parent() {
     }
 
-    public Parent(ParentStatus parentStatus, Address address) {
+    public Parent(UserBuilder<?, ?> b, ParentStatus parentStatus) {
+        super(b);
         this.parentStatus = parentStatus;
-        this.address = address;
-    }
-
-    public Parent(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber, Address address, ParentStatus parentStatus, Address address1) {
-        super(id, firstName, lastName, passwordHash, email, phoneNumber, address);
-        this.parentStatus = parentStatus;
-        this.address = address1;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public ParentStatus getParentStatus() {

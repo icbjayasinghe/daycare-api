@@ -5,7 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.skyhigh.daycareapi.swagger", "com.skyhigh.daycareapi.controller" , "com.skyhigh.daycareapi.config.swagger"})
+@ComponentScan(basePackages = {
+        "com.skyhigh.daycareapi.swagger",
+        "com.skyhigh.daycareapi.controller" ,
+        "com.skyhigh.daycareapi.service",
+        "com.skyhigh.daycareapi.repository",
+        "com.skyhigh.daycareapi.config.swagger",
+        "com.skyhigh.daycareapi.util.convertor"})
 public class DaycareApiApplication {
 
     public static void main(String[] args) {

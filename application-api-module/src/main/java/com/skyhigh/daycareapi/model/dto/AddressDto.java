@@ -2,6 +2,7 @@ package com.skyhigh.daycareapi.model.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import javax.annotation.Generated;
 
 @Schema(name = "AddressDto", description = "Address model")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T05:34:36.063118-04:00[America/Halifax]")
+@Builder
 public class AddressDto {
 
   @JsonProperty("street")

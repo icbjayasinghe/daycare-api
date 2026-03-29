@@ -5,9 +5,11 @@ import com.skyhigh.daycareapi.model.Parent;
 import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import com.skyhigh.daycareapi.model.dto.ParentDto;
+import com.skyhigh.daycareapi.repository.AddressRepository;
 import com.skyhigh.daycareapi.repository.ParentRepository;
 import com.skyhigh.daycareapi.repository.UserRepository;
 import com.skyhigh.daycareapi.service.ParentService;
+import com.skyhigh.daycareapi.util.convertor.ParentToParentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,12 @@ public class ParentServiceImpl implements ParentService {
 
     @Autowired
     ParentRepository parentRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
+
+    @Autowired
+    ParentToParentDto parentToParentDto;
 
     @Override
     public ParentDto createParent(ParentDto parentDto) {
@@ -34,6 +42,8 @@ public class ParentServiceImpl implements ParentService {
                 .province(addressDto.getState())
                 .postalCode(addressDto.getPostalCode())
                 .build();
+        address = addressRepository.save(address);
+
 
         User user = User.builder()
                 .email(parentDto.getEmail())
@@ -47,10 +57,12 @@ public class ParentServiceImpl implements ParentService {
         user = userRepository.save(user);
 
         Parent parent = Parent.builder()
-                .address(address)
+                .id(user.getId())
                 .build();
 
-        ParentDto parentDtoRes = new ParentDto();
+        parent = parentRepository.save(parent);
+
+        ParentDto parentDtoRes = parentToParentDto.convert(parent);
         return parentDtoRes;
     }
 }
