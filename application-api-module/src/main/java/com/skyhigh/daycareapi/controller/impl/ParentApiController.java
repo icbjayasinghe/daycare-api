@@ -6,6 +6,8 @@ import java.time.OffsetDateTime;
 import com.skyhigh.daycareapi.controller.ParentApi;
 
 
+import com.skyhigh.daycareapi.model.dto.ParentDto;
+import com.skyhigh.daycareapi.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +39,9 @@ public class ParentApiController implements ParentApi {
     private final NativeWebRequest request;
 
     @Autowired
+    ParentService parentService;
+
+    @Autowired
     public ParentApiController(NativeWebRequest request) {
         this.request = request;
     }
@@ -46,4 +51,9 @@ public class ParentApiController implements ParentApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<ParentDto> createParent(ParentDto parentDto) {
+        ParentDto parentDtoRes = parentService.createParent(parentDto);
+        return ResponseEntity.ok(parentDtoRes);
+    }
 }
