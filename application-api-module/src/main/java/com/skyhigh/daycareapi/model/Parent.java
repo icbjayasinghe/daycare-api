@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skyhigh.daycareapi.model.constants.ParentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -14,6 +15,7 @@ public class Parent extends User {
 
     @OneToOne
     @JoinColumn(name = "address_id")
+    @JsonIgnore
     private Address address;
 
     public Parent() {
@@ -30,5 +32,13 @@ public class Parent extends User {
 
     public void setParentStatus(ParentStatus parentStatus) {
         this.parentStatus = parentStatus;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
