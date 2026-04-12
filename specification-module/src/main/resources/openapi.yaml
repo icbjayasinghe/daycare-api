@@ -18,82 +18,42 @@ servers:
     url: 'https://virtserver.swaggerhub.com/skyhigh-00b/DaycareAPI/1.0.0'
   - url: 'https://daycare.swagger.io/v2'
 tags:
-  - name: daycare
-    description: Access to Daycare
-  - name: parent
+  - name: User
+    description: Operations common for all users
+
+  - name: DayCareOwner
+    description: Operations about daycare owner
+
+  - name: Daycare
+    description: Daycare operations
+
+  - name: Parent
     description: Operations about parent
+
+  - name: Child
+    description: Operations about child
+
     externalDocs:
       description: Find out more about our daycare
       url: 'http://swagger.io'
+
 paths:
-  /parent:
+  /user/login:
     post:
       tags:
-        - parent
-      summary: Create parent
-      description: This can only be done by the logged in parent.
-      operationId: createParent
-      requestBody:
-        description: Created parent object
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParentDto'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-        '400':
-          description: Invalid
-        '404':
-          description: Parent not found
-        '405':
-          description: Validation exception
-  /parent/createWithArray:
-    post:
-      tags:
-        - parent
-      summary: Creates list of parents with given input array
-      operationId: createParentsWithArrayInput
-      requestBody:
-        $ref: '#/components/requestBodies/ParentArray'
-      responses:
-        default:
-          description: successful operation
-  /parent/createWithList:
-    post:
-      tags:
-        - parent
-      summary: Creates list of parents with given input array
-      operationId: createParentsWithListInput
-      requestBody:
-        $ref: '#/components/requestBodies/ParentArray'
-      responses:
-        default:
-          description: successful operation
-  /parent/login:
-    get:
-      tags:
-        - parent
-      summary: Logs parent into the system
-      operationId: loginParent
+        - User
+      summary: Logs user into the system
+      operationId: loginUser
       parameters:
-        - name: parentname
+        - name: username
           in: query
-          description: The parent name for login
+          description: The user email for login
           required: true
           schema:
             type: string
         - name: password
           in: query
-          description: The password for login in clear text
+          description: The password for login in clear text/ hashed from the UI
           required: true
           schema:
             type: string
@@ -120,90 +80,514 @@ paths:
                 type: string
         '400':
           description: Invalid parentname/password supplied
-  /parent/logout:
+  /user/logout:
     get:
       tags:
-        - parent
+        - User
       summary: Logs out current logged in parent session
-      operationId: logoutParent
+      operationId: logoutUser
       responses:
         default:
           description: successful operation
-  /parent/{parentname}:
-    get:
+
+  /parent:
+    post:
       tags:
-        - parent
-      summary: Get parent by parent name
-      operationId: getParentByName
-      parameters:
-        - name: parentname
-          in: path
-          description: The name that needs to be fetched. Use parent1 for testing.
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ParentDto'
-        '400':
-          description: Invalid parentname supplied
-        '404':
-          description: Parent not found
-    put:
-      tags:
-        - parent
-      summary: Updated parent
-      description: This can only be done by the logged in parent.
-      operationId: updateParent
-      parameters:
-        - name: parentname
-          in: path
-          description: name that need to be updated
-          required: true
-          schema:
-            type: string
+        - Parent
+      summary: Create parent
+      description: This can be done by parent themself.
+      operationId: createParent
       requestBody:
-        description: Updated parent object
+        description: Parent object
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ParentDto'
       responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
         '400':
-          description: Invalid parent supplied
-        '404':
-          description: Parent not found
+          description: Operation failed
+    put:
+      tags:
+        - Parent
+      summary: Edit parent
+      description: This can be done by admin or Parent
+      operationId: editParent
+      requestBody:
+        description: Created parent object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Operation failed
+    get:
+      tags:
+        - Parent
+      summary: Get Parent list
+      description: This can be done by admin only
+      operationId: listParents
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Operation failed
+  /parent/{id}:
+    get:
+      tags:
+        - Parent
+      summary: Get parent by id
+      description: This can be done by respective user or admin
+      operationId: getParent
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 46
+          required: true
+          description: Numeric ID of the parent to get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Operation failed
     delete:
       tags:
-        - parent
-      summary: Delete parent
-      description: This can only be done by the logged in parent.
+        - Parent
+      summary: Delete Parent by id
+      description: This can be done only by admin after receiving a written request from the parent
       operationId: deleteParent
       parameters:
-        - name: parentname
-          in: path
-          description: The name that needs to be deleted
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 46
           required: true
+          description: Numeric ID of the parent to delete
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+
+  /child:
+    post:
+      tags:
+        - Child
+      summary: Create child
+      description: This can be done by parent.
+      operationId: createChild
+      requestBody:
+        description: Child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Operation failed
+    put:
+      tags:
+        - Child
+      summary: Edit Child
+      description: This can be done by parent
+      operationId: editChild
+      requestBody:
+        description: Created child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+    get:
+      tags:
+        - Child
+      summary: Get child list
+      description: This can be done by admin, parent, or daycare user
+      operationId: listChildren
+      parameters:
+        - in: query
+          name: loggedInParentId
+          required: false
+          description: If logged in user is a parent, they can view only their children.
+          schema:
+            type: integer
+            example: 91
+        - in: query
+          name: loggedInDayCareId
+          required: false
+          description: If logged in user is a daycare, they can view only children in their daycare.
+          schema:
+            type: integer
+            example: 92
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+  /child/{id}:
+    get:
+      tags:
+        - Child
+      summary: Get child by id
+      description: This can be done by respective parent, daycare user, or admin
+      operationId: getChild
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 38
+          required: true
+          description: Numeric ID of the child to get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+    delete:
+      tags:
+        - Child
+      summary: Delete Child by id
+      description: This can be done only by parent
+      operationId: deleteChild
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 38
+          required: true
+          description: Numeric ID of the child to delete
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+
+  /daycareOwner:
+    post:
+      tags:
+        - DayCareOwner
+      summary: Create new daycare owner/ admin
+      description: This can be done by system admin only
+      operationId: createDayCareOwner
+      requestBody:
+        description: Created daycare owner object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        '400':
+          description: Operation failed
+    put:
+      tags:
+        - DayCareOwner
+      summary: Edit daycare admin
+      description: This can be done by admin or Daycare owner
+      operationId: editDayCareOwner
+      requestBody:
+        description: Created DayCareOwner object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OwnerDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        '400':
+          description: Operation failed
+    get:
+      tags:
+        - DayCareOwner
+      summary: Get Daycare owners list
+      description: This can be done by admin only
+      operationId: listDayCareOwners
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+  /daycareOwner/{id}:
+    get:
+      tags:
+        - DayCareOwner
+      summary: Get daycare owner by id
+      description: This can be done by admin or owner only
+      operationId: getDayCareOwner
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 101
+          required: true
+          description: Numeric ID of the daycare owner to get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        '400':
+          description: Operation failed
+    delete:
+      tags:
+        - DayCareOwner
+      summary: Delete daycare owner by id
+      description: This can be done only by admin after receiving a written request from the daycare owner
+      operationId: deleteDayCareOwner
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 102
+          required: true
+          description: Numeric ID of the daycare owner to get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnerDto'
+        '400':
+          description: Operation failed
+
+  /daycare:
+    post:
+      tags:
+        - Daycare
+      summary: Create new daycare
+      description: This can be done by admin only
+      operationId: createDayCare
+      requestBody:
+        description: Created daycare object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DayCareDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+    put:
+      tags:
+        - Daycare
+      summary: Edit daycare
+      description: This can be done by admin or Daycare owner
+      operationId: editDayCare
+      requestBody:
+        description: Created daycare object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DayCareDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+    get:
+      tags:
+        - Daycare
+      summary: Get daycare list
+      description: This can be done by any user
+      operationId: listDayCares
+      parameters:
+        - name: keyword
+          in: query
+          description: Search keyword (searches name, description, etc.)
+          required: false
           schema:
             type: string
+            example: "Daycare name"
+        - name: latitude
+          in: query
+          description: Latitude of the center point
+          required: false
+          schema:
+            type: number
+            format: float
+            minimum: -90
+            maximum: 90
+            example: 43.7615
+
+        - name: longitude
+          in: query
+          description: Longitude of the center point
+          required: false
+          schema:
+            type: number
+            format: float
+            minimum: -180
+            maximum: 180
+            example: -79.4111
+
+        - name: radius
+          in: query
+          description: Search radius in kilometers from the center point
+          required: false
+          schema:
+            type: number
+            format: float
+            minimum: 0.1
+            maximum: 100
+            default: 10
+            example: 25
       responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
         '400':
-          description: Invalid parentname supplied
-        '404':
-          description: Parent not found
+          description: Operation failed
+
+  /daycare/{id}:
+    get:
+      tags:
+        - Daycare
+      summary: Get daycare by id
+      description: This can be done by any user
+      operationId: getDayCare
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 205
+          required: true
+          description: Numeric ID of the daycare to delete
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+    delete:
+      tags:
+        - Daycare
+      summary: Delete daycare by id
+      description: This can be done only by admin after receiving a written request from the daycare owner
+      operationId: deleteDayCare
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            example: 206
+          required: true
+          description: Numeric ID of the daycare to delete
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
+
+
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
 components:
   schemas:
+    UserTypes:
+      type: string
+      enum: [ admin, daycareOwner, daycareAssistant, parent, child ]
     ParentDto:
       type: object
       xml:
@@ -237,16 +621,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChildDto'
-    ApiResponse:
+    OwnerDto:
       type: object
+      description: Daycare owner
       properties:
-        code:
-          type: integer
-          format: int32
-        type:
+        firstName:
           type: string
-        message:
+        lastName:
           type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        userType:
+          $ref: '#/components/schemas/UserTypes'
+    DayCareDto:
+      type: object
+      description: Day care DTO
+      properties:
+        name:
+          type: string
+        telephone:
+          type: string
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/OwnerDto'
+        address:
+          $ref: '#/components/schemas/AddressDto'
     AddressDto:
       type: object
       properties:
@@ -285,6 +687,17 @@ components:
           x-stoplight:
             id: pg64mdmyc60m3
       description: ''
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+
   requestBodies:
     ParentArray:
       content:
