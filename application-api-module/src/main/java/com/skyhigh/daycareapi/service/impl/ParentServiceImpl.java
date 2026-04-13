@@ -45,19 +45,13 @@ public class ParentServiceImpl implements ParentService {
         address = addressRepository.save(address);
 
 
-        User user = User.builder()
+        Parent parent = Parent.builder()
+                .address(address)
                 .email(parentDto.getEmail())
                 .firstName(parentDto.getFirstName())
                 .lastName(parentDto.getLastName())
                 .phoneNumber(parentDto.getPhone())
                 .passwordHash(parentDto.getPassword())
-                .address(address)
-                .build();
-
-        user = userRepository.save(user);
-
-        Parent parent = Parent.builder()
-                .id(user.getId())
                 .build();
 
         parent = parentRepository.save(parent);

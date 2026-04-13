@@ -13,14 +13,13 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber, Address address) {
+    public User(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.address = address;
     }
 
     @Id
@@ -83,17 +82,5 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }
