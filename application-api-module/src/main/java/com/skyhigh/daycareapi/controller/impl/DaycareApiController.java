@@ -39,4 +39,9 @@ public class DaycareApiController implements DaycareApi {
     public ResponseEntity<List<DayCareDto>> listDayCares(String keyword, Float latitude, Float longitude, Float radius) {
         return new ResponseEntity<>(daycareService.listDayCares(),HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<DayCareDto> getDayCare(Integer id) {
+        return new ResponseEntity<>(daycareService.getDayCareById(id),HttpStatus.OK);
+    }
 }

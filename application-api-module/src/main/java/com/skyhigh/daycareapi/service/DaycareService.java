@@ -8,4 +8,6 @@ public interface DaycareService {
     DayCareDto createDayCare(DayCareDto dayCareDto);
 
     List<DayCareDto> listDayCares();
+
+    DayCareDto getDayCareById(Integer id);
 }
