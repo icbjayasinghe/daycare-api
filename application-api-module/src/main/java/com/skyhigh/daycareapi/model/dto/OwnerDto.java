@@ -2,9 +2,11 @@ package com.skyhigh.daycareapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 
 import javax.validation.Valid;
 
+@Builder
 public class OwnerDto {
     @JsonProperty("firstName")
     private String firstName;
