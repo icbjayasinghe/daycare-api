@@ -2,11 +2,14 @@ package com.skyhigh.daycareapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+@Schema(name = "DayCareDto", description = "Day care DTO")
+@Builder
 public class DayCareDto {
     @JsonProperty("name")
     private String name;
