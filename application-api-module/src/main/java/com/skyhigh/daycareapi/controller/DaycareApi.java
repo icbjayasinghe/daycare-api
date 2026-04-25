@@ -1,7 +1,6 @@
 package com.skyhigh.daycareapi.controller;
 
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
-import com.skyhigh.daycareapi.model.facility.DayCare;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -23,7 +21,7 @@ import java.util.*;
 
 @Validated
 @Tag(name = "daycare", description = "Daycare operations")
-public interface DayCareController {
+public interface DaycareApi {
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
