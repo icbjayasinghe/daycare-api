@@ -53,10 +53,9 @@ public class ParentServiceImpl implements ParentService {
                 .lastName(parentDto.getLastName())
                 .phoneNumber(parentDto.getPhone())
                 .passwordHash(parentDto.getPassword())
-                .address(address)
                 .build();
 
-        Parent parent = new Parent(user, ParentStatus.ACTIVATED);
+        Parent parent = new Parent(user, ParentStatus.ACTIVATED, address);
 
 
         parent = parentRepository.save(parent);

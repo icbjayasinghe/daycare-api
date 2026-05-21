@@ -21,4 +21,15 @@ public class AddressToAddressDto implements Converter<Address, AddressDto> {
                 .build();
         return addressDto;
     }
+
+    public Address toEntity(AddressDto addressDto) {
+        return Address.builder()
+                .address(addressDto.getAddress())
+                .city(addressDto.getCity())
+                .state(addressDto.getState())
+                .postalCode(addressDto.getPostalCode())
+                .country(addressDto.getCountry())
+                .apartment(addressDto.getApartment())
+                .build();
+    }
 }
