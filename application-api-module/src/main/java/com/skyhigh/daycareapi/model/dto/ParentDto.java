@@ -9,6 +9,7 @@ import java.util.List;
 import lombok.Builder;
 import org.openapitools.jackson.nullable.JsonNullable;
 
+import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,30 +26,40 @@ import javax.annotation.Generated;
 public class ParentDto {
 
   @JsonProperty("id")
+  @Nullable
   private Long id;
 
   @JsonProperty("firstName")
+  @NotNull
   private String firstName;
 
   @JsonProperty("lastName")
+  @NotNull
   private String lastName;
 
   @JsonProperty("email")
+  @NotNull
   private String email;
 
   @JsonProperty("password")
+  @NotNull
   private String password;
 
   @JsonProperty("phone")
+  @Nullable
   private String phone;
 
   @JsonProperty("parentStatus")
+  @Nullable
   private Integer parentStatus;
 
   @JsonProperty("address")
+  @Nullable
+  @Valid
   private AddressDto address;
 
   @JsonProperty("children")
+  @Nullable
   @Valid
   private List<ChildDto> children = null;
 

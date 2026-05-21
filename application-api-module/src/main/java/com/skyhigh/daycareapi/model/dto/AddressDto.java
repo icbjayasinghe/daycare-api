@@ -21,8 +21,11 @@ import javax.annotation.Generated;
 @Builder
 public class AddressDto {
 
-  @JsonProperty("street")
-  private String street;
+  @JsonProperty("apartment")
+  private String apartment;
+
+  @JsonProperty("address")
+  private String address;
 
   @JsonProperty("city")
   private String city;
@@ -36,23 +39,42 @@ public class AddressDto {
   @JsonProperty("country")
   private String country;
 
-  public AddressDto street(String street) {
-    this.street = street;
+  public AddressDto apartment(String apartment) {
+    this.apartment = apartment;
     return this;
   }
 
   /**
-   * Get street
-   * @return street
-  */
-  
-  @Schema(name = "street", required = false)
-  public String getStreet() {
-    return street;
+   * Get apartment
+   * @return apartment
+   */
+
+  @Schema(name = "apartment", required = false)
+  public String getApartment() {
+    return apartment;
   }
 
-  public void setStreet(String street) {
-    this.street = street;
+  public void setApartment(String apartment) {
+    this.apartment = apartment;
+  }
+
+  public AddressDto address(String address) {
+    this.address = address;
+    return this;
+  }
+
+  /**
+   * Get address
+   * @return address
+   */
+
+  @Schema(name = "address", required = false)
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public AddressDto city(String city) {
@@ -63,8 +85,8 @@ public class AddressDto {
   /**
    * Get city
    * @return city
-  */
-  
+   */
+
   @Schema(name = "city", required = false)
   public String getCity() {
     return city;
@@ -82,8 +104,8 @@ public class AddressDto {
   /**
    * Get state
    * @return state
-  */
-  
+   */
+
   @Schema(name = "state", required = false)
   public String getState() {
     return state;
@@ -101,8 +123,8 @@ public class AddressDto {
   /**
    * Get postalCode
    * @return postalCode
-  */
-  
+   */
+
   @Schema(name = "postalCode", required = false)
   public String getPostalCode() {
     return postalCode;
@@ -120,8 +142,8 @@ public class AddressDto {
   /**
    * Get country
    * @return country
-  */
-  
+   */
+
   @Schema(name = "country", required = false)
   public String getCountry() {
     return country;
@@ -140,23 +162,25 @@ public class AddressDto {
       return false;
     }
     AddressDto addressDto = (AddressDto) o;
-    return Objects.equals(this.street, addressDto.street) &&
-        Objects.equals(this.city, addressDto.city) &&
-        Objects.equals(this.state, addressDto.state) &&
-        Objects.equals(this.postalCode, addressDto.postalCode) &&
-        Objects.equals(this.country, addressDto.country);
+    return Objects.equals(this.apartment, addressDto.apartment) &&
+            Objects.equals(this.address, addressDto.address) &&
+            Objects.equals(this.city, addressDto.city) &&
+            Objects.equals(this.state, addressDto.state) &&
+            Objects.equals(this.postalCode, addressDto.postalCode) &&
+            Objects.equals(this.country, addressDto.country);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(street, city, state, postalCode, country);
+    return Objects.hash(apartment, address, city, state, postalCode, country);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class AddressDto {\n");
-    sb.append("    street: ").append(toIndentedString(street)).append("\n");
+    sb.append("    apartment: ").append(toIndentedString(apartment)).append("\n");
+    sb.append("    address: ").append(toIndentedString(address)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    postalCode: ").append(toIndentedString(postalCode)).append("\n");

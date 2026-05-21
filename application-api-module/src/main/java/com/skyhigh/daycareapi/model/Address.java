@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
 
@@ -8,38 +9,38 @@ import lombok.Builder;
 @Table(name = "Address")
 public class Address {
 
-  public Address() {
-  }
-
-  public Address(Long id, String streetNumber, String addressLine1, String addressLine2, String city, String province, String postalCode, String locationCoordinates) {
-    this.id = id;
-    this.streetNumber = streetNumber;
-    this.addressLine1 = addressLine1;
-    this.addressLine2 = addressLine2;
-    this.city = city;
-    this.province = province;
-    this.postalCode = postalCode;
-    this.locationCoordinates = locationCoordinates;
-  }
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String streetNumber;
+  private String apartment;
 
-  private String addressLine1;
-
-  private String addressLine2;
+  private String address;
 
   private String city;
 
-  private String province;
+  private String state;
 
   private String postalCode;
 
+  private String country;
+
   @Column(columnDefinition = "json")
   private String locationCoordinates;
+
+  public Address() {
+  }
+
+  public Address(Long id, String apartment, String address, String city, String state, String postalCode, String country, String locationCoordinates) {
+    this.id = id;
+    this.apartment = apartment;
+    this.address = address;
+    this.city = city;
+    this.state = state;
+    this.postalCode = postalCode;
+    this.country = country;
+    this.locationCoordinates = locationCoordinates;
+  }
 
   public Long getId() {
     return id;
@@ -49,28 +50,20 @@ public class Address {
     this.id = id;
   }
 
-  public String getStreetNumber() {
-    return streetNumber;
+  public String getApartment() {
+    return apartment;
   }
 
-  public void setStreetNumber(String streetNumber) {
-    this.streetNumber = streetNumber;
+  public void setApartment(String apartment) {
+    this.apartment = apartment;
   }
 
-  public String getAddressLine1() {
-    return addressLine1;
+  public String getAddress() {
+    return address;
   }
 
-  public void setAddressLine1(String addressLine1) {
-    this.addressLine1 = addressLine1;
-  }
-
-  public String getAddressLine2() {
-    return addressLine2;
-  }
-
-  public void setAddressLine2(String addressLine2) {
-    this.addressLine2 = addressLine2;
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   public String getCity() {
@@ -81,12 +74,12 @@ public class Address {
     this.city = city;
   }
 
-  public String getProvince() {
-    return province;
+  public String getState() {
+    return state;
   }
 
-  public void setProvince(String province) {
-    this.province = province;
+  public void setState(String state) {
+    this.state = state;
   }
 
   public String getPostalCode() {
@@ -95,6 +88,14 @@ public class Address {
 
   public void setPostalCode(String postalCode) {
     this.postalCode = postalCode;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
   }
 
   public String getLocationCoordinates() {

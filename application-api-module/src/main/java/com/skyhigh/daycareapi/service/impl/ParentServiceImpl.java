@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.service.impl;
 import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.Parent;
 import com.skyhigh.daycareapi.model.User;
+import com.skyhigh.daycareapi.model.constants.ParentStatus;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import com.skyhigh.daycareapi.model.dto.ParentDto;
 import com.skyhigh.daycareapi.repository.AddressRepository;
@@ -37,9 +38,10 @@ public class ParentServiceImpl implements ParentService {
 
         AddressDto addressDto = parentDto.getAddress();
         Address address = Address.builder()
-                .streetNumber(addressDto.getStreet())
+                .apartment(addressDto.getApartment())
+                .address(addressDto.getAddress())
                 .city(addressDto.getCity())
-                .province(addressDto.getState())
+                .state(addressDto.getState())
                 .postalCode(addressDto.getPostalCode())
                 .build();
         address = addressRepository.save(address);
@@ -54,11 +56,8 @@ public class ParentServiceImpl implements ParentService {
                 .address(address)
                 .build();
 
-        user = userRepository.save(user);
+        Parent parent = new Parent(user, ParentStatus.ACTIVATED);
 
-        Parent parent = Parent.builder()
-                .id(user.getId())
-                .build();
 
         parent = parentRepository.save(parent);
 

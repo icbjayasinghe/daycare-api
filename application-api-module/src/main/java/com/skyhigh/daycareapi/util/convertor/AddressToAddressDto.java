@@ -13,11 +13,11 @@ public class AddressToAddressDto implements Converter<Address, AddressDto> {
 
         AddressDto addressDto = AddressDto.builder()
                 .city(address.getCity())
-                .country("")
+                .country(address.getCountry())
                 .postalCode(address.getPostalCode())
-                .state(address.getPostalCode())
-                .street(address.getStreetNumber())
-                .state("")
+                .state(address.getState())
+                .apartment(address.getApartment())
+                .address(address.getAddress())
                 .build();
         return addressDto;
     }

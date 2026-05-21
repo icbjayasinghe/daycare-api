@@ -4,7 +4,6 @@ import com.skyhigh.daycareapi.model.constants.ParentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -21,6 +20,16 @@ public class Parent extends User {
 
     public Parent(UserBuilder<?, ?> b, ParentStatus parentStatus) {
         super(b);
+        this.parentStatus = parentStatus;
+    }
+
+    public Parent(User user, ParentStatus parentStatus) {
+        this.setFirstName(user.getFirstName());
+        this.setLastName(user.getLastName());
+        this.setEmail(user.getEmail());
+        this.setPasswordHash(user.getPasswordHash());
+        this.setPhoneNumber(user.getPhoneNumber());
+        this.setAddress(user.getAddress());
         this.parentStatus = parentStatus;
     }
 

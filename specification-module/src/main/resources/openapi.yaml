@@ -652,7 +652,9 @@ components:
     AddressDto:
       type: object
       properties:
-        street:
+        apartment:
+          type: string
+        address:
           type: string
         city:
           type: string
