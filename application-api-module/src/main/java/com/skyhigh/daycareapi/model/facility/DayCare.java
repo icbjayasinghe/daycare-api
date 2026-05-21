@@ -2,9 +2,13 @@ package com.skyhigh.daycareapi.model.facility;
 
 import com.skyhigh.daycareapi.model.Address;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
+@SuperBuilder
 @Table
+@NoArgsConstructor
 public class DayCare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

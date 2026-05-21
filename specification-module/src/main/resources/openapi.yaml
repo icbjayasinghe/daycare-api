@@ -147,7 +147,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ParentDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParentDto'
         '400':
           description: Operation failed
   /parent/{id}:
@@ -270,7 +272,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChildDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChildDto'
         '400':
           description: Operation failed
   /child/{id}:
@@ -378,7 +382,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DayCareDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/DayCareDto'
         '400':
           description: Operation failed
   /daycareOwner/{id}:
@@ -527,7 +533,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DayCareDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/DayCareDto'
         '400':
           description: Operation failed
 
@@ -652,7 +660,9 @@ components:
     AddressDto:
       type: object
       properties:
-        street:
+        apartment:
+          type: string
+        address:
           type: string
         city:
           type: string
