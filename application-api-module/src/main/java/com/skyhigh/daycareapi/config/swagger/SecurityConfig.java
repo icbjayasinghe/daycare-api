@@ -2,6 +2,7 @@ package com.skyhigh.daycareapi.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,6 +23,8 @@ public class SecurityConfig {
                         ).permitAll()
 
                         .requestMatchers("/api/public/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/daycare").permitAll()
 
                         .anyRequest().authenticated()
                 )
