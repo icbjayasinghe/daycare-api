@@ -1,5 +1,8 @@
 package com.skyhigh.daycareapi.config.swagger;
 
+import io.swagger.v3.oas.models.security.OAuthFlow;
+import io.swagger.v3.oas.models.security.OAuthFlows;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,16 +35,29 @@ public class SpringDocConfiguration {
                                 )
                                 .version("1.0.0")
                 )
+                .addSecurityItem(
+                        new SecurityRequirement()
+                                .addList("keycloak")
+                )
                 .components(
                         new Components()
-                                .addSecuritySchemes("api_key", new SecurityScheme()
-                                        .type(SecurityScheme.Type.APIKEY)
-                                        .in(SecurityScheme.In.HEADER)
-                                        .name("api_key")
-                                )
-                                .addSecuritySchemes("daycare_auth", new SecurityScheme()
-                                        .type(SecurityScheme.Type.OAUTH2)
-                                )
+                                .addSecuritySchemes("keycloak",
+                                        new SecurityScheme()
+                                                .type(SecurityScheme.Type.OAUTH2)
+                                                .flows(new OAuthFlows()
+                                                        .authorizationCode(
+                                                                new OAuthFlow()
+                                                                        .authorizationUrl("http://localhost:8080/realms/daycare/protocol/openid-connect/auth")
+                                                                        .tokenUrl("http://localhost:8080/realms/daycare/protocol/openid-connect/token")
+                                                        )))
+//                                .addSecuritySchemes("api_key", new SecurityScheme()
+//                                        .type(SecurityScheme.Type.APIKEY)
+//                                        .in(SecurityScheme.In.HEADER)
+//                                        .name("api_key")
+//                                )
+//                                .addSecuritySchemes("daycare_auth", new SecurityScheme()
+//                                        .type(SecurityScheme.Type.OAUTH2)
+//                                )
                 )
         ;
     }

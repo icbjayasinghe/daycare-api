@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -178,6 +179,7 @@ public interface DaycareApi {
             value = "/daycare/{id}",
             produces = { "application/json" }
     )
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER') or hasRole('PARENT')")
     default ResponseEntity<DayCareDto> getDayCare(
             @Parameter(name = "id", description = "Numeric ID of the daycare to delete", required = true) @PathVariable("id") Integer id
     ) {
@@ -222,6 +224,7 @@ public interface DaycareApi {
             value = "/daycare",
             produces = { "application/json" }
     )
+    @PreAuthorize("hasAnyRole('PARENT', 'PROVIDER', 'ADMIN', 'TEACHER')")
     default ResponseEntity<List<DayCareDto>> listDayCares(
             @Parameter(name = "keyword", description = "Search keyword (searches name, description, etc.)") @Valid @RequestParam(value = "keyword", required = false) String keyword,
             @Parameter(name = "latitude", description = "Latitude of the center point") @Valid @RequestParam(value = "latitude", required = false) Float latitude,
