@@ -23,6 +23,7 @@ public class OwnerConvertor implements Converter<Owner, OwnerDto> {
                 .firstName(owner.getFirstName())
                 .lastName(owner.getLastName())
                 .phoneNumber(owner.getPhoneNumber())
+                .passwordHash(owner.getPassword())
                 .build();
     }
 }

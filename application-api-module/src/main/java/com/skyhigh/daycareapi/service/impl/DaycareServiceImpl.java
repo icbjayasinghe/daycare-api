@@ -1,6 +1,7 @@
 package com.skyhigh.daycareapi.service.impl;
 
 import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
 import com.skyhigh.daycareapi.model.facility.DayCare;
 import com.skyhigh.daycareapi.model.facility.Owner;
@@ -8,6 +9,7 @@ import com.skyhigh.daycareapi.repository.AddressRepository;
 import com.skyhigh.daycareapi.repository.DaycareRepository;
 import com.skyhigh.daycareapi.repository.OwnerRepository;
 import com.skyhigh.daycareapi.service.DaycareService;
+import com.skyhigh.daycareapi.service.KeycloakUserService;
 import com.skyhigh.daycareapi.util.convertor.AddressToAddressDto;
 import com.skyhigh.daycareapi.util.convertor.DaycareConvertor;
 import com.skyhigh.daycareapi.util.convertor.OwnerConvertor;
@@ -39,12 +41,17 @@ public class DaycareServiceImpl implements DaycareService {
     @Autowired
     OwnerConvertor ownerConvertor;
 
+    @Autowired
+    KeycloakUserService keycloakUserService;
+
     @Override
     public DayCareDto createDayCare(DayCareDto dayCareDto) {
         Address address = addressToAddressDto.toEntity(dayCareDto.getAddress());
         address = addressRepository.save(address);
 
         Owner owner = ownerConvertor.toEntity(dayCareDto.getOwners().getFirst());
+        String keycloakUserId = keycloakUserService.createUser(owner, Role.PROVIDER);
+        owner.setKeycloakUserId(keycloakUserId);
         owner = ownerRepository.save(owner);
 
         DayCare dayCare = daycareConvertor.toEntity(dayCareDto, address,  owner);

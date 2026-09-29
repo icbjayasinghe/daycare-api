@@ -17,6 +17,9 @@ public class OwnerDto {
     @JsonProperty("email")
     private String email;
 
+    @JsonProperty("password")
+    private String password;
+
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
@@ -73,6 +76,25 @@ public class OwnerDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public OwnerDto password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    /**
+     * Get password
+     * @return password
+     */
+
+    @Schema(name = "password", required = false)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public OwnerDto phoneNumber(String phoneNumber) {

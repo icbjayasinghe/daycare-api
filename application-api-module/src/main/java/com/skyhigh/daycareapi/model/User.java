@@ -13,13 +13,14 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber) {
+    public User(Long id, String firstName, String lastName, String passwordHash, String email, String phoneNumber, String keycloakUserId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.keycloakUserId = keycloakUserId;
     }
 
     @Id
@@ -30,11 +31,15 @@ public class User {
 
     private String lastName;
 
+    @Transient
     private String passwordHash;
 
     private String email;
 
     private String phoneNumber;
+
+    @Column(unique = true)
+    private String keycloakUserId;
 
     public Long getId() {
         return id;
@@ -82,5 +87,13 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getKeycloakUserId() {
+        return keycloakUserId;
+    }
+
+    public void setKeycloakUserId(String keycloakUserId) {
+        this.keycloakUserId = keycloakUserId;
     }
 }
