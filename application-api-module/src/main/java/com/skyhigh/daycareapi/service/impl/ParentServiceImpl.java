@@ -4,11 +4,13 @@ import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.Parent;
 import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.constants.ParentStatus;
+import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import com.skyhigh.daycareapi.model.dto.ParentDto;
 import com.skyhigh.daycareapi.repository.AddressRepository;
 import com.skyhigh.daycareapi.repository.ParentRepository;
 import com.skyhigh.daycareapi.repository.UserRepository;
+import com.skyhigh.daycareapi.service.KeycloakUserService;
 import com.skyhigh.daycareapi.service.ParentService;
 import com.skyhigh.daycareapi.util.convertor.ParentToParentDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class ParentServiceImpl implements ParentService {
     @Autowired
     ParentToParentDto parentToParentDto;
 
+    @Autowired
+    KeycloakUserService keycloakUserService;
+
     @Override
     public ParentDto createParent(ParentDto parentDto) {
 
@@ -44,7 +49,6 @@ public class ParentServiceImpl implements ParentService {
                 .state(addressDto.getState())
                 .postalCode(addressDto.getPostalCode())
                 .build();
-        address = addressRepository.save(address);
 
 
         User user = User.builder()
@@ -54,6 +58,12 @@ public class ParentServiceImpl implements ParentService {
                 .phoneNumber(parentDto.getPhone())
                 .passwordHash(parentDto.getPassword())
                 .build();
+
+        String keycloakUserId = keycloakUserService.createUser(user, Role.PARENT);
+        user.setKeycloakUserId(keycloakUserId);
+
+        address = addressRepository.save(address);
+
 
         Parent parent = new Parent(user, ParentStatus.ACTIVATED, address);
 
