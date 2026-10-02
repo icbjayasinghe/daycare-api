@@ -27,10 +27,15 @@ public class SecurityConfig {
                                 "/v3/api-docs/**"
                         ).permitAll()
 
+                        // Public APIs
                         .requestMatchers("/api/public/**").permitAll()
+
+                        // CORS preflight
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/api/daycare").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/parent").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
 
 
                         .anyRequest().authenticated()
