@@ -44,40 +44,20 @@ paths:
         - User
       summary: Logs user into the system
       operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user email for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text/ hashed from the UI
-          required: true
-          schema:
-            type: string
+      requestBody:
+        description: Parent object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequestDto'
       responses:
-        '200':
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the parent
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
+        '201':
+          description: Successful operation
           content:
             application/json:
               schema:
-                type: string
-            application/xml:
-              schema:
-                type: string
+                $ref: '#/components/schemas/LoginResponseDto'
         '400':
           description: Invalid parentname/password supplied
   /user/logout:
@@ -693,6 +673,30 @@ components:
           x-stoplight:
             id: pg64mdmyc60m3
       description: ''
+    LoginRequestDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      description: User login model
+    LoginResponseDto:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: eyJhbGciOiJSUzI1NiIs...
+        refresh_token:
+          type: string
+          example: eyJhbGciOiJSUzI1NiIs...
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          example: 300
+      description: User login model
     ApiResponse:
       type: object
       properties:
