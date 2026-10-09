@@ -561,6 +561,30 @@ paths:
         '400':
           description: Operation failed
 
+  /daycare/byOwner/{email}:
+    get:
+      tags:
+        - Daycare
+      summary: Get daycare by owner
+      description: This can be done by owner
+      operationId: getDayCareByEmail
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+            example: 205
+          required: true
+          description: Owner of the daycare
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareDto'
+        '400':
+          description: Operation failed
 
 externalDocs:
   description: Find out more about Swagger

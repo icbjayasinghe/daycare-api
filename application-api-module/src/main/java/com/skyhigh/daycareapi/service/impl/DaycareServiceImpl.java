@@ -74,4 +74,17 @@ public class DaycareServiceImpl implements DaycareService {
                 );
         return daycareConvertor.convert(dayCare);
     }
+
+    @Override
+    public DayCareDto getDayCareByEmail(String email) {
+        Owner owner = ownerRepository.findByEmail(email);
+        if (owner == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Owner not found with email: " + email);
+        }
+        DayCare dayCare = daycareRepository.findDayCareByOwner(owner);
+        if (dayCare == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Daycare not found with email: " + email);
+        }
+        return daycareConvertor.convert(dayCare);
+    }
 }

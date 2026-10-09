@@ -10,4 +10,6 @@ public interface DaycareService {
     List<DayCareDto> listDayCares();
 
     DayCareDto getDayCareById(Integer id);
+
+    DayCareDto getDayCareByEmail(String email);
 }
