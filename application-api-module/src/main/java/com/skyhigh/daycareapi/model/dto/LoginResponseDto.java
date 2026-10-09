@@ -15,16 +15,12 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-01T17:53:30.464277-03:00[America/Halifax]")
 public class LoginResponseDto {
 
-  @JsonProperty("access_token")
   private String accessToken;
 
-  @JsonProperty("refresh_token")
   private String refreshToken;
 
-  @JsonProperty("token_type")
   private String tokenType;
 
-  @JsonProperty("expires_in")
   private Integer expiresIn;
 
   public LoginResponseDto accessToken(String accessToken) {

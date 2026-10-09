@@ -21,7 +21,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.util.*;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-06-16T05:59:37.895280-03:00[America/Halifax]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-09T19:12:13.568372-03:00[America/Halifax]")
 @Validated
 @Tag(name = "daycare", description = "Daycare operations")
 public interface DaycareApi {
@@ -61,7 +61,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -102,7 +102,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -144,7 +144,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -179,14 +179,54 @@ public interface DaycareApi {
             value = "/daycare/{id}",
             produces = { "application/json" }
     )
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER') or hasRole('PARENT')")
     default ResponseEntity<DayCareDto> getDayCare(
             @Parameter(name = "id", description = "Numeric ID of the daycare to delete", required = true) @PathVariable("id") Integer id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /daycare/byOwner/{email} : Get daycare by owner
+     * This can be done by owner
+     *
+     * @param email Owner of the daycare (required)
+     * @return Successful operation (status code 200)
+     *         or Operation failed (status code 400)
+     */
+    @Operation(
+            operationId = "getDayCareByEmail",
+            summary = "Get daycare by owner",
+            tags = { "Daycare" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/daycare/byOwner/{email}",
+            produces = { "application/json" }
+    )
+    default ResponseEntity<DayCareDto> getDayCareByEmail(
+            @Parameter(name = "email", description = "Owner of the daycare", required = true) @PathVariable("email") String email
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -224,7 +264,6 @@ public interface DaycareApi {
             value = "/daycare",
             produces = { "application/json" }
     )
-    @PreAuthorize("hasAnyRole('PARENT', 'PROVIDER', 'ADMIN', 'TEACHER')")
     default ResponseEntity<List<DayCareDto>> listDayCares(
             @Parameter(name = "keyword", description = "Search keyword (searches name, description, etc.)") @Valid @RequestParam(value = "keyword", required = false) String keyword,
             @Parameter(name = "latitude", description = "Latitude of the center point") @Valid @RequestParam(value = "latitude", required = false) Float latitude,
@@ -234,7 +273,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
