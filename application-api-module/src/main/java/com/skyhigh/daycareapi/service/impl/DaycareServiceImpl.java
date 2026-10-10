@@ -87,4 +87,37 @@ public class DaycareServiceImpl implements DaycareService {
         }
         return daycareConvertor.convert(dayCare);
     }
+
+    @Override
+    public DayCareDto updateDayCare(DayCareDto dayCareDto) {
+        if (dayCareDto.getId() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Daycare ID is required"
+            );
+        }
+        DayCare existingDayCare = daycareRepository.findById(dayCareDto.getId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Daycare not found with id: " + dayCareDto.getId()
+                ));
+        Address existingAddress = existingDayCare.getAddress();
+
+        Address updatedAddress = addressToAddressDto.toEntity(
+                dayCareDto.getAddress()
+        );
+
+        if (existingAddress != null) {
+            updatedAddress.setId(existingAddress.getId());
+        }
+
+        updatedAddress = addressRepository.save(updatedAddress);
+        existingDayCare.setAddress(updatedAddress);
+
+        existingDayCare.setName(dayCareDto.getName());
+        existingDayCare.setTelephone(dayCareDto.getTelephone());
+
+        DayCare dayCare = daycareRepository.save(existingDayCare);
+
+        return daycareConvertor.convert(dayCare);
+    }
 }

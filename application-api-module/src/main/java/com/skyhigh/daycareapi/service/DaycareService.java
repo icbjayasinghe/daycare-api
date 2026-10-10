@@ -12,4 +12,6 @@ public interface DaycareService {
     DayCareDto getDayCareById(Integer id);
 
     DayCareDto getDayCareByEmail(String email);
+
+    DayCareDto updateDayCare(DayCareDto dayCareDto);
 }
