@@ -39,6 +39,9 @@ public class AddressDto {
   @JsonProperty("country")
   private String country;
 
+  @JsonProperty("locationCoordinates")
+  private String locationCoordinates;
+
   public AddressDto apartment(String apartment) {
     this.apartment = apartment;
     return this;
@@ -153,6 +156,25 @@ public class AddressDto {
     this.country = country;
   }
 
+  public AddressDto locationCoordinates(String locationCoordinates) {
+    this.locationCoordinates = locationCoordinates;
+    return this;
+  }
+
+  /**
+   * Coordinates stores as a JSON String
+   * @return locationCoordinates
+   */
+
+  @Schema(name = "locationCoordinates", description = "Coordinates stores as a JSON String", required = false)
+  public String getLocationCoordinates() {
+    return locationCoordinates;
+  }
+
+  public void setLocationCoordinates(String locationCoordinates) {
+    this.locationCoordinates = locationCoordinates;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -167,12 +189,13 @@ public class AddressDto {
             Objects.equals(this.city, addressDto.city) &&
             Objects.equals(this.state, addressDto.state) &&
             Objects.equals(this.postalCode, addressDto.postalCode) &&
-            Objects.equals(this.country, addressDto.country);
+            Objects.equals(this.country, addressDto.country) &&
+            Objects.equals(this.locationCoordinates, addressDto.locationCoordinates);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apartment, address, city, state, postalCode, country);
+    return Objects.hash(apartment, address, city, state, postalCode, country, locationCoordinates);
   }
 
   @Override
@@ -185,6 +208,7 @@ public class AddressDto {
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    postalCode: ").append(toIndentedString(postalCode)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    locationCoordinates: ").append(toIndentedString(locationCoordinates)).append("\n");
     sb.append("}");
     return sb.toString();
   }
