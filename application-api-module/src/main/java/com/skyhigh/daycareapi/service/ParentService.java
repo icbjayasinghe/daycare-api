@@ -6,4 +6,5 @@ public interface ParentService {
 
     ParentDto createParent(ParentDto parentDto);
 
+    ParentDto getParentByEmail(String email);
 }
