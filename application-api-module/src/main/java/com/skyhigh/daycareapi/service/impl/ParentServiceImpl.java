@@ -73,4 +73,11 @@ public class ParentServiceImpl implements ParentService {
         ParentDto parentDtoRes = parentToParentDto.convert(parent);
         return parentDtoRes;
     }
+
+    @Override
+    public ParentDto getParentByEmail(String email) {
+        Parent parent = parentRepository.findParentByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Parent not found with email: " + email));
+        return parentToParentDto.convert(parent);
+    }
 }

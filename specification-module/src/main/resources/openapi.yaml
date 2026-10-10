@@ -176,7 +176,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DayCareDto'
+                $ref: '#/components/schemas/ParentDto'
+        '400':
+          description: Operation failed
+  /parent/byEmail/{email}:
+    get:
+      tags:
+        - Parent
+      summary: Get parent by email
+      description: This can be done by respective user or admin
+      operationId: getParentByEmail
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+            example: peter@gmail.com
+          required: true
+          description: Email of the parent to get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentDto'
         '400':
           description: Operation failed
 
