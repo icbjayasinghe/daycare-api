@@ -21,6 +21,7 @@ public class DaycareConvertor implements Converter<DayCare, DayCareDto> {
     @Override
     public DayCareDto convert(DayCare dayCare) {
        return DayCareDto.builder()
+               .id(dayCare.getId())
                .name(dayCare.getName())
                .telephone(dayCare.getTelephone())
                .address(addressToAddressDto.convert(dayCare.getAddress()))

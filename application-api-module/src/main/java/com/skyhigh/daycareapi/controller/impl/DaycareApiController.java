@@ -50,7 +50,9 @@ public class DaycareApiController implements DaycareApi {
         return new ResponseEntity<>(daycareService.getDayCareByEmail(email),HttpStatus.OK);
     }
 
-
-
-
+    @Override
+    public ResponseEntity<DayCareDto> editDayCare(DayCareDto dayCareDto) {
+        DayCareDto updatedDayCare = daycareService.updateDayCare(dayCareDto);
+        return new ResponseEntity<>(updatedDayCare, HttpStatus.OK);
+    }
 }
