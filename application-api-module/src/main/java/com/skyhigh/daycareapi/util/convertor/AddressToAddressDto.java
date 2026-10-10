@@ -11,14 +11,18 @@ public class AddressToAddressDto implements Converter<Address, AddressDto> {
     @Override
     public AddressDto convert(Address address) {
 
-        AddressDto addressDto = AddressDto.builder()
+        AddressDto.AddressDtoBuilder builder = AddressDto.builder()
                 .city(address.getCity())
                 .country(address.getCountry())
                 .postalCode(address.getPostalCode())
                 .state(address.getState())
                 .apartment(address.getApartment())
-                .address(address.getAddress())
-                .build();
+                .address(address.getAddress());
+        if (address.getLocationCoordinates() != null) {
+            builder.locationCoordinates(address.getLocationCoordinates());
+        }
+        AddressDto addressDto = builder.build();
+
         return addressDto;
     }
 

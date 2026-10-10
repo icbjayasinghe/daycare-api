@@ -672,6 +672,9 @@ components:
           type: string
         country:
           type: string
+        locationCoordinates:
+          type: string
+          description: Coordinates stores as a JSON String
       description: Address model
     ChildDto:
       type: object
