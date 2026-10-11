@@ -18,6 +18,9 @@ public class ParentToParentDto implements Converter<Parent, ParentDto> {
     @Autowired
     AddressToAddressDto addressToAddressDto;
 
+    @Autowired
+    ChildConvertor  childConvertor;
+
     @Override
     public ParentDto convert(Parent parent) {
 
@@ -29,7 +32,6 @@ public class ParentToParentDto implements Converter<Parent, ParentDto> {
                 .id(parent.getId())
                 .parentStatus(1)
                 .address(addressDto)
-                .children(childDtoList)
                 .email(parent.getEmail())
                 .firstName(parent.getFirstName())
                 .lastName(parent.getLastName())

@@ -281,6 +281,79 @@ paths:
                   $ref: '#/components/schemas/ChildDto'
         '400':
           description: Operation failed
+  /child/byEmail/{parentEmail}:
+    parameters:
+      - in: path
+        name: parentEmail
+        schema:
+          type: string
+          example: peter@gmail.com
+        required: true
+        description: Parent email associated with the child.
+
+    post:
+      tags:
+        - Child
+      summary: Create child
+      description: This can be done by parent.
+      operationId: createChildByParent
+      requestBody:
+        description: Child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+
+    put:
+      tags:
+        - Child
+      summary: Edit Child
+      description: This can be done by parent.
+      operationId: editChildByParent
+      requestBody:
+        description: Updated child object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
+
+    get:
+      tags:
+        - Child
+      summary: Get child list
+      description: This can be done by admin, parent, or daycare user.
+      operationId: listChildrenByParent
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChildDto'
+        '400':
+          description: Operation failed
   /child/{id}:
     get:
       tags:
@@ -720,12 +793,11 @@ components:
             id: 6h9e65ovml6y5
         dob:
           type: string
+          format: date
           x-stoplight:
             id: mq68bbd8e6itx
         sex:
-          type: string
-          x-stoplight:
-            id: pg64mdmyc60m3
+          $ref: '#/components/schemas/Gender'
       description: ''
     LoginRequestDto:
       type: object
@@ -761,6 +833,13 @@ components:
           type: string
         message:
           type: string
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - NOT_SPECIFIED
+      description: Child's gender/sex value
 
   requestBodies:
     ParentArray:
