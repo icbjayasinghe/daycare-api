@@ -1,20 +1,26 @@
 package com.skyhigh.daycareapi.service.impl;
 
 import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.daycareapi.model.Child;
 import com.skyhigh.daycareapi.model.Parent;
 import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.constants.ParentStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
+import com.skyhigh.daycareapi.model.dto.ChildDto;
 import com.skyhigh.daycareapi.model.dto.ParentDto;
 import com.skyhigh.daycareapi.repository.AddressRepository;
+import com.skyhigh.daycareapi.repository.ChildRepository;
 import com.skyhigh.daycareapi.repository.ParentRepository;
 import com.skyhigh.daycareapi.repository.UserRepository;
 import com.skyhigh.daycareapi.service.KeycloakUserService;
 import com.skyhigh.daycareapi.service.ParentService;
+import com.skyhigh.daycareapi.util.convertor.ChildConvertor;
 import com.skyhigh.daycareapi.util.convertor.ParentToParentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ParentServiceImpl implements ParentService {
@@ -26,6 +32,9 @@ public class ParentServiceImpl implements ParentService {
     ParentRepository parentRepository;
 
     @Autowired
+    ChildRepository childRepository;
+
+    @Autowired
     AddressRepository addressRepository;
 
     @Autowired
@@ -33,6 +42,9 @@ public class ParentServiceImpl implements ParentService {
 
     @Autowired
     KeycloakUserService keycloakUserService;
+
+    @Autowired
+    ChildConvertor childConvertor;
 
     @Override
     public ParentDto createParent(ParentDto parentDto) {
@@ -78,6 +90,10 @@ public class ParentServiceImpl implements ParentService {
     public ParentDto getParentByEmail(String email) {
         Parent parent = parentRepository.findParentByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Parent not found with email: " + email));
-        return parentToParentDto.convert(parent);
+        ParentDto parentDto = parentToParentDto.convert(parent);
+        List<Child> childList =  childRepository.findByParentId(parent.getId());
+        List<ChildDto> childDtoList = childList.stream().map(child -> childConvertor.convert(child)).toList();
+        parentDto.setChildren(childDtoList);
+        return parentDto;
     }
 }

@@ -1,12 +1,16 @@
 package com.skyhigh.daycareapi.model.dto;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.skyhigh.daycareapi.model.constants.Gender;
+import lombok.Builder;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.annotation.Generated;
@@ -17,6 +21,7 @@ import javax.annotation.Generated;
 
 @Schema(name = "ChildDto", description = "")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T05:34:36.063118-04:00[America/Halifax]")
+@Builder
 public class ChildDto {
 
   @JsonProperty("id")
@@ -29,10 +34,11 @@ public class ChildDto {
   private String lastName;
 
   @JsonProperty("dob")
-  private String dob;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  private LocalDate dob;
 
   @JsonProperty("sex")
-  private String sex;
+  private Gender sex;
 
   public ChildDto id(Long id) {
     this.id = id;
@@ -42,8 +48,8 @@ public class ChildDto {
   /**
    * Get id
    * @return id
-  */
-  
+   */
+
   @Schema(name = "id", required = false)
   public Long getId() {
     return id;
@@ -61,8 +67,8 @@ public class ChildDto {
   /**
    * Get firstName
    * @return firstName
-  */
-  
+   */
+
   @Schema(name = "firstName", required = false)
   public String getFirstName() {
     return firstName;
@@ -80,8 +86,8 @@ public class ChildDto {
   /**
    * Get lastName
    * @return lastName
-  */
-  
+   */
+
   @Schema(name = "lastName", required = false)
   public String getLastName() {
     return lastName;
@@ -91,7 +97,7 @@ public class ChildDto {
     this.lastName = lastName;
   }
 
-  public ChildDto dob(String dob) {
+  public ChildDto dob(LocalDate dob) {
     this.dob = dob;
     return this;
   }
@@ -99,18 +105,18 @@ public class ChildDto {
   /**
    * Get dob
    * @return dob
-  */
-  
+   */
+  @Valid
   @Schema(name = "dob", required = false)
-  public String getDob() {
+  public LocalDate getDob() {
     return dob;
   }
 
-  public void setDob(String dob) {
+  public void setDob(LocalDate dob) {
     this.dob = dob;
   }
 
-  public ChildDto sex(String sex) {
+  public ChildDto sex(Gender sex) {
     this.sex = sex;
     return this;
   }
@@ -118,14 +124,14 @@ public class ChildDto {
   /**
    * Get sex
    * @return sex
-  */
-  
+   */
+  @Valid
   @Schema(name = "sex", required = false)
-  public String getSex() {
+  public Gender getSex() {
     return sex;
   }
 
-  public void setSex(String sex) {
+  public void setSex(Gender sex) {
     this.sex = sex;
   }
 
@@ -139,10 +145,10 @@ public class ChildDto {
     }
     ChildDto childDto = (ChildDto) o;
     return Objects.equals(this.id, childDto.id) &&
-        Objects.equals(this.firstName, childDto.firstName) &&
-        Objects.equals(this.lastName, childDto.lastName) &&
-        Objects.equals(this.dob, childDto.dob) &&
-        Objects.equals(this.sex, childDto.sex);
+            Objects.equals(this.firstName, childDto.firstName) &&
+            Objects.equals(this.lastName, childDto.lastName) &&
+            Objects.equals(this.dob, childDto.dob) &&
+            Objects.equals(this.sex, childDto.sex);
   }
 
   @Override

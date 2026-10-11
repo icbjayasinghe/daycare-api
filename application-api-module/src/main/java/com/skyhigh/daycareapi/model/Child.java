@@ -2,10 +2,12 @@ package com.skyhigh.daycareapi.model;
 
 import com.skyhigh.daycareapi.model.constants.Gender;
 import jakarta.persistence.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Entity
+@SuperBuilder
 public class Child {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,19 @@ public class Child {
   private Parent parent;
 
   private boolean isDifferentlyAble;
+
+  public Child() {
+  }
+
+  public Child(Long id, String firstName, String lastName, Date birthday, Gender gender, Parent parent, boolean isDifferentlyAble) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = birthday;
+    this.gender = gender;
+    this.parent = parent;
+    this.isDifferentlyAble = isDifferentlyAble;
+  }
 
   public Parent getParent() {
     return parent;
