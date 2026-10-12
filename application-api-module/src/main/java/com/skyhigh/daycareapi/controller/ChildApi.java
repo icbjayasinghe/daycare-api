@@ -5,8 +5,7 @@
  */
 package com.skyhigh.daycareapi.controller;
 
-import com.skyhigh.daycareapi.model.dto.ChildDto;
-import com.skyhigh.daycareapi.model.dto.ParentDto;
+import com.skyhigh.daycareapi.model.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
@@ -110,6 +110,52 @@ public interface ChildApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * POST /child/byEmail/{parentEmail}/request/{daycareId} : Daycare request by child
+     * This can be done by parent.
+     *
+     * @param parentEmail Parent email associated with the child. (required)
+     * @param daycareId Parent email associated with the child. (required)
+     * @param childRequestDto Child&#39;s request object (required)
+     * @return Successful operation (status code 201)
+     *         or Operation failed (status code 400)
+     */
+    @Operation(
+            operationId = "daycareRequestByParent",
+            summary = "Daycare request by child",
+            tags = { "Child" },
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/child/byEmail/{parentEmail}/request/{daycareId}",
+            produces = { "application/json" },
+            consumes = { "application/json" }
+    )
+    default ResponseEntity<DayCareApplicationDto> daycareRequestByParent(
+            @Parameter(name = "parentEmail", description = "Parent email associated with the child.", required = true) @PathVariable("parentEmail") String parentEmail,
+            @Parameter(name = "daycareId", description = "Parent email associated with the child.", required = true) @PathVariable("daycareId") Long daycareId,
+            @Parameter(name = "ChildRequestDto", description = "Child's request object", required = true) @Valid @RequestBody ChildRequestDto childRequestDto
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"dayCare\" : { \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }, \"id\" : 1, \"appliedAt\" : \"2000-01-23T04:56:07.000+00:00\", \"child\" : { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

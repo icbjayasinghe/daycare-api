@@ -401,6 +401,45 @@ paths:
                 $ref: '#/components/schemas/ChildDto'
         '400':
           description: Operation failed
+  /child/byEmail/{parentEmail}/request/{daycareId}:
+    parameters:
+      - in: path
+        name: parentEmail
+        schema:
+          type: string
+          example: peter@gmail.com
+        required: true
+        description: Parent email associated with the child.
+      - in: path
+        name: daycareId
+        schema:
+          type: integer
+          format: int64
+        required: true
+        description: Parent email associated with the child.
+
+    post:
+      tags:
+        - Child
+      summary: Daycare request by child
+      description: This can be done by parent.
+      operationId: daycareRequestByParent
+      requestBody:
+        description: Child's request object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildRequestDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareApplicationDto'
+        '400':
+          description: Operation failed
 
   /daycareOwner:
     post:
@@ -751,6 +790,10 @@ components:
           type: string
         telephone:
           type: string
+        website:
+          type: string
+        withOwnPortal:
+          type: boolean
         owners:
           type: array
           items:
@@ -799,6 +842,15 @@ components:
         sex:
           $ref: '#/components/schemas/Gender'
       description: ''
+    ChildRequestDto:
+      type: object
+      title: ChildRequest
+      properties:
+        ApplicationStatus:
+          $ref: '#/components/schemas/ApplicationStatus'
+        child:
+          $ref: '#/components/schemas/ChildDto'
+      description: ''
     LoginRequestDto:
       type: object
       properties:
@@ -823,6 +875,38 @@ components:
           type: integer
           example: 300
       description: User login model
+    DayCareApplicationDto:
+      type: object
+      title: DayCareApplication
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 1
+
+        child:
+          $ref: '#/components/schemas/ChildDto'
+
+        dayCare:
+          $ref: '#/components/schemas/DayCareDto'
+
+        status:
+          $ref: '#/components/schemas/ApplicationStatus'
+          default: PENDING
+          example: PENDING
+
+        appliedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Application submission date and time (LocalDateTime).
+      required:
+        - child
+        - dayCare
+        - status
+        - appliedAt
+      description: Application submitted by a parent for a child to attend a daycare.
     ApiResponse:
       type: object
       properties:
@@ -840,6 +924,16 @@ components:
         - FEMALE
         - NOT_SPECIFIED
       description: Child's gender/sex value
+    ApplicationStatus:
+      type: string
+      enum:
+        - PENDING
+        - WAITLISTED
+        - ACCEPTED
+        - REJECTED
+        - WITHDRAWN
+        - ENROLLED
+      description: Request type
 
   requestBodies:
     ParentArray:

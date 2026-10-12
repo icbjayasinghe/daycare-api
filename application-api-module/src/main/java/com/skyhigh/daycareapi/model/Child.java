@@ -4,7 +4,9 @@ import com.skyhigh.daycareapi.model.constants.Gender;
 import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @SuperBuilder
@@ -26,6 +28,10 @@ public class Child {
   private Parent parent;
 
   private boolean isDifferentlyAble;
+
+  @OneToMany(mappedBy = "child")
+  private List<DayCareApplication> daycareApplications =
+          new ArrayList<>();
 
   public Child() {
   }
@@ -94,5 +100,13 @@ public class Child {
 
   public void setGender(Gender gender) {
     this.gender = gender;
+  }
+
+  public List<DayCareApplication> getDaycareApplications() {
+    return daycareApplications;
+  }
+
+  public void setDaycareApplications(List<DayCareApplication> daycareApplications) {
+    this.daycareApplications = daycareApplications;
   }
 }
