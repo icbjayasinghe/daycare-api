@@ -25,6 +25,8 @@ public class DaycareConvertor implements Converter<DayCare, DayCareDto> {
                .name(dayCare.getName())
                .telephone(dayCare.getTelephone())
                .address(addressToAddressDto.convert(dayCare.getAddress()))
+               .withOwnPortal(dayCare.getWithOwnPortal())
+               .website(dayCare.getWebsite())
                .owners(Collections.singletonList(ownerConvertor.convert(dayCare.getOwner())))
                .build();
     }
@@ -34,6 +36,8 @@ public class DaycareConvertor implements Converter<DayCare, DayCareDto> {
                 .name(dayCareDto.getName())
                 .address(address)
                 .telephone(dayCareDto.getTelephone())
+                .withOwnPortal(dayCareDto.getWithOwnPortal())
+                .website(dayCareDto.getWebsite())
                 .owner(owner)
                 .build();
     }

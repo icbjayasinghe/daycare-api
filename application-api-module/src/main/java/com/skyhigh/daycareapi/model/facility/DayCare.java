@@ -1,9 +1,14 @@
 package com.skyhigh.daycareapi.model.facility;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.daycareapi.model.DayCareApplication;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @SuperBuilder
@@ -25,6 +30,14 @@ public class DayCare {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    private String website;
+
+    private Boolean withOwnPortal;
+
+    @OneToMany(mappedBy = "dayCare")
+    private List<DayCareApplication> applications =
+            new ArrayList<>();
 
     public Owner getOwner() {
         return owner;
@@ -62,7 +75,31 @@ public class DayCare {
         return telephone;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public Boolean getWithOwnPortal() {
+        return withOwnPortal;
+    }
+
+    public void setWithOwnPortal(Boolean withOwnPortal) {
+        this.withOwnPortal = withOwnPortal;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public List<DayCareApplication> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<DayCareApplication> applications) {
+        this.applications = applications;
     }
 }

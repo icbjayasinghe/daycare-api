@@ -2,9 +2,9 @@ package com.skyhigh.daycareapi.controller.impl;
 
 
 import com.skyhigh.daycareapi.controller.ChildApi;
-import com.skyhigh.daycareapi.model.dto.ChildDto;
-import com.skyhigh.daycareapi.model.dto.ParentDto;
+import com.skyhigh.daycareapi.model.dto.*;
 import com.skyhigh.daycareapi.service.ChildService;
+import com.skyhigh.daycareapi.service.DaycareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
@@ -25,6 +26,9 @@ public class ChildApiController implements ChildApi {
 
     @Autowired
     private ChildService childService;
+
+    @Autowired
+    private DaycareService daycareService;
 
     @Autowired
     public ChildApiController(NativeWebRequest request) {
@@ -46,5 +50,11 @@ public class ChildApiController implements ChildApi {
     public ResponseEntity<List<ChildDto>> listChildrenByParent(String parentEmail) {
         List<ChildDto> children = childService.getChildrenByParent(parentEmail);
         return new ResponseEntity<>(children, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<DayCareApplicationDto> daycareRequestByParent(String parentEmail, Long daycareId, ChildRequestDto childRequestDto) {
+        DayCareApplicationDto response = daycareService.daycareRequestByParent(parentEmail, daycareId, childRequestDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

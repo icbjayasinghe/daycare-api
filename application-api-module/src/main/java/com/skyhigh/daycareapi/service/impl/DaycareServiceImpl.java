@@ -1,23 +1,26 @@
 package com.skyhigh.daycareapi.service.impl;
 
 import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.daycareapi.model.Child;
+import com.skyhigh.daycareapi.model.DayCareApplication;
+import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
+import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
+import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
+import com.skyhigh.daycareapi.model.dto.ModelApiResponse;
 import com.skyhigh.daycareapi.model.facility.DayCare;
 import com.skyhigh.daycareapi.model.facility.Owner;
-import com.skyhigh.daycareapi.repository.AddressRepository;
-import com.skyhigh.daycareapi.repository.DaycareRepository;
-import com.skyhigh.daycareapi.repository.OwnerRepository;
+import com.skyhigh.daycareapi.repository.*;
 import com.skyhigh.daycareapi.service.DaycareService;
 import com.skyhigh.daycareapi.service.KeycloakUserService;
-import com.skyhigh.daycareapi.util.convertor.AddressToAddressDto;
-import com.skyhigh.daycareapi.util.convertor.DaycareConvertor;
-import com.skyhigh.daycareapi.util.convertor.OwnerConvertor;
+import com.skyhigh.daycareapi.util.convertor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +39,12 @@ public class DaycareServiceImpl implements DaycareService {
     OwnerRepository ownerRepository;
 
     @Autowired
+    ChildRepository childRepository;
+
+    @Autowired
+    DayCareApplicationRepository dayCareApplicationRepository;
+
+    @Autowired
     AddressToAddressDto  addressToAddressDto;
 
     @Autowired
@@ -43,6 +52,9 @@ public class DaycareServiceImpl implements DaycareService {
 
     @Autowired
     KeycloakUserService keycloakUserService;
+
+    @Autowired
+    private DayCareApplicationConvertor dayCareApplicationConvertor;
 
     @Override
     public DayCareDto createDayCare(DayCareDto dayCareDto) {
@@ -119,5 +131,28 @@ public class DaycareServiceImpl implements DaycareService {
         DayCare dayCare = daycareRepository.save(existingDayCare);
 
         return daycareConvertor.convert(dayCare);
+    }
+
+    @Override
+    public DayCareApplicationDto daycareRequestByParent(String parentEmail, Long daycareId, ChildRequestDto childRequestDto) {
+        Child child = childRepository.findById(childRequestDto.getChild().getId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Child not found with id: " + childRequestDto.getChild().getId()
+                ));
+        DayCare dayCare = daycareRepository.findById(daycareId).orElseThrow(() ->
+                    new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Daycare not found with id: " + daycareId
+                ));
+
+        DayCareApplication application = DayCareApplication.builder()
+                .child(child)
+                .dayCare(dayCare)
+                .appliedAt(LocalDateTime.now())
+                .status(ApplicationStatus.PENDING)
+                .build();
+        DayCareApplication res = dayCareApplicationRepository.save(application);
+        return dayCareApplicationConvertor.convert(res);
     }
 }
