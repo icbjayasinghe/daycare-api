@@ -2,6 +2,7 @@ package com.skyhigh.daycareapi.controller.impl;
 
 
 import com.skyhigh.daycareapi.controller.ApplicationApi;
+import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import com.skyhigh.daycareapi.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ApplicationApiController implements ApplicationApi {
     }
 
     @Override
-    public ResponseEntity<List<DayCareApplicationDto>> getApplicationList(String loggedInParentEmail, String loggedInDayCareEmail) {
-        List<DayCareApplicationDto> response = applicationService.getApplications(loggedInParentEmail, loggedInDayCareEmail);
+    public ResponseEntity<List<DayCareApplicationDto>> getApplicationList(String loggedInParentEmail, String loggedInDayCareEmail, ApplicationStatus status) {
+        List<DayCareApplicationDto> response = applicationService.getApplications(loggedInParentEmail, loggedInDayCareEmail, status);
         return ResponseEntity.ok(response);
     }}

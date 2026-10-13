@@ -6,6 +6,7 @@
 package com.skyhigh.daycareapi.controller;
 
 
+import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,24 +45,24 @@ public interface ApplicationApi {
      *         or Operation failed (status code 400)
      */
     @Operation(
-        operationId = "createApplication",
-        summary = "Create application",
-        tags = { "Application" },
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Operation failed")
-        }
+            operationId = "createApplication",
+            summary = "Create application",
+            tags = { "Application" },
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/application",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/application",
+            produces = { "application/json" },
+            consumes = { "application/json" }
     )
     default ResponseEntity<DayCareApplicationDto> createApplication(
-        @Parameter(name = "ChildRequestDto", description = "Application object", required = true) @Valid @RequestBody ChildRequestDto childRequestDto
+            @Parameter(name = "ChildRequestDto", description = "Application object", required = true) @Valid @RequestBody ChildRequestDto childRequestDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -86,24 +87,24 @@ public interface ApplicationApi {
      *         or Operation failed (status code 400)
      */
     @Operation(
-        operationId = "editApplication",
-        summary = "Edit Application",
-        tags = { "Application" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Operation failed")
-        }
+            operationId = "editApplication",
+            summary = "Edit Application",
+            tags = { "Application" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/application",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/application",
+            produces = { "application/json" },
+            consumes = { "application/json" }
     )
     default ResponseEntity<DayCareApplicationDto> editApplication(
-        @Parameter(name = "DayCareApplicationDto", description = "Created application object", required = true) @Valid @RequestBody DayCareApplicationDto dayCareApplicationDto
+            @Parameter(name = "DayCareApplicationDto", description = "Created application object", required = true) @Valid @RequestBody DayCareApplicationDto dayCareApplicationDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -125,28 +126,30 @@ public interface ApplicationApi {
      *
      * @param loggedInParentEmail If logged in user is a parent, they can view only their children. (optional)
      * @param loggedInDayCareEmail If logged in user is a daycare, they can view only children in their daycare. (optional)
+     * @param status Filter accourding to status (optional)
      * @return Successful operation (status code 200)
      *         or Operation failed (status code 400)
      */
     @Operation(
-        operationId = "getApplicationList",
-        summary = "Get all application list",
-        tags = { "Application" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Operation failed")
-        }
+            operationId = "getApplicationList",
+            summary = "Get all application list",
+            tags = { "Application" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareApplicationDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/application",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/application",
+            produces = { "application/json" }
     )
     default ResponseEntity<List<DayCareApplicationDto>> getApplicationList(
-        @Parameter(name = "loggedInParentEmail", description = "If logged in user is a parent, they can view only their children.") @Valid @RequestParam(value = "loggedInParentEmail", required = false) String loggedInParentEmail,
-        @Parameter(name = "loggedInDayCareEmail", description = "If logged in user is a daycare, they can view only children in their daycare.") @Valid @RequestParam(value = "loggedInDayCareEmail", required = false) String loggedInDayCareEmail
+            @Parameter(name = "loggedInParentEmail", description = "If logged in user is a parent, they can view only their children.") @Valid @RequestParam(value = "loggedInParentEmail", required = false) String loggedInParentEmail,
+            @Parameter(name = "loggedInDayCareEmail", description = "If logged in user is a daycare, they can view only children in their daycare.") @Valid @RequestParam(value = "loggedInDayCareEmail", required = false) String loggedInDayCareEmail,
+            @Parameter(name = "status", description = "Filter accourding to status") @Valid @RequestParam(value = "status", required = false) ApplicationStatus status
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
