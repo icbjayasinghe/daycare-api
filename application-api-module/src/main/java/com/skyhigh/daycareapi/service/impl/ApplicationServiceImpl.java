@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.service.impl;
 
+import com.skyhigh.daycareapi.model.DayCareApplication;
 import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import com.skyhigh.daycareapi.repository.DayCareApplicationRepository;
@@ -42,7 +43,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             return applications;
         } else if (dayCareEmail != null && !dayCareEmail.isEmpty()) {
             if(status != null) {
-                List<DayCareApplicationDto> applications = applicationRepository.findAllByDaycareEmailAndStatus(parentEmail, status)
+                List<DayCareApplicationDto> applications = applicationRepository.findAllByDaycareEmailAndStatus(dayCareEmail, status)
                         .stream()
                         .map(application -> {
                             DayCareApplicationDto dto = applicationConvertor.convert(application);
@@ -61,5 +62,16 @@ public class ApplicationServiceImpl implements ApplicationService {
             return applications;
         }
         return List.of();
+    }
+
+    @Override
+    public DayCareApplicationDto updateApplication(DayCareApplicationDto newApplicationDto) {
+        DayCareApplication application = applicationRepository.findById(newApplicationDto.getId())
+                .orElseThrow(()-> new RuntimeException("Application not found with id: " + newApplicationDto.getId()));
+
+        application.setStatus(newApplicationDto.getStatus());
+        DayCareApplication   res = applicationRepository.save(application);
+
+        return applicationConvertor.convert(res);
     }
 }

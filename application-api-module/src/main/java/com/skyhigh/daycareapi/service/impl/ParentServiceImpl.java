@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParentServiceImpl implements ParentService {
@@ -95,5 +96,13 @@ public class ParentServiceImpl implements ParentService {
         List<ChildDto> childDtoList = childList.stream().map(child -> childConvertor.convert(child)).toList();
         parentDto.setChildren(childDtoList);
         return parentDto;
+    }
+
+    @Override
+    public ParentDto getParentByChildId(Long id) {
+        Child child = childRepository.findById(id).orElseThrow(() -> new RuntimeException("Child not found with id: " + id));
+
+        Parent parent = child.getParent();
+        return parentToParentDto.convert(parent);
     }
 }

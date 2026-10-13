@@ -40,4 +40,11 @@ public class ApplicationApiController implements ApplicationApi {
     public ResponseEntity<List<DayCareApplicationDto>> getApplicationList(String loggedInParentEmail, String loggedInDayCareEmail, ApplicationStatus status) {
         List<DayCareApplicationDto> response = applicationService.getApplications(loggedInParentEmail, loggedInDayCareEmail, status);
         return ResponseEntity.ok(response);
-    }}
+    }
+
+    @Override
+    public ResponseEntity<DayCareApplicationDto> editApplication(DayCareApplicationDto dayCareApplicationDto) {
+        DayCareApplicationDto response = applicationService.updateApplication(dayCareApplicationDto);
+        return ResponseEntity.ok(response);
+    }
+}

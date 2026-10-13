@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ApplicationService {
     List<DayCareApplicationDto> getApplications(String parentEmail, String dayCareEmail, ApplicationStatus status);
+
+    DayCareApplicationDto updateApplication(DayCareApplicationDto dayCareApplicationDto);
 }
