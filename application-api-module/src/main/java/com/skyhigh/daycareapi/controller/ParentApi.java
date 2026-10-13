@@ -72,7 +72,7 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -113,7 +113,7 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -155,7 +155,7 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -196,7 +196,48 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /parent/byChildId/{id} : Get parent by child id
+     * This can be done by respective user or admin
+     *
+     * @param id ID of the child to get (required)
+     * @return Successful operation (status code 200)
+     *         or Operation failed (status code 400)
+     */
+    @Operation(
+            operationId = "getParentByChildId",
+            summary = "Get parent by child id",
+            tags = { "Parent" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ParentDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Operation failed")
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/parent/byChildId/{id}",
+            produces = { "application/json" }
+    )
+    default ResponseEntity<ParentDto> getParentByChildId(
+            @Parameter(name = "id", description = "ID of the child to get", required = true) @PathVariable("id") Long id
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -237,7 +278,7 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -277,7 +318,7 @@ public interface ParentApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"dob\", \"sex\" : \"sex\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"phone\" : \"phone\", \"children\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } ], \"parentStatus\" : 6, \"id\" : 0, \"email\" : \"email\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

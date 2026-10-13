@@ -47,4 +47,10 @@ public class ParentApiController implements ParentApi {
         ParentDto parentDtoRes = parentService.getParentByEmail(email);
         return ResponseEntity.ok(parentDtoRes);
     }
+
+    @Override
+    public ResponseEntity<ParentDto> getParentByChildId(Long id) {
+        ParentDto parentDtoRes = parentService.getParentByChildId(id);
+        return ResponseEntity.ok(parentDtoRes);
+    }
 }
