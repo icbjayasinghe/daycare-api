@@ -5,6 +5,7 @@
  */
 package com.skyhigh.daycareapi.controller;
 
+import com.skyhigh.daycareapi.model.dto.ErrorResponseDto;
 import com.skyhigh.daycareapi.model.dto.LoginRequestDto;
 import com.skyhigh.daycareapi.model.dto.LoginResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +39,8 @@ public interface UserApi {
      *
      * @param loginRequestDto Parent object (required)
      * @return Successful operation (status code 201)
-     *         or Invalid parentname/password supplied (status code 400)
+     * or Invalid email or password (status code 400)
+     * or Account disabled (status code 403)
      */
     @Operation(
             operationId = "loginUser",
@@ -48,7 +50,12 @@ public interface UserApi {
                     @ApiResponse(responseCode = "201", description = "Successful operation", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponseDto.class))
                     }),
-                    @ApiResponse(responseCode = "400", description = "Invalid parentname/password supplied")
+                    @ApiResponse(responseCode = "400", description = "Invalid email or password", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+                    }),
+                    @ApiResponse(responseCode = "403", description = "Account disabled", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+                    })
             }
     )
     @RequestMapping(
@@ -57,7 +64,7 @@ public interface UserApi {
             produces = { "application/json" },
             consumes = { "application/json" }
     )
-    default ResponseEntity<LoginResponseDto> loginUser(
+    default ResponseEntity<?> loginUser(
             @Parameter(name = "LoginRequestDto", description = "Parent object", required = true) @Valid @RequestBody LoginRequestDto loginRequestDto
     ) {
         getRequest().ifPresent(request -> {

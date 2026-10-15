@@ -1,5 +1,7 @@
 package com.skyhigh.daycareapi.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.LoginRequestDto;
@@ -13,10 +15,14 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.server.ResponseStatusException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -31,18 +37,23 @@ public class KeycloakUserServiceImpl implements KeycloakUserService {
     private final String realm;
     private final String clientId;
     private final String clientSecret;
+    private final ObjectMapper objectMapper;
+
 
     public KeycloakUserServiceImpl(
             RestClient.Builder restClientBuilder,
             @Value("${spring.security.oauth2.resourceserver-url}") String serverUrl,
             @Value("${keycloak.realm}") String realm,
             @Value("${springdoc.swagger-ui.oauth.client-id}") String clientId,
-            @Value("${springdoc.swagger-ui.oauth.client-secret}") String clientSecret) {
+            @Value("${springdoc.swagger-ui.oauth.client-secret}") String clientSecret,
+            ObjectMapper objectMapper) {
+
 
         this.serverUrl = serverUrl;
         this.realm = realm;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
+        this.objectMapper = objectMapper;
 
         this.keycloak = KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
@@ -71,15 +82,43 @@ public class KeycloakUserServiceImpl implements KeycloakUserService {
         formData.add("password", request.getPassword());
         formData.add("scope", "openid");
 
-        return restClient.post()
-                .uri(tokenUrl)
-                .contentType(
-                        org.springframework.http.MediaType
-                                .APPLICATION_FORM_URLENCODED
-                )
-                .body(formData)
-                .retrieve()
-                .body(Map.class);
+        try {
+            return restClient.post()
+                    .uri(tokenUrl)
+                    .contentType(
+                            org.springframework.http.MediaType
+                                    .APPLICATION_FORM_URLENCODED
+                    )
+                    .body(formData)
+                    .retrieve()
+                    .body(Map.class);
+        } catch (HttpClientErrorException ex) {
+
+            String responseBody = ex.getResponseBodyAsString();
+
+            try {
+                JsonNode errorJson =
+                        objectMapper.readTree(responseBody);
+
+                String error = errorJson.path("error").asText();
+                String description =
+                        errorJson.path("error_description").asText();
+
+                if ("invalid_grant".equals(error)
+                        && "Account disabled".equals(description)) {
+                    throw new ResponseStatusException(
+                            HttpStatus.FORBIDDEN,
+                            "Account disabled"
+                    );
+                }
+
+            } catch (JsonProcessingException jsonException) {
+                // Handle a response that is not valid JSON.
+            }
+
+            throw ex;
+        }
+
 
 
     }
@@ -92,8 +131,11 @@ public class KeycloakUserServiceImpl implements KeycloakUserService {
         userRepresentation.setLastName(user.getLastName());
         userRepresentation.setUsername(user.getEmail());
         userRepresentation.setEmailVerified(false);
-        userRepresentation.setEnabled(true);
-
+        if (role == Role.PROVIDER) {
+            userRepresentation.setEnabled(false);
+        } else {
+            userRepresentation.setEnabled(true);
+        }
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setValue(user.getPasswordHash());

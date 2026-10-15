@@ -2,15 +2,16 @@ package com.skyhigh.daycareapi.controller.impl;
 
 
 import com.skyhigh.daycareapi.controller.UserApi;
+import com.skyhigh.daycareapi.model.dto.ErrorResponseDto;
 import com.skyhigh.daycareapi.model.dto.LoginRequestDto;
 import com.skyhigh.daycareapi.model.dto.LoginResponseDto;
-import com.skyhigh.daycareapi.service.KeycloakUserService;
 import com.skyhigh.daycareapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 import javax.annotation.Generated;
@@ -36,9 +37,21 @@ public class UserApiController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<LoginResponseDto> loginUser(LoginRequestDto loginRequestDto) {
-        LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
-        return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+    public ResponseEntity<?> loginUser(LoginRequestDto loginRequestDto) {
+        try {
+            LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
+            return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+        } catch (ResponseStatusException e) {
+            ErrorResponseDto errorResponse = new ErrorResponseDto(
+                    e.getStatusCode().value(),
+                    e.getReason()
+            );
+
+            return ResponseEntity
+                    .status(e.getStatusCode())
+                    .body(errorResponse);
+        }
+
     }
 
     @Override
