@@ -7,6 +7,7 @@ import com.skyhigh.daycareapi.service.UserService;
 import com.skyhigh.daycareapi.util.convertor.KeycloakResToLoginResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
@@ -21,8 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
-        Map<String, Object> keycloakResponse = keycloakUserService.login(loginRequestDto);
-        // Convert the Keycloak response to LoginResponseDto
-        return keycloakResToLoginResponseDto.convert(keycloakResponse);
+        try {
+            Map<String, Object> keycloakResponse = keycloakUserService.login(loginRequestDto);
+            return keycloakResToLoginResponseDto.convert(keycloakResponse);
+        } catch (ResponseStatusException e) {
+            throw e;
+        }
+
     }
 }
