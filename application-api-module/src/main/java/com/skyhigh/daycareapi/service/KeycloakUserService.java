@@ -9,4 +9,5 @@ import java.util.Map;
 public interface KeycloakUserService {
     String createUser(User user, Role  role);
     Map<String, Object> login(LoginRequestDto request);
+    void updateUserStatus(String userId, boolean enabled);
 }
