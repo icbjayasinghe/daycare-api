@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -185,5 +186,19 @@ public class KeycloakUserServiceImpl implements KeycloakUserService {
         return location.substring(
                 location.lastIndexOf("/") + 1
         );
+    }
+
+    @Override
+    public void updateUserStatus(String userId, boolean enabled) {
+
+        UserResource userResource = keycloak
+                .realm(realm)
+                .users()
+                .get(userId);
+
+        UserRepresentation user = userResource.toRepresentation();
+        user.setEnabled(enabled);
+
+        userResource.update(user);
     }
 }

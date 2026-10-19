@@ -618,6 +618,10 @@ paths:
       summary: Edit daycare
       description: This can be done by admin or Daycare owner
       operationId: editDayCare
+
+      security:
+        - bearerAuth: []
+
       requestBody:
         description: Created daycare object
         required: true
@@ -1098,6 +1102,11 @@ components:
       description: List of parent object
       required: true
   securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
     daycare_auth:
       type: oauth2
       flows:

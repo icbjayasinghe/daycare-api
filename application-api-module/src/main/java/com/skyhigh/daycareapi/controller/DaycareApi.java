@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -131,6 +133,9 @@ public interface DaycareApi {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = DayCareDto.class))
                     }),
                     @ApiResponse(responseCode = "400", description = "Operation failed")
+            },
+            security = {
+                    @SecurityRequirement(name = "bearerAuth")
             }
     )
     @RequestMapping(

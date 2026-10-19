@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.service.impl;
 import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.Child;
 import com.skyhigh.daycareapi.model.DayCareApplication;
+import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -133,10 +135,25 @@ public class DaycareServiceImpl implements DaycareService {
 
         existingDayCare.setName(dayCareDto.getName());
         existingDayCare.setTelephone(dayCareDto.getTelephone());
+        if( existingDayCare.getStatus() != dayCareDto.getStatus()) {
+            existingDayCare.setStatus(changeDaycareStatus(existingDayCare.getOwner(), dayCareDto.getStatus()));
+        }
 
         DayCare dayCare = daycareRepository.save(existingDayCare);
 
         return daycareConvertor.convert(dayCare);
+    }
+
+    private DaycareStatus changeDaycareStatus(User user, @Valid DaycareStatus status) {
+        if  (status == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Daycare status is required");
+        } else if (status == DaycareStatus.APPROVED) {
+            keycloakUserService.updateUserStatus(user.getKeycloakUserId(), true);
+            // Valid status, do nothing
+        } else {
+            keycloakUserService.updateUserStatus(user.getKeycloakUserId(), false);
+        }
+        return status;
     }
 
     @Override
