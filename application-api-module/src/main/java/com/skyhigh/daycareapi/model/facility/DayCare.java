@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.model.facility;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.DayCareApplication;
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -34,6 +35,9 @@ public class DayCare {
     private String website;
 
     private Boolean withOwnPortal;
+
+    @JsonProperty("status")
+    private DaycareStatus status = DaycareStatus.PENDING;
 
     @OneToMany(mappedBy = "dayCare")
     private List<DayCareApplication> applications =
@@ -101,5 +105,13 @@ public class DayCare {
 
     public void setApplications(List<DayCareApplication> applications) {
         this.applications = applications;
+    }
+
+    public DaycareStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DaycareStatus status) {
+        this.status = status;
     }
 }

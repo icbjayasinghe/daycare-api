@@ -1,6 +1,7 @@
 package com.skyhigh.daycareapi.controller.impl;
 
 import com.skyhigh.daycareapi.controller.DaycareApi;
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
 import com.skyhigh.daycareapi.service.DaycareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class DaycareApiController implements DaycareApi {
     }
 
     @Override
-    public ResponseEntity<List<DayCareDto>> listDayCares(String keyword, Float latitude, Float longitude, Float radius) {
-        return new ResponseEntity<>(daycareService.listDayCares(),HttpStatus.OK);
+    public ResponseEntity<List<DayCareDto>> listDayCares(String keyword, Float latitude, Float longitude, Float radius, DaycareStatus status) {
+        return new ResponseEntity<>(daycareService.listDayCares(status),HttpStatus.OK);
     }
 
     @Override

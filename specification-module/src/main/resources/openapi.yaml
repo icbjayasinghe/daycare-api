@@ -675,6 +675,12 @@ paths:
             format: float
             default: 10
             example: 25
+        - name: status
+          in: query
+          description: Search by status
+          required: false
+          schema:
+            $ref: '#/components/schemas/DaycareStatus'
       responses:
         '200':
           description: Successful operation
@@ -922,6 +928,8 @@ components:
             $ref: '#/components/schemas/OwnerDto'
         address:
           $ref: '#/components/schemas/AddressDto'
+        status:
+          $ref: '#/components/schemas/DaycareStatus'
     AddressDto:
       type: object
       properties:
@@ -1069,6 +1077,14 @@ components:
         - REJECTED
         - WITHDRAWN
         - ENROLLED
+      description: Request type
+    DaycareStatus:
+      type: string
+      enum:
+        - PENDING
+        - APPROVED
+        - REJECTED
+        - DEACTIVATED
       description: Request type
 
   requestBodies:

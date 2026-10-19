@@ -4,6 +4,7 @@ import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.Child;
 import com.skyhigh.daycareapi.model.DayCareApplication;
 import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
@@ -73,8 +74,13 @@ public class DaycareServiceImpl implements DaycareService {
     }
 
     @Override
-    public List<DayCareDto> listDayCares() {
-        List<DayCare> dayCares = daycareRepository.findAll();
+    public List<DayCareDto> listDayCares(DaycareStatus status) {
+        List<DayCare> dayCares;
+        if (status != null) {
+            dayCares = daycareRepository.findByStatus(status);
+        } else {
+            dayCares = daycareRepository.findAll();
+        }
         return dayCares.stream().map(dayCare -> daycareConvertor.convert(dayCare)).collect(Collectors.toList());
     }
 

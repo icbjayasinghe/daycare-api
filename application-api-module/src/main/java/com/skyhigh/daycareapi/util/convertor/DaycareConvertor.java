@@ -28,6 +28,7 @@ public class DaycareConvertor implements Converter<DayCare, DayCareDto> {
                .withOwnPortal(dayCare.getWithOwnPortal())
                .website(dayCare.getWebsite())
                .owners(Collections.singletonList(ownerConvertor.convert(dayCare.getOwner())))
+               .status(dayCare.getStatus())
                .build();
     }
 
@@ -39,6 +40,7 @@ public class DaycareConvertor implements Converter<DayCare, DayCareDto> {
                 .withOwnPortal(dayCareDto.getWithOwnPortal())
                 .website(dayCareDto.getWebsite())
                 .owner(owner)
+                .status(dayCareDto.getStatus())
                 .build();
     }
 }

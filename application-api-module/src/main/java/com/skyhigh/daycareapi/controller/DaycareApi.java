@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.controller;
 
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -61,7 +62,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -102,7 +103,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -144,7 +145,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -185,7 +186,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -226,7 +227,7 @@ public interface DaycareApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -245,6 +246,7 @@ public interface DaycareApi {
      * @param latitude Latitude of the center point (optional)
      * @param longitude Longitude of the center point (optional)
      * @param radius Search radius in kilometers from the center point (optional, default to 10)
+     * @param status Search by status (optional)
      * @return Successful operation (status code 200)
      *         or Operation failed (status code 400)
      */
@@ -268,12 +270,13 @@ public interface DaycareApi {
             @Parameter(name = "keyword", description = "Search keyword (searches name, description, etc.)") @Valid @RequestParam(value = "keyword", required = false) String keyword,
             @Parameter(name = "latitude", description = "Latitude of the center point") @Valid @RequestParam(value = "latitude", required = false) Float latitude,
             @Parameter(name = "longitude", description = "Longitude of the center point") @Valid @RequestParam(value = "longitude", required = false) Float longitude,
-            @Parameter(name = "radius", description = "Search radius in kilometers from the center point") @Valid @RequestParam(value = "radius", required = false, defaultValue = "10") Float radius
+            @Parameter(name = "radius", description = "Search radius in kilometers from the center point") @Valid @RequestParam(value = "radius", required = false, defaultValue = "10") Float radius,
+            @Parameter(name = "status", description = "Search by status") @Valid @RequestParam(value = "status", required = false) DaycareStatus status
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"apartment\" : \"apartment\" }, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ] }";
+                    String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
