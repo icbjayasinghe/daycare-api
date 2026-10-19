@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.service;
 
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
@@ -10,7 +11,7 @@ import java.util.List;
 public interface DaycareService {
     DayCareDto createDayCare(DayCareDto dayCareDto);
 
-    List<DayCareDto> listDayCares();
+    List<DayCareDto> listDayCares(DaycareStatus status);
 
     DayCareDto getDayCareById(Integer id);
 

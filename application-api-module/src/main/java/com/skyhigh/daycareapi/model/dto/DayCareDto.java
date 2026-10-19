@@ -1,6 +1,7 @@
 package com.skyhigh.daycareapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
@@ -12,32 +13,45 @@ import java.util.Objects;
 @Schema(name = "DayCareDto", description = "Day care DTO")
 @Builder
 public class DayCareDto {
+
     @JsonProperty("id")
     private Long id;
+
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("telephone")
     private String telephone;
+
     @JsonProperty("website")
     private String website;
+
     @JsonProperty("withOwnPortal")
     private Boolean withOwnPortal;
+
     @JsonProperty("owners")
-    private @Valid List<OwnerDto> owners = null;
+    @Valid
+    private List<OwnerDto> owners = null;
+
     @JsonProperty("address")
     private AddressDto address;
+
+    @JsonProperty("status")
+    private DaycareStatus status;
 
     public DayCareDto id(Long id) {
         this.id = id;
         return this;
     }
 
-    @Schema(
-            name = "id",
-            required = false
-    )
+    /**
+     * Get id
+     * @return id
+     */
+
+    @Schema(name = "id", required = false)
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -49,12 +63,14 @@ public class DayCareDto {
         return this;
     }
 
-    @Schema(
-            name = "name",
-            required = false
-    )
+    /**
+     * Get name
+     * @return name
+     */
+
+    @Schema(name = "name", required = false)
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -66,12 +82,14 @@ public class DayCareDto {
         return this;
     }
 
-    @Schema(
-            name = "telephone",
-            required = false
-    )
+    /**
+     * Get telephone
+     * @return telephone
+     */
+
+    @Schema(name = "telephone", required = false)
     public String getTelephone() {
-        return this.telephone;
+        return telephone;
     }
 
     public void setTelephone(String telephone) {
@@ -83,12 +101,14 @@ public class DayCareDto {
         return this;
     }
 
-    @Schema(
-            name = "website",
-            required = false
-    )
+    /**
+     * Get website
+     * @return website
+     */
+
+    @Schema(name = "website", required = false)
     public String getWebsite() {
-        return this.website;
+        return website;
     }
 
     public void setWebsite(String website) {
@@ -100,12 +120,14 @@ public class DayCareDto {
         return this;
     }
 
-    @Schema(
-            name = "withOwnPortal",
-            required = false
-    )
+    /**
+     * Get withOwnPortal
+     * @return withOwnPortal
+     */
+
+    @Schema(name = "withOwnPortal", required = false)
     public Boolean getWithOwnPortal() {
-        return this.withOwnPortal;
+        return withOwnPortal;
     }
 
     public void setWithOwnPortal(Boolean withOwnPortal) {
@@ -119,19 +141,20 @@ public class DayCareDto {
 
     public DayCareDto addOwnersItem(OwnerDto ownersItem) {
         if (this.owners == null) {
-            this.owners = new ArrayList();
+            this.owners = new ArrayList<>();
         }
-
         this.owners.add(ownersItem);
         return this;
     }
 
-    @Schema(
-            name = "owners",
-            required = false
-    )
-    public @Valid List<OwnerDto> getOwners() {
-        return this.owners;
+    /**
+     * Get owners
+     * @return owners
+     */
+    @Valid
+    @Schema(name = "owners", required = false)
+    public List<OwnerDto> getOwners() {
+        return owners;
     }
 
     public void setOwners(List<OwnerDto> owners) {
@@ -143,48 +166,87 @@ public class DayCareDto {
         return this;
     }
 
-    @Schema(
-            name = "address",
-            required = false
-    )
-    public @Valid AddressDto getAddress() {
-        return this.address;
+    /**
+     * Get address
+     * @return address
+     */
+    @Valid
+    @Schema(name = "address", required = false)
+    public AddressDto getAddress() {
+        return address;
     }
 
     public void setAddress(AddressDto address) {
         this.address = address;
     }
 
+    public DayCareDto status(DaycareStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Get status
+     * @return status
+     */
+    @Valid
+    @Schema(name = "status", required = false)
+    public DaycareStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DaycareStatus status) {
+        this.status = status;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else if (o != null && this.getClass() == o.getClass()) {
-            DayCareDto dayCareDto = (DayCareDto)o;
-            return Objects.equals(this.id, dayCareDto.id) && Objects.equals(this.name, dayCareDto.name) && Objects.equals(this.telephone, dayCareDto.telephone) && Objects.equals(this.website, dayCareDto.website) && Objects.equals(this.withOwnPortal, dayCareDto.withOwnPortal) && Objects.equals(this.owners, dayCareDto.owners) && Objects.equals(this.address, dayCareDto.address);
-        } else {
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        DayCareDto dayCareDto = (DayCareDto) o;
+        return Objects.equals(this.id, dayCareDto.id) &&
+                Objects.equals(this.name, dayCareDto.name) &&
+                Objects.equals(this.telephone, dayCareDto.telephone) &&
+                Objects.equals(this.website, dayCareDto.website) &&
+                Objects.equals(this.withOwnPortal, dayCareDto.withOwnPortal) &&
+                Objects.equals(this.owners, dayCareDto.owners) &&
+                Objects.equals(this.address, dayCareDto.address) &&
+                Objects.equals(this.status, dayCareDto.status);
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.name, this.telephone, this.website, this.withOwnPortal, this.owners, this.address});
+        return Objects.hash(id, name, telephone, website, withOwnPortal, owners, address, status);
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class DayCareDto {\n");
-        sb.append("    id: ").append(this.toIndentedString(this.id)).append("\n");
-        sb.append("    name: ").append(this.toIndentedString(this.name)).append("\n");
-        sb.append("    telephone: ").append(this.toIndentedString(this.telephone)).append("\n");
-        sb.append("    website: ").append(this.toIndentedString(this.website)).append("\n");
-        sb.append("    withOwnPortal: ").append(this.toIndentedString(this.withOwnPortal)).append("\n");
-        sb.append("    owners: ").append(this.toIndentedString(this.owners)).append("\n");
-        sb.append("    address: ").append(this.toIndentedString(this.address)).append("\n");
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    telephone: ").append(toIndentedString(telephone)).append("\n");
+        sb.append("    website: ").append(toIndentedString(website)).append("\n");
+        sb.append("    withOwnPortal: ").append(toIndentedString(withOwnPortal)).append("\n");
+        sb.append("    owners: ").append(toIndentedString(owners)).append("\n");
+        sb.append("    address: ").append(toIndentedString(address)).append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("}");
         return sb.toString();
     }
 
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(Object o) {
-        return o == null ? "null" : o.toString().replace("\n", "\n    ");
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
     }
 }
