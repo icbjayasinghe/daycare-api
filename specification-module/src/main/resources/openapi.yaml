@@ -854,6 +854,92 @@ paths:
         '400':
           description: Operation failed
 
+  /enrollment:
+    post:
+      tags:
+        - Enrollment
+      summary: Create application
+      description: This can be done by daycare.
+      operationId: createEnrollment
+      requestBody:
+        description: Enrollment object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DayCareEnrollmentDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareEnrollmentDto'
+        '400':
+          description: Operation failed
+    put:
+      tags:
+        - Enrollment
+      summary: Edit Enrollment
+      description: This can be done by parent or daycare provider
+      operationId: editEnrollment
+      requestBody:
+        description: Created enrollment object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DayCareEnrollmentDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DayCareEnrollmentDto'
+        '400':
+          description: Operation failed
+    get:
+      tags:
+        - Enrollment
+      summary: Get enrollment list
+      description: This can be done by admin, parent, or daycare user
+      operationId: getEnrollmentList
+      parameters:
+        - in: query
+          name: loggedInParentEmail
+          required: false
+          description: If logged in user is a parent, they can view only their children.
+          schema:
+            type: string
+            example: peter@gmail.com
+        - in: query
+          name: loggedInDayCareEmail
+          required: false
+          description: If logged in user is a daycare, they can view only children in their daycare.
+          schema:
+            type: string
+            example: peter@gmail.com
+        - in: query
+          name: status
+          required: false
+          description: Filter accourding to status
+          schema:
+            $ref: '#/components/schemas/EnrollmentStatus'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DayCareEnrollmentDto'
+        '400':
+          description: Operation failed
+
+
+
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
