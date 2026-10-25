@@ -21,8 +21,25 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     EnrollmentConvertor enrollmentConvertor;
 
     @Override
-    public List<DayCareEnrollmentDto> getEnrollmentList(String loggedInParentEmail, String loggedInDayCareEmail, EnrollmentStatus status) {
-        List<DayCareEnrollment> enrollments = enrollmentRepository.findDayCareEnrollmentByParentEmail(loggedInParentEmail);
+    public List<DayCareEnrollmentDto> getEnrollmentList(String parentEmail, String dayCareEmail, EnrollmentStatus status) {
+
+        List<DayCareEnrollment> enrollments = List.of();
+
+        if (parentEmail != null && !parentEmail.isEmpty()) {
+            if (status == null) {
+                enrollments = enrollmentRepository.findDayCareEnrollmentByParentEmail(parentEmail);
+            } else {
+                enrollments = enrollmentRepository.findDayCareEnrollmentByParentEmailAndStatus(parentEmail, status);
+            }
+        }
+        if (dayCareEmail != null && !dayCareEmail.isEmpty()) {
+            if (status == null) {
+                enrollments = enrollmentRepository.findDayCareEnrollmentByDaycareEmail(dayCareEmail);
+
+            } else {
+                enrollments = enrollmentRepository.findDayCareEnrollmentByDaycareEmailAndStatus(dayCareEmail, status);
+            }
+        }
         List<DayCareEnrollmentDto> response = enrollments.stream().map(enrollment -> {
 
             return enrollmentConvertor.convert(enrollment); // Replace with actual conversion logic
