@@ -40,4 +40,10 @@ public class EnrollmentApiController implements EnrollmentApi {
         List<DayCareEnrollmentDto> response = enrollmentService.getEnrollmentList(loggedInParentEmail, loggedInDayCareEmail, status);
         return ResponseEntity.ok(response);
     }
+
+    @Override
+    public ResponseEntity<DayCareEnrollmentDto> editEnrollment(DayCareEnrollmentDto dayCareEnrollmentDto) {
+        DayCareEnrollmentDto updatedEnrollment = enrollmentService.updateEnrollment(dayCareEnrollmentDto);
+        return ResponseEntity.ok(updatedEnrollment);
+    }
 }

@@ -30,4 +30,13 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
         return response;
     }
-}
+
+    @Override
+    public DayCareEnrollmentDto updateEnrollment(DayCareEnrollmentDto dayCareEnrollmentDto) {
+        DayCareEnrollment enrollment = enrollmentRepository.findById(dayCareEnrollmentDto.getId())
+                .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + dayCareEnrollmentDto.getId()));
+        if (dayCareEnrollmentDto.getStatus() != null) {
+            enrollment.setStatus(dayCareEnrollmentDto.getStatus());
+        }
+        return enrollmentConvertor.convert(enrollmentRepository.save(enrollment));
+    }}
