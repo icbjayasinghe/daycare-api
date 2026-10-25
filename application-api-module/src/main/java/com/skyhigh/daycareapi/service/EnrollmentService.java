@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface EnrollmentService {
     List<DayCareEnrollmentDto> getEnrollmentList(String loggedInParentEmail, String loggedInDayCareEmail, EnrollmentStatus status);
+
+    DayCareEnrollmentDto updateEnrollment(DayCareEnrollmentDto dayCareEnrollmentDto);
 }
