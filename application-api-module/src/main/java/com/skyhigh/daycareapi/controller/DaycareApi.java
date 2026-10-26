@@ -2,6 +2,7 @@ package com.skyhigh.daycareapi.controller;
 
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
+import com.skyhigh.daycareapi.model.dto.DaycareDashboardDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -233,6 +234,53 @@ public interface DaycareApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /daycare/{email}/dashboard : Get daycare provider dashboard
+     * Retrieve dashboard statistics and recent applications for a daycare.
+     *
+     * @param email Unique identifier of the daycare (required)
+     * @return Dashboard retrieved successfully (status code 200)
+     *         or Unauthorized (status code 401)
+     *         or Access denied (status code 403)
+     *         or Daycare not found (status code 404)
+     *         or Internal server error (status code 500)
+     */
+    @Operation(
+            operationId = "getDaycareDashboard",
+            summary = "Get daycare provider dashboard",
+            tags = { "Daycare Dashboard" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Dashboard retrieved successfully", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareDashboardDto.class))
+                    }),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized"),
+                    @ApiResponse(responseCode = "403", description = "Access denied"),
+                    @ApiResponse(responseCode = "404", description = "Daycare not found"),
+                    @ApiResponse(responseCode = "500", description = "Internal server error")
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/daycare/{email}/dashboard",
+            produces = { "application/json" }
+    )
+    default ResponseEntity<DaycareDashboardDto> getDaycareDashboard(
+            @Parameter(name = "email", description = "Unique identifier of the daycare", required = true) @PathVariable("email") String email
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"daycareId\" : 101, \"totalCapacity\" : 25, \"availableSpaces\" : 7, \"recentApplications\" : [ { \"dayCare\" : { \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }, \"id\" : 1, \"appliedAt\" : \"2000-01-23T04:56:07.000+00:00\", \"child\" : { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } }, { \"dayCare\" : { \"website\" : \"website\", \"address\" : { \"country\" : \"country\", \"address\" : \"address\", \"city\" : \"city\", \"postalCode\" : \"postalCode\", \"state\" : \"state\", \"locationCoordinates\" : \"locationCoordinates\", \"apartment\" : \"apartment\" }, \"withOwnPortal\" : true, \"name\" : \"name\", \"telephone\" : \"telephone\", \"owners\" : [ { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" }, { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"password\" : \"password\", \"phoneNumber\" : \"phoneNumber\", \"email\" : \"email\" } ], \"id\" : 0 }, \"id\" : 1, \"appliedAt\" : \"2000-01-23T04:56:07.000+00:00\", \"child\" : { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"dob\" : \"2000-01-23\", \"id\" : 1 } } ], \"occupancyRate\" : 72.0, \"enrolledChildren\" : 18, \"applications\" : { \"approved\" : 18, \"rejected\" : 2, \"pending\" : 5 } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
