@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.model.dto;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 
 
 import javax.annotation.Generated;
@@ -12,6 +13,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-26T18:20:29.957994-03:00[America/Halifax]")
+@Builder
 public class ApplicationSummaryDto {
 
   @JsonProperty("pending")

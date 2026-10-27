@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema;import lombok.Builder;
 
 
 import javax.annotation.Generated;
@@ -16,6 +16,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-26T18:20:29.957994-03:00[America/Halifax]")
+@Builder
 public class DaycareDashboardDto {
 
   @JsonProperty("daycareId")

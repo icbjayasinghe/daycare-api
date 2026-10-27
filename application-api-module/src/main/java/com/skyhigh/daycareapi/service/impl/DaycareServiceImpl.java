@@ -7,13 +7,11 @@ import com.skyhigh.daycareapi.model.User;
 import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
-import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
-import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
-import com.skyhigh.daycareapi.model.dto.DayCareDto;
-import com.skyhigh.daycareapi.model.dto.ModelApiResponse;
+import com.skyhigh.daycareapi.model.dto.*;
 import com.skyhigh.daycareapi.model.facility.DayCare;
 import com.skyhigh.daycareapi.model.facility.Owner;
 import com.skyhigh.daycareapi.repository.*;
+import com.skyhigh.daycareapi.service.ApplicationService;
 import com.skyhigh.daycareapi.service.DaycareService;
 import com.skyhigh.daycareapi.service.KeycloakUserService;
 import com.skyhigh.daycareapi.util.convertor.*;
@@ -55,6 +53,9 @@ public class DaycareServiceImpl implements DaycareService {
 
     @Autowired
     KeycloakUserService keycloakUserService;
+
+    @Autowired
+    ApplicationService applicationService;
 
     @Autowired
     private DayCareApplicationConvertor dayCareApplicationConvertor;
@@ -177,5 +178,37 @@ public class DaycareServiceImpl implements DaycareService {
                 .build();
         DayCareApplication res = dayCareApplicationRepository.save(application);
         return dayCareApplicationConvertor.convert(res);
+    }
+
+    @Override
+    public DaycareDashboardDto getDaycareDashboard(String email) {
+        Owner owner = ownerRepository.findByEmail(email);
+        if (owner == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Owner not found with email: " + email);
+        }
+        DayCare dayCare = daycareRepository.findDayCareByOwner(owner);
+        if (dayCare == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Daycare not found with email: " + email);
+        }
+
+        List<DayCareApplicationDto> applicationList = applicationService.getApplications(null, email, ApplicationStatus.PENDING);
+//        DayCareDto dayCareDto =  daycareConvertor.convert(dayCare);
+
+        ApplicationSummaryDto applicationSummaryDto = ApplicationSummaryDto.builder()
+                .pending(1)
+                .rejected(2)
+                .approved(2)
+                .build();
+
+        DaycareDashboardDto dashboardDto = DaycareDashboardDto.builder()
+                .daycareId(dayCare.getId())
+                .totalCapacity(8)
+                .enrolledChildren(5)
+                .applications(applicationSummaryDto)
+                .recentApplications(applicationList)
+                .occupancyRate((5.0 / 8.0) * 100)
+                .availableSpaces(8 - 5)
+                .build();
+        return dashboardDto;
     }
 }
