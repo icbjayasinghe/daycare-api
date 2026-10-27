@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.controller.impl;
 import com.skyhigh.daycareapi.controller.DaycareApi;
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
+import com.skyhigh.daycareapi.model.dto.DaycareDashboardDto;
 import com.skyhigh.daycareapi.service.DaycareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -59,6 +60,8 @@ public class DaycareApiController implements DaycareApi {
         return new ResponseEntity<>(updatedDayCare, HttpStatus.OK);
     }
 
-
-
+    @Override
+    public ResponseEntity<DaycareDashboardDto> getDaycareDashboard(String email) {
+        return new ResponseEntity<>(daycareService.getDaycareDashboard(email),HttpStatus.OK);
+    }
 }
