@@ -192,22 +192,17 @@ public class DaycareServiceImpl implements DaycareService {
         }
 
         List<DayCareApplicationDto> applicationList = applicationService.getApplications(null, email, ApplicationStatus.PENDING);
-//        DayCareDto dayCareDto =  daycareConvertor.convert(dayCare);
 
-        ApplicationSummaryDto applicationSummaryDto = ApplicationSummaryDto.builder()
-                .pending(1)
-                .rejected(2)
-                .approved(2)
-                .build();
+        ApplicationSummaryDto applicationSummaryDto = dayCareApplicationRepository.getApplicationCounts(email);
 
         DaycareDashboardDto dashboardDto = DaycareDashboardDto.builder()
                 .daycareId(dayCare.getId())
-                .totalCapacity(8)
-                .enrolledChildren(5)
+                .totalCapacity(8L)
+                .enrolledChildren(5L)
                 .applications(applicationSummaryDto)
                 .recentApplications(applicationList)
                 .occupancyRate((5.0 / 8.0) * 100)
-                .availableSpaces(8 - 5)
+                .availableSpaces(8L - 5L)
                 .build();
         return dashboardDto;
     }

@@ -23,13 +23,13 @@ public class DaycareDashboardDto {
   private Long daycareId;
 
   @JsonProperty("totalCapacity")
-  private Integer totalCapacity;
+  private Long totalCapacity;
 
   @JsonProperty("enrolledChildren")
-  private Integer enrolledChildren;
+  private Long enrolledChildren;
 
   @JsonProperty("availableSpaces")
-  private Integer availableSpaces;
+  private Long availableSpaces;
 
   @JsonProperty("occupancyRate")
   private Double occupancyRate;
@@ -49,8 +49,8 @@ public class DaycareDashboardDto {
   /**
    * Get daycareId
    * @return daycareId
-  */
-  
+   */
+
   @Schema(name = "daycareId", example = "101", required = false)
   public Long getDaycareId() {
     return daycareId;
@@ -60,7 +60,7 @@ public class DaycareDashboardDto {
     this.daycareId = daycareId;
   }
 
-  public DaycareDashboardDto totalCapacity(Integer totalCapacity) {
+  public DaycareDashboardDto totalCapacity(Long totalCapacity) {
     this.totalCapacity = totalCapacity;
     return this;
   }
@@ -68,18 +68,18 @@ public class DaycareDashboardDto {
   /**
    * Get totalCapacity
    * @return totalCapacity
-  */
-  
+   */
+
   @Schema(name = "totalCapacity", example = "25", required = false)
-  public Integer getTotalCapacity() {
+  public Long getTotalCapacity() {
     return totalCapacity;
   }
 
-  public void setTotalCapacity(Integer totalCapacity) {
+  public void setTotalCapacity(Long totalCapacity) {
     this.totalCapacity = totalCapacity;
   }
 
-  public DaycareDashboardDto enrolledChildren(Integer enrolledChildren) {
+  public DaycareDashboardDto enrolledChildren(Long enrolledChildren) {
     this.enrolledChildren = enrolledChildren;
     return this;
   }
@@ -87,18 +87,18 @@ public class DaycareDashboardDto {
   /**
    * Get enrolledChildren
    * @return enrolledChildren
-  */
-  
+   */
+
   @Schema(name = "enrolledChildren", example = "18", required = false)
-  public Integer getEnrolledChildren() {
+  public Long getEnrolledChildren() {
     return enrolledChildren;
   }
 
-  public void setEnrolledChildren(Integer enrolledChildren) {
+  public void setEnrolledChildren(Long enrolledChildren) {
     this.enrolledChildren = enrolledChildren;
   }
 
-  public DaycareDashboardDto availableSpaces(Integer availableSpaces) {
+  public DaycareDashboardDto availableSpaces(Long availableSpaces) {
     this.availableSpaces = availableSpaces;
     return this;
   }
@@ -106,14 +106,14 @@ public class DaycareDashboardDto {
   /**
    * Get availableSpaces
    * @return availableSpaces
-  */
-  
+   */
+
   @Schema(name = "availableSpaces", example = "7", required = false)
-  public Integer getAvailableSpaces() {
+  public Long getAvailableSpaces() {
     return availableSpaces;
   }
 
-  public void setAvailableSpaces(Integer availableSpaces) {
+  public void setAvailableSpaces(Long availableSpaces) {
     this.availableSpaces = availableSpaces;
   }
 
@@ -125,8 +125,8 @@ public class DaycareDashboardDto {
   /**
    * Get occupancyRate
    * @return occupancyRate
-  */
-  
+   */
+
   @Schema(name = "occupancyRate", example = "72.0", required = false)
   public Double getOccupancyRate() {
     return occupancyRate;
@@ -144,8 +144,8 @@ public class DaycareDashboardDto {
   /**
    * Get applications
    * @return applications
-  */
-  @Valid 
+   */
+  @Valid
   @Schema(name = "applications", required = false)
   public ApplicationSummaryDto getApplications() {
     return applications;
@@ -171,8 +171,8 @@ public class DaycareDashboardDto {
   /**
    * Get recentApplications
    * @return recentApplications
-  */
-  @Valid 
+   */
+  @Valid
   @Schema(name = "recentApplications", required = false)
   public List<DayCareApplicationDto> getRecentApplications() {
     return recentApplications;
@@ -192,12 +192,12 @@ public class DaycareDashboardDto {
     }
     DaycareDashboardDto daycareDashboardDto = (DaycareDashboardDto) o;
     return Objects.equals(this.daycareId, daycareDashboardDto.daycareId) &&
-        Objects.equals(this.totalCapacity, daycareDashboardDto.totalCapacity) &&
-        Objects.equals(this.enrolledChildren, daycareDashboardDto.enrolledChildren) &&
-        Objects.equals(this.availableSpaces, daycareDashboardDto.availableSpaces) &&
-        Objects.equals(this.occupancyRate, daycareDashboardDto.occupancyRate) &&
-        Objects.equals(this.applications, daycareDashboardDto.applications) &&
-        Objects.equals(this.recentApplications, daycareDashboardDto.recentApplications);
+            Objects.equals(this.totalCapacity, daycareDashboardDto.totalCapacity) &&
+            Objects.equals(this.enrolledChildren, daycareDashboardDto.enrolledChildren) &&
+            Objects.equals(this.availableSpaces, daycareDashboardDto.availableSpaces) &&
+            Objects.equals(this.occupancyRate, daycareDashboardDto.occupancyRate) &&
+            Objects.equals(this.applications, daycareDashboardDto.applications) &&
+            Objects.equals(this.recentApplications, daycareDashboardDto.recentApplications);
   }
 
   @Override
