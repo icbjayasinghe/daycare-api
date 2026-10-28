@@ -17,15 +17,21 @@ import javax.annotation.Generated;
 public class ApplicationSummaryDto {
 
   @JsonProperty("pending")
-  private Integer pending;
+  private Long pending;
 
   @JsonProperty("approved")
-  private Integer approved;
+  private Long approved;
 
   @JsonProperty("rejected")
-  private Integer rejected;
+  private Long rejected;
 
-  public ApplicationSummaryDto pending(Integer pending) {
+  public ApplicationSummaryDto(Long pending, Long approved, Long rejected) {
+    this.pending = pending;
+    this.approved = approved;
+    this.rejected = rejected;
+  }
+
+  public ApplicationSummaryDto pending(Long pending) {
     this.pending = pending;
     return this;
   }
@@ -33,18 +39,18 @@ public class ApplicationSummaryDto {
   /**
    * Get pending
    * @return pending
-  */
-  
+   */
+
   @Schema(name = "pending", example = "5", required = false)
-  public Integer getPending() {
+  public Long getPending() {
     return pending;
   }
 
-  public void setPending(Integer pending) {
+  public void setPending(Long pending) {
     this.pending = pending;
   }
 
-  public ApplicationSummaryDto approved(Integer approved) {
+  public ApplicationSummaryDto approved(Long approved) {
     this.approved = approved;
     return this;
   }
@@ -52,18 +58,18 @@ public class ApplicationSummaryDto {
   /**
    * Get approved
    * @return approved
-  */
-  
+   */
+
   @Schema(name = "approved", example = "18", required = false)
-  public Integer getApproved() {
+  public Long getApproved() {
     return approved;
   }
 
-  public void setApproved(Integer approved) {
+  public void setApproved(Long approved) {
     this.approved = approved;
   }
 
-  public ApplicationSummaryDto rejected(Integer rejected) {
+  public ApplicationSummaryDto rejected(Long rejected) {
     this.rejected = rejected;
     return this;
   }
@@ -71,14 +77,14 @@ public class ApplicationSummaryDto {
   /**
    * Get rejected
    * @return rejected
-  */
-  
+   */
+
   @Schema(name = "rejected", example = "2", required = false)
-  public Integer getRejected() {
+  public Long getRejected() {
     return rejected;
   }
 
-  public void setRejected(Integer rejected) {
+  public void setRejected(Long rejected) {
     this.rejected = rejected;
   }
 
@@ -92,8 +98,8 @@ public class ApplicationSummaryDto {
     }
     ApplicationSummaryDto applicationSummaryDto = (ApplicationSummaryDto) o;
     return Objects.equals(this.pending, applicationSummaryDto.pending) &&
-        Objects.equals(this.approved, applicationSummaryDto.approved) &&
-        Objects.equals(this.rejected, applicationSummaryDto.rejected);
+            Objects.equals(this.approved, applicationSummaryDto.approved) &&
+            Objects.equals(this.rejected, applicationSummaryDto.rejected);
   }
 
   @Override

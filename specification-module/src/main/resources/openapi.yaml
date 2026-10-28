@@ -1210,15 +1210,15 @@ components:
           example: 101
         totalCapacity:
           type: integer
-          format: int32
+          format: int64
           example: 25
         enrolledChildren:
           type: integer
-          format: int32
+          format: int64
           example: 18
         availableSpaces:
           type: integer
-          format: int32
+          format: int64
           example: 7
         occupancyRate:
           type: number
@@ -1236,15 +1236,15 @@ components:
       properties:
         pending:
           type: integer
-          format: int32
+          format: int64
           example: 5
         approved:
           type: integer
-          format: int32
+          format: int64
           example: 18
         rejected:
           type: integer
-          format: int32
+          format: int64
           example: 2
 
     ApiResponse:
