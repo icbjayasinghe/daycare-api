@@ -3,6 +3,7 @@ package com.skyhigh.daycareapi.model.facility;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skyhigh.daycareapi.model.Address;
 import com.skyhigh.daycareapi.model.DayCareApplication;
+import com.skyhigh.daycareapi.model.DaycareConfig;
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,14 @@ public class DayCare {
     @OneToMany(mappedBy = "dayCare")
     private List<DayCareApplication> applications =
             new ArrayList<>();
+
+    @OneToOne(
+            mappedBy = "dayCare",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private DaycareConfig config;
 
     public Owner getOwner() {
         return owner;
@@ -113,5 +122,13 @@ public class DayCare {
 
     public void setStatus(DaycareStatus status) {
         this.status = status;
+    }
+
+    public DaycareConfig getConfig() {
+        return config;
+    }
+
+    public void setConfig(DaycareConfig config) {
+        this.config = config;
     }
 }
