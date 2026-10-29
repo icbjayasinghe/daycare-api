@@ -38,4 +38,11 @@ public interface DayCareEnrollmentRepository extends JpaRepository<DayCareEnroll
     WHERE e.dayCare.owner.email = :dayCareEmail AND e.status = :status
     """)
     List<DayCareEnrollment> findDayCareEnrollmentByDaycareEmailAndStatus(String dayCareEmail, EnrollmentStatus status);
+
+    @Query("""
+    SELECT COUNT(e)
+    FROM DayCareEnrollment e
+    WHERE e.dayCare.owner.email = :daycareEmail AND e.status = :status
+    """)
+    Long countDayCareEnrollmentsByDaycareEmail(String daycareEmail, EnrollmentStatus status);
 }

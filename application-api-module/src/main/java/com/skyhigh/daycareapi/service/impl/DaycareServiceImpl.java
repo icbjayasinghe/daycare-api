@@ -1,11 +1,9 @@
 package com.skyhigh.daycareapi.service.impl;
 
-import com.skyhigh.daycareapi.model.Address;
-import com.skyhigh.daycareapi.model.Child;
-import com.skyhigh.daycareapi.model.DayCareApplication;
-import com.skyhigh.daycareapi.model.User;
+import com.skyhigh.daycareapi.model.*;
 import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.constants.DaycareStatus;
+import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.*;
 import com.skyhigh.daycareapi.model.facility.DayCare;
@@ -44,6 +42,12 @@ public class DaycareServiceImpl implements DaycareService {
 
     @Autowired
     DayCareApplicationRepository dayCareApplicationRepository;
+
+    @Autowired
+    DaycareConfigRepository daycareConfigRepository;
+
+    @Autowired
+    DayCareEnrollmentRepository dayCareEnrollmentRepository;
 
     @Autowired
     AddressToAddressDto  addressToAddressDto;
@@ -195,14 +199,21 @@ public class DaycareServiceImpl implements DaycareService {
 
         ApplicationSummaryDto applicationSummaryDto = dayCareApplicationRepository.getApplicationCounts(email);
 
+        DaycareConfig daycareConfig = daycareConfigRepository.findDaycareConfigByDayCare(dayCare);
+        Long capasity = 0L;
+        if (daycareConfig != null) {
+            capasity = daycareConfig.getTotalCapacity();
+        }
+        Long currentStudentCount = dayCareEnrollmentRepository.countDayCareEnrollmentsByDaycareEmail(owner.getEmail(), EnrollmentStatus.COMPLETED);
+
         DaycareDashboardDto dashboardDto = DaycareDashboardDto.builder()
                 .daycareId(dayCare.getId())
-                .totalCapacity(8L)
-                .enrolledChildren(5L)
+                .totalCapacity(capasity)
+                .enrolledChildren(currentStudentCount)
                 .applications(applicationSummaryDto)
                 .recentApplications(applicationList)
-                .occupancyRate((5.0 / 8.0) * 100)
-                .availableSpaces(8L - 5L)
+                .occupancyRate(((double)currentStudentCount / (double)capasity * 100))
+                .availableSpaces(capasity - currentStudentCount)
                 .build();
         return dashboardDto;
     }
