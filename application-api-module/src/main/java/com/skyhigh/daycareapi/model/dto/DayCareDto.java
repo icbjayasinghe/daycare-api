@@ -39,6 +39,9 @@ public class DayCareDto {
     @JsonProperty("status")
     private DaycareStatus status;
 
+    @JsonProperty("config")
+    private DaycareConfigDto config;
+
     public DayCareDto id(Long id) {
         this.id = id;
         return this;
@@ -197,6 +200,25 @@ public class DayCareDto {
 
     public void setStatus(DaycareStatus status) {
         this.status = status;
+    }
+
+    public DayCareDto config(DaycareConfigDto config) {
+        this.config = config;
+        return this;
+    }
+
+    /**
+     * Get config
+     * @return config
+     */
+    @Valid
+    @Schema(name = "config", required = false)
+    public DaycareConfigDto getConfig() {
+        return config;
+    }
+
+    public void setConfig(DaycareConfigDto config) {
+        this.config = config;
     }
 
     @Override

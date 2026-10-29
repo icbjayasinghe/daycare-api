@@ -1051,6 +1051,8 @@ components:
           $ref: '#/components/schemas/AddressDto'
         status:
           $ref: '#/components/schemas/DaycareStatus'
+        config:
+          $ref: '#/components/schemas/DaycareConfigDto'
     AddressDto:
       type: object
       properties:
@@ -1246,6 +1248,22 @@ components:
           type: integer
           format: int64
           example: 2
+
+    DaycareConfigDto:
+      type: object
+      properties:
+        configId:
+          type: integer
+          format: int64
+          example: 101
+        totalCapacity:
+          type: integer
+          format: int64
+          example: 5
+        hourlyCharge:
+          type: integer
+          format: int64
+          example: 18
 
     ApiResponse:
       type: object
