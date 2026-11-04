@@ -46,16 +46,8 @@
                 <artifactId>azure-webapp-maven-plugin</artifactId>
                 <version>2.14.1</version>
                 <configuration>
-                    <schemaVersion>v2</schemaVersion>
                     <resourceGroup>daycare</resourceGroup>
-                    <appName>daycareP</appName>
-                    <pricingTier>B1</pricingTier>
-                    <region>eastus2</region>
-                    <runtime>
-                        <os>Linux</os>
-                        <javaVersion>Java 21</javaVersion>
-                        <webContainer>Java SE</webContainer>
-                    </runtime>
+                    <appName>${azure.appName}</appName>
                     <deployment>
                         <resources>
                             <resource>
