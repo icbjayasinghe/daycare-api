@@ -6,6 +6,7 @@
     <modules>
         <module>application-api-module</module>
         <module>specification-module</module>
+        <module>billing-api-module</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
