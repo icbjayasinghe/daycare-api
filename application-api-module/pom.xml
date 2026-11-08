@@ -4,10 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.42</version>
-            <scope>compile</scope>
+            <groupId>com.skyhigh.daycareapi.billing</groupId>
+            <artifactId>billing-api-module</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>io.swagger.core.v3</groupId>-->

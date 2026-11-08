@@ -11,7 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
         "com.skyhigh.daycareapi.service",
         "com.skyhigh.daycareapi.repository",
         "com.skyhigh.daycareapi.config.swagger",
-        "com.skyhigh.daycareapi.util.convertor"})
+        "com.skyhigh.daycareapi.util.convertor",
+        "com.skyhigh.daycareapi.billing"})
 public class DaycareApiApplication {
 
     public static void main(String[] args) {

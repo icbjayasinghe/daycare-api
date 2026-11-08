@@ -969,6 +969,138 @@ paths:
         '500':
           description: Internal server error
 
+  /fee-plans:
+    post:
+      tags:
+        - Payment
+      summary: Create a new fee plan
+      operationId: createFeePlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeePlanDto'
+      responses:
+        '201':
+          description: Fee plan created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeePlanDto'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Daycare not found
+        '409':
+          description: Fee plan conflict
+    get:
+      tags:
+        - Payment
+      summary: Get all fee plans
+      operationId: getFeePlans
+      parameters:
+        - name: daycareId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+          description: Filter fee plans by daycare ID
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter fee plans by active status
+      responses:
+        '200':
+          description: Fee plans retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeePlanDto'
+        '401':
+          description: Unauthorized
+  /fee-plans/{feePlanId}:
+    get:
+      tags:
+        - Payment
+      summary: Get fee plan by ID
+      operationId: getFeePlanById
+      parameters:
+        - name: feePlanId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Fee plan retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeePlanDto'
+        '404':
+          description: Fee plan not found
+
+    put:
+      tags:
+        - Payment
+      summary: Update an existing fee plan
+      operationId: updateFeePlan
+      parameters:
+        - name: feePlanId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeePlanDto'
+      responses:
+        '200':
+          description: Fee plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeePlanDto'
+        '400':
+          description: Invalid request
+        '404':
+          description: Fee plan not found
+        '409':
+          description: Fee plan conflict
+
+    delete:
+      tags:
+        - Payment
+      summary: Delete a fee plan
+      operationId: deleteFeePlan
+      parameters:
+        - name: feePlanId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Fee plan deleted successfully
+        '404':
+          description: Fee plan not found
+        '409':
+          description: Fee plan is already assigned to an enrollment
+
 
 
 externalDocs:
@@ -1264,6 +1396,53 @@ components:
           type: integer
           format: int64
           example: 18
+
+    FeePlanDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 1
+        daycareId:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Full-time care
+        description:
+          type: string
+          example: Full-day childcare from Monday to Friday
+        monthlyFee:
+          type: number
+          format: double
+          example: 900.00
+        effectiveFrom:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+        effectiveTo:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+        active:
+          type: boolean
+          default: true
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+          readOnly: true
 
     ApiResponse:
       type: object
