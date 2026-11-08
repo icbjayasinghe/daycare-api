@@ -15,16 +15,23 @@ public class FeePlanConvertor implements Converter<FeePlan, FeePlanDto>{
         feePlanDto.setDescription(source.getDescription());
         feePlanDto.setMonthlyFee(source.getMonthlyFee());
         feePlanDto.setActive(source.getActive());
+        feePlanDto.setCreatedAt(source.getCreatedAt());
+        feePlanDto.setEffectiveFrom(source.getEffectiveFrom());
+        feePlanDto.setEffectiveTo(source.getEffectiveTo());
         return feePlanDto;
     }
 
     public FeePlan toEntity(FeePlanDto dto) {
         FeePlan feePlan = new FeePlan();
         feePlan.setId(dto.getId());
+        feePlan.setDaycareId(dto.getDaycareId());
         feePlan.setName(dto.getName());
         feePlan.setDescription(dto.getDescription());
         feePlan.setMonthlyFee(dto.getMonthlyFee());
         feePlan.setActive(dto.getActive());
+        feePlan.setCreatedAt(dto.getCreatedAt());
+        feePlan.setEffectiveFrom(dto.getEffectiveFrom());
+        feePlan.setEffectiveTo(dto.getEffectiveTo());
         return feePlan;
     }
 

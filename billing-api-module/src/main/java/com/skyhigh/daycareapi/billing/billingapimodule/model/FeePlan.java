@@ -37,7 +37,7 @@ public class FeePlan {
 
     @JsonProperty("effectiveTo")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private JsonNullable<LocalDate> effectiveTo = JsonNullable.undefined();
+    private LocalDate effectiveTo;
 
     @JsonProperty("active")
     private Boolean active = true;
@@ -53,7 +53,7 @@ public class FeePlan {
     public FeePlan() {
     }
 
-    public FeePlan(Long id, Long daycareId, String name, String description, Double monthlyFee, LocalDate effectiveFrom, JsonNullable<LocalDate> effectiveTo, Boolean active, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public FeePlan(Long id, Long daycareId, String name, String description, Double monthlyFee, LocalDate effectiveFrom, LocalDate effectiveTo, Boolean active, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.daycareId = daycareId;
         this.name = name;
@@ -114,11 +114,11 @@ public class FeePlan {
         this.effectiveFrom = effectiveFrom;
     }
 
-    public JsonNullable<LocalDate> getEffectiveTo() {
+    public LocalDate getEffectiveTo() {
         return effectiveTo;
     }
 
-    public void setEffectiveTo(JsonNullable<LocalDate> effectiveTo) {
+    public void setEffectiveTo(LocalDate effectiveTo) {
         this.effectiveTo = effectiveTo;
     }
 
