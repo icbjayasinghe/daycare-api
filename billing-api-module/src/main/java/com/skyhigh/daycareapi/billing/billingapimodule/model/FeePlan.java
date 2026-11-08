@@ -65,4 +65,84 @@ public class FeePlan {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getDaycareId() {
+        return daycareId;
+    }
+
+    public void setDaycareId(Long daycareId) {
+        this.daycareId = daycareId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getMonthlyFee() {
+        return monthlyFee;
+    }
+
+    public void setMonthlyFee(Double monthlyFee) {
+        this.monthlyFee = monthlyFee;
+    }
+
+    public LocalDate getEffectiveFrom() {
+        return effectiveFrom;
+    }
+
+    public void setEffectiveFrom(LocalDate effectiveFrom) {
+        this.effectiveFrom = effectiveFrom;
+    }
+
+    public JsonNullable<LocalDate> getEffectiveTo() {
+        return effectiveTo;
+    }
+
+    public void setEffectiveTo(JsonNullable<LocalDate> effectiveTo) {
+        this.effectiveTo = effectiveTo;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
