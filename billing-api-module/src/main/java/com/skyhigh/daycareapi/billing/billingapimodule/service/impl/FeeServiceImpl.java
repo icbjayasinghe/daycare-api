@@ -8,6 +8,7 @@ import com.skyhigh.daycareapi.billing.billingapimodule.util.convertor.FeePlanCon
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -20,6 +21,8 @@ public class FeeServiceImpl implements FeeService {
     @Override
     public FeePlanDto createFeePlan(FeePlanDto feePlanDto) {
         FeePlan feePlan = feePlanConvertor.toEntity(feePlanDto);
+        feePlan.setUpdatedAt(OffsetDateTime.now());
+        feePlan.setCreatedAt(OffsetDateTime.now());
         feePlanRepository.save(feePlan);
         return feePlanConvertor.convert(feePlan);
     }
