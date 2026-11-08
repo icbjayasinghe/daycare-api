@@ -44,7 +44,7 @@ public class FeePlanDto {
 
   @JsonProperty("effectiveTo")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  private JsonNullable<LocalDate> effectiveTo = JsonNullable.undefined();
+  private LocalDate effectiveTo;
 
   @JsonProperty("active")
   private Boolean active = true;
@@ -54,8 +54,8 @@ public class FeePlanDto {
   private OffsetDateTime createdAt;
 
   @JsonProperty("updatedAt")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime updatedAt;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  private LocalDate updatedAt;
 
   public FeePlanDto id(Long id) {
     this.id = id;
@@ -65,8 +65,8 @@ public class FeePlanDto {
   /**
    * Get id
    * @return id
-  */
-  
+   */
+
   @Schema(name = "id", accessMode = Schema.AccessMode.READ_ONLY, example = "1", required = false)
   public Long getId() {
     return id;
@@ -84,8 +84,8 @@ public class FeePlanDto {
   /**
    * Get daycareId
    * @return daycareId
-  */
-  
+   */
+
   @Schema(name = "daycareId", example = "10", required = false)
   public Long getDaycareId() {
     return daycareId;
@@ -103,8 +103,8 @@ public class FeePlanDto {
   /**
    * Get name
    * @return name
-  */
-  
+   */
+
   @Schema(name = "name", example = "Full-time care", required = false)
   public String getName() {
     return name;
@@ -122,8 +122,8 @@ public class FeePlanDto {
   /**
    * Get description
    * @return description
-  */
-  
+   */
+
   @Schema(name = "description", example = "Full-day childcare from Monday to Friday", required = false)
   public String getDescription() {
     return description;
@@ -141,8 +141,8 @@ public class FeePlanDto {
   /**
    * Get monthlyFee
    * @return monthlyFee
-  */
-  
+   */
+
   @Schema(name = "monthlyFee", example = "900.0", required = false)
   public Double getMonthlyFee() {
     return monthlyFee;
@@ -160,9 +160,9 @@ public class FeePlanDto {
   /**
    * Get effectiveFrom
    * @return effectiveFrom
-  */
-  @Valid 
-  @Schema(name = "effectiveFrom", example = "Sat Oct 31 21:00:00 ADT 2026", required = false)
+   */
+  @Valid
+  @Schema(name = "effectiveFrom", required = false)
   public LocalDate getEffectiveFrom() {
     return effectiveFrom;
   }
@@ -172,21 +172,21 @@ public class FeePlanDto {
   }
 
   public FeePlanDto effectiveTo(LocalDate effectiveTo) {
-    this.effectiveTo = JsonNullable.of(effectiveTo);
+    this.effectiveTo = effectiveTo;
     return this;
   }
 
   /**
    * Get effectiveTo
    * @return effectiveTo
-  */
-  @Valid 
-  @Schema(name = "effectiveTo", example = "Sat Oct 30 21:00:00 ADT 2027", required = false)
-  public JsonNullable<LocalDate> getEffectiveTo() {
+   */
+  @Valid
+  @Schema(name = "effectiveTo", required = false)
+  public LocalDate getEffectiveTo() {
     return effectiveTo;
   }
 
-  public void setEffectiveTo(JsonNullable<LocalDate> effectiveTo) {
+  public void setEffectiveTo(LocalDate effectiveTo) {
     this.effectiveTo = effectiveTo;
   }
 
@@ -198,8 +198,8 @@ public class FeePlanDto {
   /**
    * Get active
    * @return active
-  */
-  
+   */
+
   @Schema(name = "active", example = "true", required = false)
   public Boolean getActive() {
     return active;
@@ -217,8 +217,8 @@ public class FeePlanDto {
   /**
    * Get createdAt
    * @return createdAt
-  */
-  @Valid 
+   */
+  @Valid
   @Schema(name = "createdAt", accessMode = Schema.AccessMode.READ_ONLY, required = false)
   public OffsetDateTime getCreatedAt() {
     return createdAt;
@@ -228,7 +228,7 @@ public class FeePlanDto {
     this.createdAt = createdAt;
   }
 
-  public FeePlanDto updatedAt(OffsetDateTime updatedAt) {
+  public FeePlanDto updatedAt(LocalDate updatedAt) {
     this.updatedAt = updatedAt;
     return this;
   }
@@ -236,14 +236,14 @@ public class FeePlanDto {
   /**
    * Get updatedAt
    * @return updatedAt
-  */
-  @Valid 
+   */
+  @Valid
   @Schema(name = "updatedAt", accessMode = Schema.AccessMode.READ_ONLY, required = false)
-  public OffsetDateTime getUpdatedAt() {
+  public LocalDate getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(OffsetDateTime updatedAt) {
+  public void setUpdatedAt(LocalDate updatedAt) {
     this.updatedAt = updatedAt;
   }
 
@@ -257,31 +257,20 @@ public class FeePlanDto {
     }
     FeePlanDto feePlanDto = (FeePlanDto) o;
     return Objects.equals(this.id, feePlanDto.id) &&
-        Objects.equals(this.daycareId, feePlanDto.daycareId) &&
-        Objects.equals(this.name, feePlanDto.name) &&
-        Objects.equals(this.description, feePlanDto.description) &&
-        Objects.equals(this.monthlyFee, feePlanDto.monthlyFee) &&
-        Objects.equals(this.effectiveFrom, feePlanDto.effectiveFrom) &&
-        equalsNullable(this.effectiveTo, feePlanDto.effectiveTo) &&
-        Objects.equals(this.active, feePlanDto.active) &&
-        Objects.equals(this.createdAt, feePlanDto.createdAt) &&
-        Objects.equals(this.updatedAt, feePlanDto.updatedAt);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+            Objects.equals(this.daycareId, feePlanDto.daycareId) &&
+            Objects.equals(this.name, feePlanDto.name) &&
+            Objects.equals(this.description, feePlanDto.description) &&
+            Objects.equals(this.monthlyFee, feePlanDto.monthlyFee) &&
+            Objects.equals(this.effectiveFrom, feePlanDto.effectiveFrom) &&
+            Objects.equals(this.effectiveTo, feePlanDto.effectiveTo) &&
+            Objects.equals(this.active, feePlanDto.active) &&
+            Objects.equals(this.createdAt, feePlanDto.createdAt) &&
+            Objects.equals(this.updatedAt, feePlanDto.updatedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, daycareId, name, description, monthlyFee, effectiveFrom, hashCodeNullable(effectiveTo), active, createdAt, updatedAt);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, daycareId, name, description, monthlyFee, effectiveFrom, effectiveTo, active, createdAt, updatedAt);
   }
 
   @Override

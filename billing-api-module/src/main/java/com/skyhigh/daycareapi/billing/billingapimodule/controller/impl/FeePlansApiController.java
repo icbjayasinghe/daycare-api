@@ -41,9 +41,9 @@ public class FeePlansApiController implements FeePlansApi {
     }
 
 
-    //    @Override
-//    public ResponseEntity<FeePlanDto> createFeePlan(FeePlanDto feePlanDto) {
-//        FeePlanDto feePlan = feeService.createFeePlan(feePlanDto);
-//        return ResponseEntity.ok(feePlan);
-//    }
+        @Override
+    public ResponseEntity<FeePlanDto> createFeePlan(FeePlanDto feePlanDto) {
+        FeePlanDto feePlan = feeService.createFeePlan(feePlanDto);
+        return ResponseEntity.ok(feePlan);
+    }
 }

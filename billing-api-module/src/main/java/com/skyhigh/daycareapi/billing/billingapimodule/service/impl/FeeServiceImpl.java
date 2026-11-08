@@ -19,8 +19,9 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     public FeePlanDto createFeePlan(FeePlanDto feePlanDto) {
-
-        return null;
+        FeePlan feePlan = feePlanConvertor.toEntity(feePlanDto);
+        feePlanRepository.save(feePlan);
+        return feePlanConvertor.convert(feePlan);
     }
 
     @Override

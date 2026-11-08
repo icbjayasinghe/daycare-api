@@ -1422,12 +1422,13 @@ components:
         effectiveFrom:
           type: string
           format: date
-          example: "2026-11-01"
+          x-stoplight:
+            id: mq68bbd8e6itx
         effectiveTo:
           type: string
           format: date
-          nullable: true
-          example: "2027-10-31"
+          x-stoplight:
+            id: mq68bbd8e6itx
         active:
           type: boolean
           default: true
@@ -1438,7 +1439,9 @@ components:
           readOnly: true
         updatedAt:
           type: string
-          format: date-time
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
           readOnly: true
 
     ApiResponse:
