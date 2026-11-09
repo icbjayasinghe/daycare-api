@@ -1443,6 +1443,53 @@ components:
           x-stoplight:
             id: mq68bbd8e6itx
           readOnly: true
+    ChildPaymentEnrollmentsDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 101
+        childId:
+          type: integer
+          format: int64
+          example: 25
+        daycareId:
+          type: integer
+          format: int64
+          example: 10
+        feePlanId:
+          type: integer
+          format: int64
+          example: 1
+        enrollmentDate:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+        withdrawalDate:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+        status:
+          $ref: '#/components/schemas/EnrollmentStatus'
+        notes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date
+          x-stoplight:
+            id: mq68bbd8e6itx
+          readOnly: true
 
     ApiResponse:
       type: object
