@@ -1,7 +1,7 @@
-package com.skyhigh.daycareapi.model;
+package com.skyhigh.domainmodule.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skyhigh.daycareapi.model.facility.DayCare;
+import com.skyhigh.domainmodule.model.facility.DayCare;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

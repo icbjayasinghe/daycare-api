@@ -1,12 +1,11 @@
 package com.skyhigh.daycareapi.service.impl;
 
-import com.skyhigh.daycareapi.model.Child;
-import com.skyhigh.daycareapi.model.Parent;
+import com.skyhigh.domainmodule.model.Child;
+import com.skyhigh.domainmodule.model.Parent;
 import com.skyhigh.daycareapi.model.dto.ChildDto;
 import com.skyhigh.daycareapi.repository.ChildRepository;
 import com.skyhigh.daycareapi.repository.ParentRepository;
 import com.skyhigh.daycareapi.service.ChildService;
-import com.skyhigh.daycareapi.service.ParentService;
 import com.skyhigh.daycareapi.util.convertor.ChildConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

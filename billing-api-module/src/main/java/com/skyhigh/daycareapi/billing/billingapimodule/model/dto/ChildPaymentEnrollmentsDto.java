@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import com.skyhigh.daycareapi.billing.billingapimodule.model.constants.EnrollmentStatus;
+import com.skyhigh.daycareapi.billing.billingapimodule.model.constants.EnrollmentStatuss;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,7 +44,7 @@ public class ChildPaymentEnrollmentsDto {
   private LocalDate withdrawalDate;
 
   @JsonProperty("status")
-  private EnrollmentStatus status;
+  private EnrollmentStatuss status;
 
   @JsonProperty("notes")
   private JsonNullable<String> notes = JsonNullable.undefined();
@@ -171,7 +171,7 @@ public class ChildPaymentEnrollmentsDto {
     this.withdrawalDate = withdrawalDate;
   }
 
-  public ChildPaymentEnrollmentsDto status(EnrollmentStatus status) {
+  public ChildPaymentEnrollmentsDto status(EnrollmentStatuss status) {
     this.status = status;
     return this;
   }
@@ -182,11 +182,11 @@ public class ChildPaymentEnrollmentsDto {
   */
   @Valid 
   @Schema(name = "status", required = false)
-  public EnrollmentStatus getStatus() {
+  public EnrollmentStatuss getStatus() {
     return status;
   }
 
-  public void setStatus(EnrollmentStatus status) {
+  public void setStatus(EnrollmentStatuss status) {
     this.status = status;
   }
 

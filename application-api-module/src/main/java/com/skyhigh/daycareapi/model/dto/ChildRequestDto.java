@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.Valid;
 
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 

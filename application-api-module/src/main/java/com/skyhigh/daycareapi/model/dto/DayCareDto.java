@@ -1,7 +1,7 @@
 package com.skyhigh.daycareapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skyhigh.daycareapi.model.constants.DaycareStatus;
+import com.skyhigh.domainmodule.model.constants.DaycareStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 

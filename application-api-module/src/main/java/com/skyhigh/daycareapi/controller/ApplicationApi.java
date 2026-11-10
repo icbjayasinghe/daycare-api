@@ -6,7 +6,7 @@
 package com.skyhigh.daycareapi.controller;
 
 
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.ChildRequestDto;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import io.swagger.v3.oas.annotations.Operation;

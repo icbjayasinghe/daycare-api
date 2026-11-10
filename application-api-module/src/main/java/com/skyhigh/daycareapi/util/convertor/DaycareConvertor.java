@@ -1,9 +1,9 @@
 package com.skyhigh.daycareapi.util.convertor;
 
-import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.domainmodule.model.Address;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
-import com.skyhigh.daycareapi.model.facility.DayCare;
-import com.skyhigh.daycareapi.model.facility.Owner;
+import com.skyhigh.domainmodule.model.facility.DayCare;
+import com.skyhigh.domainmodule.model.facility.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;

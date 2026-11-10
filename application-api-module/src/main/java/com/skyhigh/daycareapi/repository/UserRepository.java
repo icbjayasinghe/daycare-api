@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.repository;
 
-import com.skyhigh.daycareapi.model.User;
+import com.skyhigh.domainmodule.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

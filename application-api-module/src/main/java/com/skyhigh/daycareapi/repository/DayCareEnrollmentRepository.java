@@ -1,8 +1,7 @@
 package com.skyhigh.daycareapi.repository;
 
-import com.skyhigh.daycareapi.model.DayCareApplication;
 import com.skyhigh.daycareapi.model.DayCareEnrollment;
-import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
+import com.skyhigh.domainmodule.model.constants.EnrollmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

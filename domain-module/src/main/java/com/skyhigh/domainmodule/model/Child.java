@@ -1,6 +1,7 @@
-package com.skyhigh.daycareapi.model;
+package com.skyhigh.domainmodule.model;
 
-import com.skyhigh.daycareapi.model.constants.Gender;
+
+import com.skyhigh.domainmodule.model.constants.Gender;
 import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 
@@ -30,7 +31,7 @@ public class Child {
   private boolean isDifferentlyAble;
 
   @OneToMany(mappedBy = "child")
-  private List<DayCareApplication> daycareApplications =
+  private List<com.skyhigh.domainmodule.model.DayCareApplication> daycareApplications =
           new ArrayList<>();
 
   public Child() {
@@ -102,11 +103,11 @@ public class Child {
     this.gender = gender;
   }
 
-  public List<DayCareApplication> getDaycareApplications() {
+  public List<com.skyhigh.domainmodule.model.DayCareApplication> getDaycareApplications() {
     return daycareApplications;
   }
 
-  public void setDaycareApplications(List<DayCareApplication> daycareApplications) {
+  public void setDaycareApplications(List<com.skyhigh.domainmodule.model.DayCareApplication> daycareApplications) {
     this.daycareApplications = daycareApplications;
   }
 }

@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.service;
 
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 
 import java.util.List;

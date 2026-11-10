@@ -1,10 +1,10 @@
-package com.skyhigh.daycareapi.model;
+package com.skyhigh.domainmodule.model;
 
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
-import com.skyhigh.daycareapi.model.facility.DayCare;
+
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.facility.DayCare;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 

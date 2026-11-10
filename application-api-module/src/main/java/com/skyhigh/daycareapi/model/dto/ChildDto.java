@@ -3,12 +3,11 @@ package com.skyhigh.daycareapi.model.dto;
 import java.time.LocalDate;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skyhigh.daycareapi.model.constants.Gender;
+import com.skyhigh.domainmodule.model.constants.Gender;
 import lombok.Builder;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.format.annotation.DateTimeFormat;
 

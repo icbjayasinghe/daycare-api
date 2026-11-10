@@ -1,7 +1,7 @@
 package com.skyhigh.daycareapi.service.impl;
 
 import com.skyhigh.daycareapi.model.DayCareEnrollment;
-import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
+import com.skyhigh.domainmodule.model.constants.EnrollmentStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareEnrollmentDto;
 import com.skyhigh.daycareapi.repository.DayCareEnrollmentRepository;
 import com.skyhigh.daycareapi.service.EnrollmentService;

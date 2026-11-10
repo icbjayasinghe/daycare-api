@@ -2,7 +2,7 @@ package com.skyhigh.daycareapi.controller.impl;
 
 
 import com.skyhigh.daycareapi.controller.ApplicationApi;
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareApplicationDto;
 import com.skyhigh.daycareapi.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;

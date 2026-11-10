@@ -1,18 +1,16 @@
-package com.skyhigh.daycareapi.model.constants;
-
-import com.fasterxml.jackson.annotation.JsonValue;
-
-
-import javax.annotation.Generated;
+package com.skyhigh.daycareapi.billing.billingapimodule.model.constants;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import javax.annotation.Generated;
 
 /**
  * Enrollment type
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-21T19:01:31.348847-03:00[America/Halifax]")
-public enum EnrollmentStatus {
+public enum EnrollmentStatuss {
   
   ACTIVE("ACTIVE"),
   
@@ -24,7 +22,7 @@ public enum EnrollmentStatus {
 
   private String value;
 
-  EnrollmentStatus(String value) {
+  EnrollmentStatuss(String value) {
     this.value = value;
   }
 
@@ -39,8 +37,8 @@ public enum EnrollmentStatus {
   }
 
   @JsonCreator
-  public static EnrollmentStatus fromValue(String value) {
-    for (EnrollmentStatus b : EnrollmentStatus.values()) {
+  public static EnrollmentStatuss fromValue(String value) {
+    for (EnrollmentStatuss b : EnrollmentStatuss.values()) {
       if (b.value.equals(value)) {
         return b;
       }

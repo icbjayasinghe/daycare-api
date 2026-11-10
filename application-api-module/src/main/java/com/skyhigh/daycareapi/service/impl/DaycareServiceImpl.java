@@ -1,13 +1,13 @@
 package com.skyhigh.daycareapi.service.impl;
 
-import com.skyhigh.daycareapi.model.*;
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
-import com.skyhigh.daycareapi.model.constants.DaycareStatus;
-import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.DaycareConfig;
+import com.skyhigh.domainmodule.model.constants.DaycareStatus;
+import com.skyhigh.domainmodule.model.constants.EnrollmentStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.*;
-import com.skyhigh.daycareapi.model.facility.DayCare;
-import com.skyhigh.daycareapi.model.facility.Owner;
+import com.skyhigh.domainmodule.model.facility.DayCare;
+import com.skyhigh.domainmodule.model.facility.Owner;
 import com.skyhigh.daycareapi.repository.*;
 import com.skyhigh.daycareapi.service.ApplicationService;
 import com.skyhigh.daycareapi.service.DaycareService;
@@ -66,7 +66,7 @@ public class DaycareServiceImpl implements DaycareService {
 
     @Override
     public DayCareDto createDayCare(DayCareDto dayCareDto) {
-        Address address = addressToAddressDto.toEntity(dayCareDto.getAddress());
+        com.skyhigh.domainmodule.model.Address address = addressToAddressDto.toEntity(dayCareDto.getAddress());
         address = addressRepository.save(address);
 
         Owner owner = ownerConvertor.toEntity(dayCareDto.getOwners().getFirst());
@@ -125,9 +125,9 @@ public class DaycareServiceImpl implements DaycareService {
                         HttpStatus.NOT_FOUND,
                         "Daycare not found with id: " + dayCareDto.getId()
                 ));
-        Address existingAddress = existingDayCare.getAddress();
+        com.skyhigh.domainmodule.model.Address existingAddress = existingDayCare.getAddress();
 
-        Address updatedAddress = addressToAddressDto.toEntity(
+        com.skyhigh.domainmodule.model.Address updatedAddress = addressToAddressDto.toEntity(
                 dayCareDto.getAddress()
         );
 
@@ -149,7 +149,7 @@ public class DaycareServiceImpl implements DaycareService {
         return daycareConvertor.convert(dayCare);
     }
 
-    private DaycareStatus changeDaycareStatus(User user, @Valid DaycareStatus status) {
+    private DaycareStatus changeDaycareStatus(com.skyhigh.domainmodule.model.User user, @Valid DaycareStatus status) {
         if  (status == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Daycare status is required");
         } else if (status == DaycareStatus.APPROVED) {
@@ -163,7 +163,7 @@ public class DaycareServiceImpl implements DaycareService {
 
     @Override
     public DayCareApplicationDto daycareRequestByParent(String parentEmail, Long daycareId, ChildRequestDto childRequestDto) {
-        Child child = childRepository.findById(childRequestDto.getChild().getId())
+        com.skyhigh.domainmodule.model.Child child = childRepository.findById(childRequestDto.getChild().getId())
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Child not found with id: " + childRequestDto.getChild().getId()
@@ -174,13 +174,13 @@ public class DaycareServiceImpl implements DaycareService {
                         "Daycare not found with id: " + daycareId
                 ));
 
-        DayCareApplication application = DayCareApplication.builder()
+        com.skyhigh.domainmodule.model.DayCareApplication application = com.skyhigh.domainmodule.model.DayCareApplication.builder()
                 .child(child)
                 .dayCare(dayCare)
                 .appliedAt(LocalDateTime.now())
                 .status(ApplicationStatus.PENDING)
                 .build();
-        DayCareApplication res = dayCareApplicationRepository.save(application);
+        com.skyhigh.domainmodule.model.DayCareApplication res = dayCareApplicationRepository.save(application);
         return dayCareApplicationConvertor.convert(res);
     }
 

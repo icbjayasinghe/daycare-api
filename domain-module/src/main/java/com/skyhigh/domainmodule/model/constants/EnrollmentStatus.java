@@ -1,9 +1,11 @@
-package com.skyhigh.daycareapi.billing.billingapimodule.model.constants;
+package com.skyhigh.domainmodule.model.constants;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+
 import javax.annotation.Generated;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * Enrollment type

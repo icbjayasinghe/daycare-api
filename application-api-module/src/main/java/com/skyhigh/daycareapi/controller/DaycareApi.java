@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.controller;
 
-import com.skyhigh.daycareapi.model.constants.DaycareStatus;
+import com.skyhigh.domainmodule.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
 import com.skyhigh.daycareapi.model.dto.DaycareDashboardDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,19 +10,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.util.*;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-09T19:12:13.568372-03:00[America/Halifax]")
