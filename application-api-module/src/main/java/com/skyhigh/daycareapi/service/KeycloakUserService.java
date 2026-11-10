@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.service;
 
-import com.skyhigh.daycareapi.model.User;
+import com.skyhigh.domainmodule.model.User;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.LoginRequestDto;
 

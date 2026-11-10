@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.util.convertor;
 
-import com.skyhigh.daycareapi.model.Address;
+import com.skyhigh.domainmodule.model.Address;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;

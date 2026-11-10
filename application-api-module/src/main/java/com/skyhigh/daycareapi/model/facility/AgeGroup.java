@@ -1,5 +1,6 @@
 package com.skyhigh.daycareapi.model.facility;
 
+import com.skyhigh.domainmodule.model.facility.DayCare;
 import jakarta.persistence.*;
 
 /**

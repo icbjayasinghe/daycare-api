@@ -1,7 +1,7 @@
-package com.skyhigh.daycareapi.model;
+package com.skyhigh.domainmodule.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.skyhigh.daycareapi.model.constants.ParentStatus;
+import com.skyhigh.domainmodule.model.constants.ParentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -9,13 +9,13 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @SuperBuilder
-public class Parent extends User {
+public class Parent extends com.skyhigh.domainmodule.model.User {
     private ParentStatus parentStatus;
 
     @OneToOne
     @JoinColumn(name = "address_id")
     @JsonIgnore
-    private Address address;
+    private com.skyhigh.domainmodule.model.Address address;
 
     public Parent() {
     }
@@ -25,7 +25,7 @@ public class Parent extends User {
         this.parentStatus = parentStatus;
     }
 
-    public Parent(User user, ParentStatus parentStatus, Address address) {
+    public Parent(com.skyhigh.domainmodule.model.User user, ParentStatus parentStatus, com.skyhigh.domainmodule.model.Address address) {
         this.setFirstName(user.getFirstName());
         this.setLastName(user.getLastName());
         this.setEmail(user.getEmail());
@@ -43,11 +43,11 @@ public class Parent extends User {
         this.parentStatus = parentStatus;
     }
 
-    public Address getAddress() {
+    public com.skyhigh.domainmodule.model.Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(com.skyhigh.domainmodule.model.Address address) {
         this.address = address;
     }
 }

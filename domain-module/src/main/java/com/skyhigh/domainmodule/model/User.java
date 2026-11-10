@@ -1,7 +1,6 @@
-package com.skyhigh.daycareapi.model;
+package com.skyhigh.domainmodule.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 
 @Entity

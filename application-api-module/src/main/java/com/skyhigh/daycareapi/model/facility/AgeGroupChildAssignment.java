@@ -1,6 +1,6 @@
 package com.skyhigh.daycareapi.model.facility;
 
-import com.skyhigh.daycareapi.model.Child;
+import com.skyhigh.domainmodule.model.Child;
 import jakarta.persistence.*;
 
 import java.util.Date;

@@ -1,8 +1,6 @@
 package com.skyhigh.daycareapi.util.convertor;
 
-import com.skyhigh.daycareapi.model.Parent;
 import com.skyhigh.daycareapi.model.dto.LoginResponseDto;
-import com.skyhigh.daycareapi.model.dto.ParentDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 

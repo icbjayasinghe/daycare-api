@@ -1,8 +1,8 @@
-package com.skyhigh.daycareapi.model.facility;
+package com.skyhigh.domainmodule.model.facility;
 
-import com.skyhigh.daycareapi.model.User;
+
+import com.skyhigh.domainmodule.model.User;
 import jakarta.persistence.Entity;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

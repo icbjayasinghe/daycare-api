@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Domain module - unwanted files
+domain-module/.mvn/
+domain-module/mvnw
+domain-module/mvnw.cmd
+domain-module/pom.xml
+domain-module/src/main/resources/

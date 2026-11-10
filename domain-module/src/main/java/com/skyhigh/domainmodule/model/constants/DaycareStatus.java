@@ -1,4 +1,4 @@
-package com.skyhigh.daycareapi.model.constants;
+package com.skyhigh.domainmodule.model.constants;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -11,24 +11,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * Request type
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-12T14:38:03.748306-03:00[America/Halifax]")
-public enum ApplicationStatus {
-
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-18T20:55:09.726984-03:00[America/Halifax]")
+public enum DaycareStatus {
+  
   PENDING("PENDING"),
-
-  WAITLISTED("WAITLISTED"),
-
-  ACCEPTED("ACCEPTED"),
-
+  
+  APPROVED("APPROVED"),
+  
   REJECTED("REJECTED"),
-
-  WITHDRAWN("WITHDRAWN"),
-
-  ENROLLED("ENROLLED");
+  
+  DEACTIVATED("DEACTIVATED");
 
   private String value;
 
-  ApplicationStatus(String value) {
+  DaycareStatus(String value) {
     this.value = value;
   }
 
@@ -43,8 +39,8 @@ public enum ApplicationStatus {
   }
 
   @JsonCreator
-  public static ApplicationStatus fromValue(String value) {
-    for (ApplicationStatus b : ApplicationStatus.values()) {
+  public static DaycareStatus fromValue(String value) {
+    for (DaycareStatus b : DaycareStatus.values()) {
       if (b.value.equals(value)) {
         return b;
       }
@@ -52,3 +48,4 @@ public enum ApplicationStatus {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 }
+

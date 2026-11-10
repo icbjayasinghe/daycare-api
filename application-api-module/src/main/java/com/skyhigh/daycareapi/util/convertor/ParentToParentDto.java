@@ -1,7 +1,6 @@
 package com.skyhigh.daycareapi.util.convertor;
 
-import com.skyhigh.daycareapi.model.Parent;
-import com.skyhigh.daycareapi.model.constants.ParentStatus;
+import com.skyhigh.domainmodule.model.Parent;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import com.skyhigh.daycareapi.model.dto.ChildDto;
 import com.skyhigh.daycareapi.model.dto.ParentDto;

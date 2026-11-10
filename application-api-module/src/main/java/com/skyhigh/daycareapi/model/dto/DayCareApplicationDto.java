@@ -4,7 +4,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import lombok.Builder;import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;

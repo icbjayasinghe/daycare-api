@@ -2,11 +2,10 @@ package com.skyhigh.daycareapi.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.skyhigh.daycareapi.model.User;
+import com.skyhigh.domainmodule.model.User;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.LoginRequestDto;
 import com.skyhigh.daycareapi.service.KeycloakUserService;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;

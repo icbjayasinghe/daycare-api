@@ -1,10 +1,10 @@
 package com.skyhigh.daycareapi.service.impl;
 
-import com.skyhigh.daycareapi.model.Address;
-import com.skyhigh.daycareapi.model.Child;
-import com.skyhigh.daycareapi.model.Parent;
-import com.skyhigh.daycareapi.model.User;
-import com.skyhigh.daycareapi.model.constants.ParentStatus;
+import com.skyhigh.domainmodule.model.Address;
+import com.skyhigh.domainmodule.model.Child;
+import com.skyhigh.domainmodule.model.Parent;
+import com.skyhigh.domainmodule.model.User;
+import com.skyhigh.domainmodule.model.constants.ParentStatus;
 import com.skyhigh.daycareapi.model.constants.Role;
 import com.skyhigh.daycareapi.model.dto.AddressDto;
 import com.skyhigh.daycareapi.model.dto.ChildDto;
@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ParentServiceImpl implements ParentService {

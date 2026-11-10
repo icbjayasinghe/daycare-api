@@ -1,14 +1,12 @@
 package com.skyhigh.daycareapi.repository;
 
-import com.skyhigh.daycareapi.model.DayCareApplication;
-import com.skyhigh.daycareapi.model.constants.ApplicationStatus;
+import com.skyhigh.domainmodule.model.DayCareApplication;
+import com.skyhigh.domainmodule.model.constants.ApplicationStatus;
 import com.skyhigh.daycareapi.model.dto.ApplicationSummaryDto;
-import com.skyhigh.daycareapi.model.facility.DayCare;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 
     @Repository
@@ -43,9 +41,9 @@ import java.util.List;
 
         @Query("""
     SELECT new com.skyhigh.daycareapi.model.dto.ApplicationSummaryDto(
-        SUM(CASE WHEN a.status = com.skyhigh.daycareapi.model.constants.ApplicationStatus.PENDING THEN 1 ELSE 0 END),
-        SUM(CASE WHEN a.status = com.skyhigh.daycareapi.model.constants.ApplicationStatus.ACCEPTED THEN 1 ELSE 0 END),
-        SUM(CASE WHEN a.status = com.skyhigh.daycareapi.model.constants.ApplicationStatus.REJECTED THEN 1 ELSE 0 END)
+        SUM(CASE WHEN a.status = PENDING THEN 1 ELSE 0 END),
+        SUM(CASE WHEN a.status = ACCEPTED THEN 1 ELSE 0 END),
+        SUM(CASE WHEN a.status = REJECTED THEN 1 ELSE 0 END)
     )
     FROM DayCareApplication a
     WHERE a.dayCare.owner.email = :email

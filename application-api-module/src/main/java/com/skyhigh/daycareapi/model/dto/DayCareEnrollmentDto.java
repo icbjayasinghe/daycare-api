@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
+import com.skyhigh.domainmodule.model.constants.EnrollmentStatus;
 import lombok.Builder;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -2,7 +2,7 @@ package com.skyhigh.daycareapi.controller.impl;
 
 
 import com.skyhigh.daycareapi.controller.EnrollmentApi;
-import com.skyhigh.daycareapi.model.constants.EnrollmentStatus;
+import com.skyhigh.domainmodule.model.constants.EnrollmentStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareEnrollmentDto;
 import com.skyhigh.daycareapi.service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
