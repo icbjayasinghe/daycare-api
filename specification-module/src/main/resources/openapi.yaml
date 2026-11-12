@@ -1490,6 +1490,32 @@ components:
           x-stoplight:
             id: mq68bbd8e6itx
           readOnly: true
+    FundingProgramDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "Nova Scotia Child Care Subsidy"
+        code:
+          type: string
+          example: "NS_CHILD_CARE_SUBSIDY"
+        description:
+          type: string
+          example: "Financial assistance for eligible families to reduce daycare expenses."
+        fundingType:
+          $ref: '#/components/schemas/FundingType'
+        active:
+          type: boolean
+          example: true
+      required:
+        - name
+        - code
+        - fundingType
+        - active
 
     ApiResponse:
       type: object
@@ -1548,6 +1574,13 @@ components:
         - WITHDRAWN
         - COMPLETED
       description: Enrollment type
+    FundingType:
+      type: string
+      enum:
+        - GOVERNMENT_REDUCTION
+        - FAMILY_SUBSIDY
+        - PROVIDER_GRANT
+      description: Funding type
 
   requestBodies:
     ParentArray:
