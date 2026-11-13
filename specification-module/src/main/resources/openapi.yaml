@@ -1654,13 +1654,67 @@ components:
           type: string
           format: date-time
           readOnly: true
-
       required:
         - enrollmentId
         - billingMonth
         - issueDate
         - dueDate
         - grossAmount
+        - status
+
+    InvoiceFundingAllocationDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 1001
+        invoiceId:
+          type: integer
+          format: int64
+          example: 501
+          description: Reference to the monthly invoice.
+        fundingProgramId:
+          type: integer
+          format: int64
+          example: 2
+          description: Reference to the funding program.
+        allocationType:
+          $ref: '#/components/schemas/FundingAllocationType'
+          example: FEE_REDUCTION
+          description: Type of funding allocation applied to the invoice.
+        amount:
+          type: number
+          format: double
+          example: 200.00
+          description: Funding amount allocated to the invoice.
+        status:
+          $ref: '#/components/schemas/FundingAllocationStatus'
+          example: APPLIED
+          description: Current status of the funding allocation.
+        referenceNumber:
+          type: string
+          nullable: true
+          example: "CWELCC-2026-001"
+          description: External funding reference number, if applicable.
+        notes:
+          type: string
+          nullable: true
+          example: "Government fee reduction for November 2026."
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - invoiceId
+        - fundingProgramId
+        - allocationType
+        - amount
         - status
 
     ApiResponse:
@@ -1751,6 +1805,20 @@ components:
         - PAID
         - OVERDUE
         - VOID
+    FundingAllocationType:
+      type: string
+      enum:
+        - FEE_REDUCTION
+        - SUBSIDY
+        - DIRECT_FUNDING
+
+    FundingAllocationStatus:
+      type: string
+      enum:
+        - PENDING
+        - APPROVED
+        - APPLIED
+        - REVERSED
 
   requestBodies:
     ParentArray:
