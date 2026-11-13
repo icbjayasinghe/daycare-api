@@ -1716,6 +1716,47 @@ components:
         - allocationType
         - amount
         - status
+    PaymentTransactionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        enrollmentId:
+          type: integer
+          format: int64
+          description: ID of the child enrollment associated with this payment
+        payerType:
+          $ref: '#/components/schemas/PayerType'
+          description: Identifies who made the payment
+        amount:
+          type: number
+          format: double
+          description: Actual amount received
+          example: 500.00
+        paymentDate:
+          type: string
+          format: date
+          description: Date the payment was received
+          example: "2026-11-05"
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        referenceNumber:
+          type: string
+          nullable: true
+          description: Bank transaction ID, cheque number, or payment reference
+          example: "BANK-2026-00125"
+        status:
+          $ref: '#/components/schemas/PaymentStatus'
+          description: Current payment transaction status
+      required:
+        - enrollmentId
+        - payerType
+        - amount
+        - paymentDate
+        - paymentMethod
+        - status
 
     ApiResponse:
       type: object
@@ -1818,6 +1859,32 @@ components:
         - PENDING
         - APPROVED
         - APPLIED
+        - REVERSED
+
+    PayerType:
+      type: string
+      enum:
+        - PARENT
+        - GOVERNMENT
+        - OTHER
+
+    PaymentMethod:
+      type: string
+      enum:
+        - CASH
+        - BANK_TRANSFER
+        - CREDIT_CARD
+        - DEBIT_CARD
+        - CHEQUE
+        - ONLINE
+        - OTHER
+
+    PaymentStatus:
+      type: string
+      enum:
+        - PENDING
+        - COMPLETED
+        - FAILED
         - REVERSED
 
   requestBodies:
