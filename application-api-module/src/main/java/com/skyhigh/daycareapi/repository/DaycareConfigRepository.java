@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DaycareConfigRepository extends JpaRepository<DaycareConfig, Long> {
     DaycareConfig findDaycareConfigByDayCare(DayCare daycare);
+
+    DaycareConfig findDaycareConfigByDayCareId(Long daycareId);
 }

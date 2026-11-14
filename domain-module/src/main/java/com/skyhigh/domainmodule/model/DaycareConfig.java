@@ -41,4 +41,7 @@ public class DaycareConfig {
     @JsonProperty("hourlyCharge")
     private Long hourlyCharge;
 
+    @Column(name = "payments_enabled", nullable = false)
+    private Boolean paymentsEnabled = false;
+
 }
