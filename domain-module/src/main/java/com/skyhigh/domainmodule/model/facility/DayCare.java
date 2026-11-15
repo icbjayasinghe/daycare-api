@@ -53,6 +53,12 @@ public class DayCare {
     )
     private DaycareConfig config;
 
+    @Column(name = "logo_url", length = 500)
+    private String logoUrl;
+
+    @Column(name = "logo_key", length = 500)
+    private String logoKey;
+
     public Owner getOwner() {
         return owner;
     }
@@ -131,5 +137,21 @@ public class DayCare {
 
     public void setConfig(DaycareConfig config) {
         this.config = config;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public String getLogoKey() {
+        return logoKey;
+    }
+
+    public void setLogoKey(String logoKey) {
+        this.logoKey = logoKey;
     }
 }
