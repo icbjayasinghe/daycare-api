@@ -16,6 +16,7 @@ import com.skyhigh.daycareapi.util.convertor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
@@ -216,5 +217,15 @@ public class DaycareServiceImpl implements DaycareService {
                 .availableSpaces(capasity - currentStudentCount)
                 .build();
         return dashboardDto;
+    }
+
+    @Override
+    public DaycareLogoDto uploadDaycareLogo(Long daycareId, MultipartFile file) {
+        return null;
+    }
+
+    @Override
+    public DaycareLogoDto getDaycareLogo(Long daycareId) {
+        return null;
     }
 }

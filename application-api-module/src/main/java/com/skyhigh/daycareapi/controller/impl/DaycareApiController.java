@@ -1,6 +1,7 @@
 package com.skyhigh.daycareapi.controller.impl;
 
 import com.skyhigh.daycareapi.controller.DaycareApi;
+import com.skyhigh.daycareapi.model.dto.DaycareLogoDto;
 import com.skyhigh.domainmodule.model.constants.DaycareStatus;
 import com.skyhigh.daycareapi.model.dto.DayCareDto;
 import com.skyhigh.daycareapi.model.dto.DaycareDashboardDto;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,5 +63,17 @@ public class DaycareApiController implements DaycareApi {
     @Override
     public ResponseEntity<DaycareDashboardDto> getDaycareDashboard(String email) {
         return new ResponseEntity<>(daycareService.getDaycareDashboard(email),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<DaycareLogoDto> uploadDaycareLogo(Long daycareId, MultipartFile file) {
+        DaycareLogoDto daycareLogoDto = daycareService.uploadDaycareLogo(daycareId, file);
+        return DaycareApi.super.uploadDaycareLogo(daycareId, file);
+    }
+
+    @Override
+    public ResponseEntity<DaycareLogoDto> getDaycareLogo(Long daycareId) {
+        DaycareLogoDto daycareLogoDto = daycareService.getDaycareLogo(daycareId);
+        return DaycareApi.super.getDaycareLogo(daycareId);
     }
 }

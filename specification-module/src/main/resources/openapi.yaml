@@ -770,6 +770,88 @@ paths:
         '400':
           description: Operation failed
 
+  /daycare/{daycareId}/logo:
+    post:
+      tags:
+        - Daycare
+      summary: Upload or replace daycare logo
+      operationId: uploadDaycareLogo
+      parameters:
+        - name: daycareId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Daycare logo image (PNG, JPG or WEBP)
+      responses:
+        '200':
+          description: Logo uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaycareLogoDto'
+        '400':
+          description: Invalid image file
+        '403':
+          description: User is not authorized to manage this daycare
+        '404':
+          description: Daycare not found
+
+    get:
+      tags:
+        - Daycare
+      summary: Get daycare logo
+      operationId: getDaycareLogo
+      parameters:
+        - name: daycareId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Logo information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaycareLogoDto'
+        '404':
+          description: Logo not found
+
+    delete:
+      tags:
+        - Daycare
+      summary: Delete daycare logo
+      operationId: deleteDaycareLogo
+      parameters:
+        - name: daycareId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Logo deleted successfully
+        '403':
+          description: User is not authorized to manage this daycare
+        '404':
+          description: Daycare or logo not found
+
   /application:
     post:
       tags:
@@ -968,6 +1050,8 @@ paths:
           description: Daycare not found
         '500':
           description: Internal server error
+
+
 
   /fee-plans:
     post:
@@ -1783,6 +1867,16 @@ components:
         - paymentId
         - invoiceId
         - allocatedAmount
+
+    DaycareLogoDto:
+      type: object
+      properties:
+        daycareId:
+          type: integer
+          format: int64
+        logoUrl:
+          type: string
+          example: "https://cdn.example.com/daycares/101/logo.png"
 
     ApiResponse:
       type: object
