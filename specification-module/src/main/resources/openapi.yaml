@@ -852,6 +852,100 @@ paths:
         '404':
           description: Daycare or logo not found
 
+  /daycare-config:
+    post:
+      tags:
+        - DaycareConfig
+      summary: Create daycare configuration
+      operationId: createDaycareConfig
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DaycareConfigDto'
+      responses:
+        '201':
+          description: Daycare configuration created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaycareConfigDto'
+        '400':
+          description: Invalid request
+
+  /daycare-config/{configId}:
+    get:
+      tags:
+        - DaycareConfig
+      summary: Get daycare configuration by ID
+      operationId: getDaycareConfigById
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 101
+      responses:
+        '200':
+          description: Daycare configuration found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaycareConfigDto'
+        '404':
+          description: Configuration not found
+
+    put:
+      tags:
+        - DaycareConfig
+      summary: Update daycare configuration
+      operationId: updateDaycareConfig
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 101
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DaycareConfigDto'
+      responses:
+        '200':
+          description: Configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaycareConfigDto'
+        '404':
+          description: Configuration not found
+
+    delete:
+      tags:
+        - DaycareConfig
+      summary: Delete daycare configuration
+      operationId: deleteDaycareConfig
+      parameters:
+        - name: configId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 101
+      responses:
+        '204':
+          description: Configuration deleted successfully
+        '404':
+          description: Configuration not found
+
   /application:
     post:
       tags:

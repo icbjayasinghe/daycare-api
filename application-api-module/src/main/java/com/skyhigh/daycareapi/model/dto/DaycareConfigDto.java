@@ -3,6 +3,8 @@ package com.skyhigh.daycareapi.model.dto;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
 
 import javax.annotation.Generated;
@@ -12,6 +14,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-29T18:53:28.207953-03:00[America/Halifax]")
+@SuperBuilder
 public class DaycareConfigDto {
   @JsonProperty("configId")
   private Long configId;
@@ -21,6 +24,12 @@ public class DaycareConfigDto {
   private Long hourlyCharge;
 
   public DaycareConfigDto() {
+  }
+
+  public DaycareConfigDto(Long configId, Long totalCapacity, Long hourlyCharge) {
+    this.configId = configId;
+    this.totalCapacity = totalCapacity;
+    this.hourlyCharge = hourlyCharge;
   }
 
   public DaycareConfigDto configId(Long configId) {
