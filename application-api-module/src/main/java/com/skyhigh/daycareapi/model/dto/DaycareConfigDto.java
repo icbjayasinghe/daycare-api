@@ -2,6 +2,7 @@ package com.skyhigh.daycareapi.model.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.skyhigh.domainmodule.model.facility.DayCare;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
@@ -18,6 +19,8 @@ import javax.annotation.Generated;
 public class DaycareConfigDto {
   @JsonProperty("configId")
   private Long configId;
+  @JsonProperty("daycareId")
+  private Long dayCareId;
   @JsonProperty("totalCapacity")
   private Long totalCapacity;
   @JsonProperty("hourlyCharge")
@@ -26,8 +29,9 @@ public class DaycareConfigDto {
   public DaycareConfigDto() {
   }
 
-  public DaycareConfigDto(Long configId, Long totalCapacity, Long hourlyCharge) {
+  public DaycareConfigDto(Long configId, Long dayCareId, Long totalCapacity, Long hourlyCharge) {
     this.configId = configId;
+    this.dayCareId = dayCareId;
     this.totalCapacity = totalCapacity;
     this.hourlyCharge = hourlyCharge;
   }
@@ -84,6 +88,14 @@ public class DaycareConfigDto {
 
   public void setHourlyCharge(Long hourlyCharge) {
     this.hourlyCharge = hourlyCharge;
+  }
+
+  public Long getDayCareId() {
+    return dayCareId;
+  }
+
+  public void setDayCareId(Long dayCareId) {
+    this.dayCareId = dayCareId;
   }
 
   public boolean equals(Object o) {

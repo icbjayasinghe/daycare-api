@@ -2,7 +2,6 @@ package com.skyhigh.daycareapi.service.impl;
 
 import com.skyhigh.daycareapi.repository.DaycareConfigRepository;
 import com.skyhigh.daycareapi.service.PaymentFeatureService;
-import com.skyhigh.domainmodule.model.DaycareConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
