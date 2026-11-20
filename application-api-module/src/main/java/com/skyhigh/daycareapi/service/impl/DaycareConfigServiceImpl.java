@@ -31,11 +31,22 @@ public class DaycareConfigServiceImpl implements DaycareConfigService {
 
     @Override
     public DaycareConfigDto createDaycareConfiguration(DaycareConfigDto daycareConfigDto) {
-        DayCare daycare = daycareRepository.findById(daycareConfigDto.getDayCareId())
-                .orElseThrow(() -> new IllegalArgumentException("DayCare not found for id: " + daycareConfigDto.getDayCareId()));
+        DayCare daycare = daycareRepository.findById(daycareConfigDto.getDaycareId())
+                .orElseThrow(() -> new IllegalArgumentException("DayCare not found for id: " + daycareConfigDto.getDaycareId()));
         DaycareConfig daycareConfig = daycareConfigConvertor.toEntity(daycareConfigDto);
         daycareConfig.setDayCare(daycare);
         DaycareConfig res =  daycareConfigRepository.save(daycareConfig);
+        return daycareConfigConvertor.convert(res);
+    }
+
+    @Override
+    public DaycareConfigDto updateDaycareConfiguration(Long configId, DaycareConfigDto daycareConfigDto) {
+        DaycareConfig daycareConfig = daycareConfigRepository.findById(configId)
+                .orElseThrow(() -> new IllegalArgumentException("DaycareConfig not found for id: " + configId));
+        daycareConfig.setTotalCapacity(daycareConfigDto.getTotalCapacity());
+        daycareConfig.setHourlyCharge(daycareConfigDto.getHourlyCharge());
+        daycareConfig.setPaymentsEnabled(daycareConfigDto.getPaymentsEnabled());
+        DaycareConfig res = daycareConfigRepository.save(daycareConfig);
         return daycareConfigConvertor.convert(res);
     }
 }

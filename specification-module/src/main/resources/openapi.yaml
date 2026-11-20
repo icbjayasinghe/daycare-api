@@ -1566,6 +1566,10 @@ components:
           type: integer
           format: int64
           example: 101
+        daycareId:
+          type: integer
+          format: int64
+          example: 101
         totalCapacity:
           type: integer
           format: int64
@@ -1574,6 +1578,10 @@ components:
           type: integer
           format: int64
           example: 18
+        paymentsEnabled:
+          type: boolean
+          default: false
+          example: true
 
     FeePlanDto:
       type: object
