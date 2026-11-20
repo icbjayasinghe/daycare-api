@@ -6,4 +6,6 @@ public interface DaycareConfigService {
     DaycareConfigDto getDaycareConfiguration(Long configId);
 
     DaycareConfigDto createDaycareConfiguration(DaycareConfigDto daycareConfigDto);
+
+    DaycareConfigDto updateDaycareConfiguration(Long configId, DaycareConfigDto daycareConfigDto);
 }

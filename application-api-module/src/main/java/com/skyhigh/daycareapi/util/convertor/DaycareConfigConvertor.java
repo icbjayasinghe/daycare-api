@@ -12,7 +12,7 @@ public class DaycareConfigConvertor  implements Converter<DaycareConfig, Daycare
     public DaycareConfigDto convert(DaycareConfig source) {
         DaycareConfigDto dto = DaycareConfigDto.builder()
                 .configId(source.getConfigId())
-                .dayCareId(source.getDayCare().getId())
+                .daycareId(source.getDayCare().getId())
                 .totalCapacity(source.getTotalCapacity())
                 .hourlyCharge(source.getHourlyCharge())
                 .build();

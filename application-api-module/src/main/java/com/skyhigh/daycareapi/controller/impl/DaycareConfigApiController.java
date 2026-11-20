@@ -48,6 +48,7 @@ public class DaycareConfigApiController implements DaycareConfigApi {
 
     @Override
     public ResponseEntity<DaycareConfigDto> updateDaycareConfig(Long configId, DaycareConfigDto daycareConfigDto) {
-        return DaycareConfigApi.super.updateDaycareConfig(configId, daycareConfigDto);
+        DaycareConfigDto updatedConfig = daycareConfigService.updateDaycareConfiguration(configId, daycareConfigDto);
+        return ResponseEntity.ok(updatedConfig);
     }
 }
