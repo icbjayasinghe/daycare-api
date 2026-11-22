@@ -874,14 +874,14 @@ paths:
         '400':
           description: Invalid request
 
-  /daycare-config/{configId}:
+  /daycare-config/{daycareId}:
     get:
       tags:
         - DaycareConfig
       summary: Get daycare configuration by ID
       operationId: getDaycareConfigById
       parameters:
-        - name: configId
+        - name: daycareId
           in: path
           required: true
           schema:
@@ -904,7 +904,7 @@ paths:
       summary: Update daycare configuration
       operationId: updateDaycareConfig
       parameters:
-        - name: configId
+        - name: daycareId
           in: path
           required: true
           schema:
@@ -933,7 +933,7 @@ paths:
       summary: Delete daycare configuration
       operationId: deleteDaycareConfig
       parameters:
-        - name: configId
+        - name: daycareId
           in: path
           required: true
           schema:

@@ -8,7 +8,9 @@ import com.skyhigh.daycareapi.util.convertor.DaycareConfigConvertor;
 import com.skyhigh.domainmodule.model.DaycareConfig;
 import com.skyhigh.domainmodule.model.facility.DayCare;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class DaycareConfigServiceImpl implements DaycareConfigService {
@@ -23,9 +25,11 @@ public class DaycareConfigServiceImpl implements DaycareConfigService {
     DaycareConfigConvertor daycareConfigConvertor;
 
     @Override
-    public DaycareConfigDto getDaycareConfiguration(Long configId) {
-        DaycareConfig daycareConfig = daycareConfigRepository.findById(configId)
-                .orElseThrow(() -> new IllegalArgumentException("DaycareConfig not found for id: " + configId));
+    public DaycareConfigDto getDaycareConfiguration(Long daycareId) {
+        DaycareConfig daycareConfig = daycareConfigRepository.findDaycareConfigByDayCareId(daycareId);
+        if(daycareConfig == null){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DaycareConfig not found for id: " + daycareConfig);
+        }
         return daycareConfigConvertor.convert(daycareConfig);
     }
 
@@ -40,9 +44,11 @@ public class DaycareConfigServiceImpl implements DaycareConfigService {
     }
 
     @Override
-    public DaycareConfigDto updateDaycareConfiguration(Long configId, DaycareConfigDto daycareConfigDto) {
-        DaycareConfig daycareConfig = daycareConfigRepository.findById(configId)
-                .orElseThrow(() -> new IllegalArgumentException("DaycareConfig not found for id: " + configId));
+    public DaycareConfigDto updateDaycareConfiguration(Long daycareId, DaycareConfigDto daycareConfigDto) {
+        DaycareConfig daycareConfig = daycareConfigRepository.findDaycareConfigByDayCareId(daycareId);
+        if(daycareConfig == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DaycareConfig not found for id: " + daycareConfig);
+        }
         daycareConfig.setTotalCapacity(daycareConfigDto.getTotalCapacity());
         daycareConfig.setHourlyCharge(daycareConfigDto.getHourlyCharge());
         daycareConfig.setPaymentsEnabled(daycareConfigDto.getPaymentsEnabled());

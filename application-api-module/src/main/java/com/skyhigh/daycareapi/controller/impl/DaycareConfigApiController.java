@@ -41,14 +41,14 @@ public class DaycareConfigApiController implements DaycareConfigApi {
     }
 
     @Override
-    public ResponseEntity<DaycareConfigDto> getDaycareConfigById(Long configId) {
-        DaycareConfigDto daycareConfigDto = daycareConfigService.getDaycareConfiguration(configId);
+    public ResponseEntity<DaycareConfigDto> getDaycareConfigById(Long daycareId) {
+        DaycareConfigDto daycareConfigDto = daycareConfigService.getDaycareConfiguration(daycareId);
         return ResponseEntity.ok(daycareConfigDto);
     }
 
     @Override
-    public ResponseEntity<DaycareConfigDto> updateDaycareConfig(Long configId, DaycareConfigDto daycareConfigDto) {
-        DaycareConfigDto updatedConfig = daycareConfigService.updateDaycareConfiguration(configId, daycareConfigDto);
+    public ResponseEntity<DaycareConfigDto> updateDaycareConfig(Long daycareId, DaycareConfigDto daycareConfigDto) {
+        DaycareConfigDto updatedConfig = daycareConfigService.updateDaycareConfiguration(daycareId, daycareConfigDto);
         return ResponseEntity.ok(updatedConfig);
     }
 }

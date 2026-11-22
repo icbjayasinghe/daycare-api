@@ -171,5 +171,16 @@ public class DaycareConfigDto {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+  public DaycareConfigDto() {
+  }
+
+  public DaycareConfigDto(Long configId, Long daycareId, Long totalCapacity, Long hourlyCharge, Boolean paymentsEnabled) {
+    this.configId = configId;
+    this.daycareId = daycareId;
+    this.totalCapacity = totalCapacity;
+    this.hourlyCharge = hourlyCharge;
+    this.paymentsEnabled = paymentsEnabled;
+  }
 }
 
