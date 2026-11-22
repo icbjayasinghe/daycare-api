@@ -8,9 +8,11 @@ package com.skyhigh.daycareapi.controller;
 import com.skyhigh.daycareapi.model.dto.DaycareConfigDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,12 +20,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import javax.validation.constraints.*;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-16T15:45:18.493986-04:00[America/Halifax]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-21T18:22:58.466917-04:00[America/Halifax]")
 @Validated
 @Tag(name = "daycare-config", description = "the daycare-config API")
 public interface DaycareConfigApi {
@@ -40,29 +46,29 @@ public interface DaycareConfigApi {
      *         or Invalid request (status code 400)
      */
     @Operation(
-        operationId = "createDaycareConfig",
-        summary = "Create daycare configuration",
-        tags = { "DaycareConfig" },
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Daycare configuration created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid request")
-        }
+            operationId = "createDaycareConfig",
+            summary = "Create daycare configuration",
+            tags = { "DaycareConfig" },
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Daycare configuration created successfully", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Invalid request")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/daycare-config",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/daycare-config",
+            produces = { "application/json" },
+            consumes = { "application/json" }
     )
     default ResponseEntity<DaycareConfigDto> createDaycareConfig(
-        @Parameter(name = "DaycareConfigDto", description = "", required = true) @Valid @RequestBody DaycareConfigDto daycareConfigDto
+            @Parameter(name = "DaycareConfigDto", description = "", required = true) @Valid @RequestBody DaycareConfigDto daycareConfigDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
+                    String exampleString = "{ \"paymentsEnabled\" : true, \"daycareId\" : 101, \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -74,27 +80,27 @@ public interface DaycareConfigApi {
 
 
     /**
-     * DELETE /daycare-config/{configId} : Delete daycare configuration
+     * DELETE /daycare-config/{daycareId} : Delete daycare configuration
      *
-     * @param configId  (required)
+     * @param daycareId  (required)
      * @return Configuration deleted successfully (status code 204)
      *         or Configuration not found (status code 404)
      */
     @Operation(
-        operationId = "deleteDaycareConfig",
-        summary = "Delete daycare configuration",
-        tags = { "DaycareConfig" },
-        responses = {
-            @ApiResponse(responseCode = "204", description = "Configuration deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Configuration not found")
-        }
+            operationId = "deleteDaycareConfig",
+            summary = "Delete daycare configuration",
+            tags = { "DaycareConfig" },
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Configuration deleted successfully"),
+                    @ApiResponse(responseCode = "404", description = "Configuration not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/daycare-config/{configId}"
+            method = RequestMethod.DELETE,
+            value = "/daycare-config/{daycareId}"
     )
     default ResponseEntity<Void> deleteDaycareConfig(
-        @Parameter(name = "configId", description = "", required = true) @PathVariable("configId") Long configId
+            @Parameter(name = "daycareId", description = "", required = true) @PathVariable("daycareId") Long daycareId
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -102,35 +108,35 @@ public interface DaycareConfigApi {
 
 
     /**
-     * GET /daycare-config/{configId} : Get daycare configuration by ID
+     * GET /daycare-config/{daycareId} : Get daycare configuration by ID
      *
-     * @param configId  (required)
+     * @param daycareId  (required)
      * @return Daycare configuration found (status code 200)
      *         or Configuration not found (status code 404)
      */
     @Operation(
-        operationId = "getDaycareConfigById",
-        summary = "Get daycare configuration by ID",
-        tags = { "DaycareConfig" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Daycare configuration found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "Configuration not found")
-        }
+            operationId = "getDaycareConfigById",
+            summary = "Get daycare configuration by ID",
+            tags = { "DaycareConfig" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Daycare configuration found", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "Configuration not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/daycare-config/{configId}",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/daycare-config/{daycareId}",
+            produces = { "application/json" }
     )
     default ResponseEntity<DaycareConfigDto> getDaycareConfigById(
-        @Parameter(name = "configId", description = "", required = true) @PathVariable("configId") Long configId
+            @Parameter(name = "daycareId", description = "", required = true) @PathVariable("daycareId") Long daycareId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
+                    String exampleString = "{ \"paymentsEnabled\" : true, \"daycareId\" : 101, \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -142,38 +148,38 @@ public interface DaycareConfigApi {
 
 
     /**
-     * PUT /daycare-config/{configId} : Update daycare configuration
+     * PUT /daycare-config/{daycareId} : Update daycare configuration
      *
-     * @param configId  (required)
+     * @param daycareId  (required)
      * @param daycareConfigDto  (required)
      * @return Configuration updated successfully (status code 200)
      *         or Configuration not found (status code 404)
      */
     @Operation(
-        operationId = "updateDaycareConfig",
-        summary = "Update daycare configuration",
-        tags = { "DaycareConfig" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Configuration updated successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "Configuration not found")
-        }
+            operationId = "updateDaycareConfig",
+            summary = "Update daycare configuration",
+            tags = { "DaycareConfig" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Configuration updated successfully", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DaycareConfigDto.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "Configuration not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/daycare-config/{configId}",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/daycare-config/{daycareId}",
+            produces = { "application/json" },
+            consumes = { "application/json" }
     )
     default ResponseEntity<DaycareConfigDto> updateDaycareConfig(
-        @Parameter(name = "configId", description = "", required = true) @PathVariable("configId") Long configId,
-        @Parameter(name = "DaycareConfigDto", description = "", required = true) @Valid @RequestBody DaycareConfigDto daycareConfigDto
+            @Parameter(name = "daycareId", description = "", required = true) @PathVariable("daycareId") Long daycareId,
+            @Parameter(name = "DaycareConfigDto", description = "", required = true) @Valid @RequestBody DaycareConfigDto daycareConfigDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
+                    String exampleString = "{ \"paymentsEnabled\" : true, \"daycareId\" : 101, \"configId\" : 101, \"totalCapacity\" : 5, \"hourlyCharge\" : 18 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
