@@ -1279,6 +1279,133 @@ paths:
         '409':
           description: Fee plan is already assigned to an enrollment
 
+  /funding-programs:
+    post:
+      tags:
+        - FundingProgram
+      summary: Create a funding program
+      operationId: createFundingProgram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FundingProgramDto'
+      responses:
+        '201':
+          description: Funding program created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundingProgramDto'
+        '400':
+          description: Invalid funding program data
+        '409':
+          description: Funding program code already exists
+
+    get:
+      tags:
+        - FundingProgram
+      summary: Get all funding programs
+      operationId: getAllFundingPrograms
+      parameters:
+        - name: active
+          in: query
+          required: false
+          description: Filter funding programs by active status
+          schema:
+            type: boolean
+        - name: fundingType
+          in: query
+          required: false
+          description: Filter funding programs by funding type
+          schema:
+            $ref: '#/components/schemas/FundingType'
+      responses:
+        '200':
+          description: Funding programs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundingProgramDto'
+
+  /funding-programs/{id}:
+    get:
+      tags:
+        - FundingProgram
+      summary: Get funding program by ID
+      operationId: getFundingProgramById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Funding program retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundingProgramDto'
+        '404':
+          description: Funding program not found
+
+    put:
+      tags:
+        - FundingProgram
+      summary: Update funding program
+      operationId: updateFundingProgram
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FundingProgramDto'
+      responses:
+        '200':
+          description: Funding program updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundingProgramDto'
+        '400':
+          description: Invalid funding program data
+        '404':
+          description: Funding program not found
+        '409':
+          description: Funding program code already exists
+
+    delete:
+      tags:
+        - FundingProgram
+      summary: Delete funding program
+      operationId: deleteFundingProgram
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Funding program deleted successfully
+        '404':
+          description: Funding program not found
+        '409':
+          description: Funding program is already assigned and cannot be deleted
+
 
 
 externalDocs:

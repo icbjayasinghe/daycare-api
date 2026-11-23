@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 import com.skyhigh.daycareapi.billing.billingapimodule.model.constants.FundingType;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 
 
 import javax.annotation.Generated;
@@ -17,6 +18,7 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-11T19:17:18.880535-04:00[America/Halifax]")
+@Builder
 public class FundingProgramDto {
 
   @JsonProperty("id")
